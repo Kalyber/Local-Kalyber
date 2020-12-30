@@ -1,0 +1,71 @@
+// primary colors
+.color__red  {
+    color: $primary-red;
+
+    &--bk {
+        background-color: $primary-red;
+    }
+}
+
+.color__blue {
+    color: $primary-blue;
+
+    &--bk {
+        background-color: $primary-blue;
+    }
+}
+
+.color__black {
+    color: $primary-black;
+
+    &--bk {
+        background-color: $primary-black;
+    }
+}
+
+.color__white {
+    color: white;
+
+    &--bk {
+        background-color:white;
+    }
+}
+
+
+
+// secondary colors
+.color__green  {
+    color: $green;
+
+    &--bk {
+        background-color: $green;
+    }
+}
+
+.color__light-blue {
+    color: $light-blue;
+
+    &--bk {
+        background-color: $light-blue;
+    }
+}
+
+.color__gold {
+    color: $gold;
+
+    &--bk {
+        background-color: $gold;
+    }
+}
+
+.color__dark-gray {
+    color: $dark-gray;
+
+    &--bk {
+        background-color: $dark-gray;
+    }
+}
+
+
+
+// tertiary colors are in variables but not specced here

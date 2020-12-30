@@ -1,0 +1,57 @@
+// hide/show elements
+.notmobileblock {
+  display: none !important;
+
+  @include respondto('medium') {
+    display: block !important;
+  }
+}
+
+.notdesktopblock {
+  display: block !important;
+
+  @include respondto('medium') {
+    display: none !important;
+  }
+}
+
+.notmobileinline {
+  display: none !important;
+
+  @include respondto('medium') {
+    display: inline-block !important;
+  }
+}
+
+.notindesktopinline {
+  display: inline-block;
+
+  @include respondto('medium') {
+    display: none;
+  }
+}
+
+// screen reader text
+.screen-reader-text { 
+  border: 0; 
+  clip: rect(0 0 0 0); 
+  height: 1px; 
+  margin: -1px; 
+  overflow: hidden; 
+  padding: 0; 
+  position: absolute; 
+  width: 1px; 
+}
+
+// swipe text for mobile tables
+.swipe-text {
+  display: block;
+  font-size: .8rem;
+  line-height: .8rem;
+  padding: .4rem 0 .4rem 0;
+  margin: 0;
+
+  @include respondto('medium') {
+    display: none;
+  }
+}

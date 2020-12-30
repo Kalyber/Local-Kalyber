@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1171px" height="1171px" viewBox="0 0 1171 1171" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 7</title>
+    <defs>
+        <linearGradient x1="10.775%" y1="80.15625%" x2="89.76875%" y2="20.49625%" id="linearGradient-1">
+            <stop stop-color="#EE443D" offset="0%"></stop>
+            <stop stop-color="#D4992B" offset="30.8461208%"></stop>
+            <stop stop-color="#6CC24A" offset="70.522248%"></stop>
+            <stop stop-color="#1E76BC" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-linecap="round">
+        <g id="Desktop-HD-Copy-31" transform="translate(-135.000000, -1106.000000)">
+            <g id="Group-7" transform="translate(720.500000, 1691.500000) rotate(-315.000000) translate(-720.500000, -1691.500000) translate(313.000000, 1284.000000)">
+                <path d="M407.5,720 C500.765575,720 584.488442,679.142808 641.746528,614.350498 C690.445167,559.243917 720,486.823409 720,407.5 C720,329.218005 691.216107,257.658848 643.654656,202.828866 C586.35697,136.774718 501.806989,95 407.5,95 C316.871887,95 235.254395,133.57906 178.174194,195.210513 C126.552872,250.947826 95,325.539129 95,407.5 C95,479.598264 119.416049,545.993855 160.430719,598.869344" id="Oval-Copy-5" stroke="url(#linearGradient-1)" stroke-width="9" transform="translate(407.500000, 407.500000) rotate(112.000000) translate(-407.500000, -407.500000) "></path>
+                <polyline id="Path-30" stroke="#DE7932" stroke-width="8" points="93 295.288208 120.822205 284 133 312"></polyline>
+            </g>
+        </g>
+    </g>
+</svg>

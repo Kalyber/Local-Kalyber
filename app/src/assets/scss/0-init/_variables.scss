@@ -1,0 +1,40 @@
+// breakpoints - mobile first css
+$breakpoints: (
+  "x-small": 640px,
+  "small":   768px,
+  "medium":  1024px,
+  "large":   1248px,
+  "x-large": 1440px
+) !default;
+
+
+
+//colors
+$primary-red: #DA291C;
+$primary-black: #101820;
+$primary-blue: #0077C8;
+
+//secondary colors
+$green: #6CC24A;
+$light-blue: #4EC3E0;
+$gold: #D69A2D;
+$dark-gray: #333333;
+
+//tertiary colors
+$blue-gray: #244C5A;
+$blue: #4298CC;
+$seafoam: #3CD5AF;
+$yellow: #EEE93B;
+$pink: #EAC4B7;
+$dark-blue-green: #007A87;
+$orange: #F98E2B;
+$light-orange: #ECDEBB;
+$light-violet: #D7C8DC;
+
+//alpha values less than 1
+$primary-blue-90: rgba(0, 119, 200, .9);
+
+
+
+// typography
+$primary-font: 'Poppins', 'Helvetica', 'Arial', sans-serif; // 300, 400 & 600 weights

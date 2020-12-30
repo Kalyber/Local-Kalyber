@@ -1,0 +1,8 @@
+// photo grid sliders
+.projects-mobile-slider {
+  display: block;
+
+  @include respondto('medium') {
+    display: none;
+  }
+}

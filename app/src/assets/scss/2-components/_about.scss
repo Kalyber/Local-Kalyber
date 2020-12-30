@@ -1,0 +1,110 @@
+.about {
+    position: relative;
+    .max-width-lg {
+        box-shadow: none;
+        
+    }
+
+    .black-bg {
+        //text-align: center;
+        padding-bottom: 100px;
+        @media (max-width: 640px) {
+            text-align: center;
+        }
+    }
+
+    .about-logo {
+        max-width: 500px;
+        margin: 0 auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        @media (max-width: 640px) {
+            max-width: 300px;
+        }
+    }
+
+    .col-6 {
+        display: flex;
+        margin: 100px 0;
+        flex-direction: column;
+
+        &:first-child {
+            margin-bottom: 0;
+        }
+
+        @media (max-width: 640px) {
+            margin: 50px 0;
+        }
+    }
+    
+
+    h1 {
+        padding-top: 400px;
+        display: inline-block;
+        font-weight: 900;
+        margin: 0;
+        font-size: 34px;
+        line-height: 29px;
+        @media (max-width: 640px) {
+            padding-top: 300px;
+            width: 100%;
+        }
+    }
+
+    h4 {
+        font-size: 1.3rem;
+        margin-top: 3.125rem;
+       
+        @media (max-width: 640px) {
+            font-size: 1rem;
+            line-height: 1.4rem;
+            width: 100%;
+        }
+    }
+
+    h5 {
+        font-weight: 500;
+        display: inline;
+        line-height: 32px;
+        margin-bottom: 0;
+    }
+
+    p {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+        font-weight: 500;
+        @media (max-width: 640px) {
+            font-size: 1rem;
+        }
+    }
+
+    ul {
+        list-style: none;
+      
+        li {
+            list-style: none;
+            margin-bottom: 0.75rem;
+            position: relative;
+            font-size: 1.2rem;
+            line-height: 1.6rem;
+            @media (max-width: 640px) {
+                font-size: 1rem;
+                line-height: 1.4rem;
+            }
+            &::before {
+                content: "•";
+                color: $primary-red;
+                font-weight: bold;
+                left: -20px;
+                position: absolute;
+            }
+        }
+      
+    }
+
+    .button {
+        margin-top: 30px;
+    }
+
+}

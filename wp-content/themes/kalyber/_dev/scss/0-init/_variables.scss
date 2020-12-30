@@ -1,0 +1,74 @@
+// Colors
+$blue: #406d8e;
+$dkblue: #003c69;
+$gold: #e9b34b;
+$ltgray: #dddede;
+$gray: #808385;
+$dkgray: #565a5c; 
+
+// Typography
+$fontprime: 'Nunito Sans', Helvetica, Arial, sans-serif;
+$fontsecond: 'Roboto', Helvetica, Arial, sans-serif;
+$fontsans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$h1sized: 3.125em;
+$h2sized: 2.188em;
+$h3sized: 1.563em;
+$h4sized: 1.300em;
+
+$h1sizem: 2.188em;
+$h2sizem: 1.875em;
+$h3sizem: 1.563em;
+$h4sizem: 1.300em;
+
+$fontlarge: 1.4em;
+$fontregular: 1em;
+$fontsmall: .8em;
+
+// Font weights
+$light:   100;
+$regular: 400;
+$bold:    600;
+$exbold:  900;
+
+// Sizes
+$deskmargin: 40px;
+$mobmargin: 20px;
+
+// Alignment
+$hCenter: 0 auto;
+
+// Grid
+$c01: 06.923076%;
+$c02: 15.384613%;
+$c03: 23.846150%;
+$c04: 32.307687%;
+$c05: 40.769224%;
+$c06: 49.230761%;
+$c07: 57.692298%;
+$c08: 66.153835%;
+$c09: 74.615372%;
+$c10: 83.076909%;
+$c11: 91.538446%;
+$c12: 99.999983%;
+
+$c01Plus: 08.461537%;
+$c02Plus: 16.923074%;
+$c03Plus: 25.384611%;
+$c04Plus: 33.846148%;
+$c05Plus: 42.307685%;
+$c06Plus: 50.769222%;
+$c07Plus: 59.230759%;
+$c08Plus: 67.692296%;
+$c09Plus: 76.153833%;
+$c10Plus: 84.615370%;
+$c11Plus: 93.076907%;
+
+// Breakpoints - mobile first css
+$breakpoints: (
+  "x-small": 640px,
+  "small":   768px,
+  "medium":  1024px,
+  "large":   1248px,
+  "x-large": 1440px
+) !default;

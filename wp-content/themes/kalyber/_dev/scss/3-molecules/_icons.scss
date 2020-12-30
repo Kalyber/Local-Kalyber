@@ -1,0 +1,29 @@
+// header
+.social--header {
+  fill: $dkgray;
+  transition: .6s;
+}
+
+svg:hover .social--header {
+  fill: $gold;
+}
+
+// footer
+.social--footer {
+  fill: #ffffff;
+  transition: .6s;
+}
+
+svg:hover .social--footer {
+  fill: $gold;
+}
+
+// home top icon
+.full-width__icon {
+  width: 60px;
+  margin: 1.4em auto 1.4em auto;
+
+  & img {
+    width: 100%;
+  }
+}

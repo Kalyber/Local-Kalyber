@@ -1,0 +1,130 @@
+.contact {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 80px;
+    overflow: hidden;
+    position: relative;
+
+    iframe {
+        z-index: 20;
+        position: relative;
+    }
+
+    h1, p {
+        color: white;
+        margin:  0 0 10px 0;
+        position: relative;
+        z-index: 2;
+        padding: 0 15px;
+    }
+
+    &:after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 150%;
+        top: 0;
+        left: 0;
+        background: rgb(30,118,188);
+        background: -moz-linear-gradient(70deg, rgba(30,118,188,1) 0%, rgba(216,45,39,1) 100%);
+        background: -webkit-linear-gradient(70deg, rgba(30,118,188,1) 0%, rgba(216,45,39,1) 100%);
+        background: linear-gradient(70deg, rgba(30,118,188,1) 0%, rgba(216,45,39,1) 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#1e76bc",endColorstr="#d82d27",GradientType=1);
+        mix-blend-mode: multiply;
+    }
+
+    
+    .form {
+        width: 100%;
+        display: flex;
+        flex-flow: row wrap;
+        position: relative;
+        color: white;
+        z-index: 2;
+        margin-top: 30px;
+        .form-field {
+             width: 50%;
+             padding: 15px;
+             @media (max-width: 640px){
+                width: 100%;
+             }
+             label {
+                margin-bottom: 10px;
+                display: block;
+             }
+             input {
+                width: 100%;
+                height: 52px;
+                background: transparent;;
+                box-shadow: none;
+                outline: none;
+                margin: 0;
+                border: 0;
+                border-bottom: 1px solid white;
+                color: white;
+                padding: 0 10px;
+                transition: all 0.3s ease-in-out;
+
+                &:focus {
+                    background: rgba(255,255,255,0.1);
+                }
+             }
+
+            &.pd-textarea {
+                width: 100%;
+                
+                textarea{
+                    width: 100%;
+                    min-height: 150px;
+                    background: transparent;
+                    border: 1px solid white;
+                    outline: 0;
+                    color: white;
+                    padding: 10px;
+
+                    &:focus {
+                        background: rgba(255,255,255,0.1);
+                    }
+                }
+            
+            }
+
+            
+        }
+
+        input[type="submit"] {
+            cursor: pointer;
+            padding: 14px 20px;
+            border-radius: 25px;
+            font-size: 18px;
+            font-weight: 900;
+            overflow: hidden;
+            margin-bottom: 30px;
+            display: table;
+            text-align: center;
+            outline: 0;
+            background: rgba(255,255,255,0.1);
+            border: 1px solid white;
+            color: white;
+            transition: all 0.3s ease-in-out;
+            @media (max-width: 640px) {
+                width: 100%;
+                text-align: center;
+            }
+            &:hover, &:focus {
+                color: #101820;
+                background: rgba(255,255,255,1.0);
+            }
+        }
+
+        p.submit {
+            @media (max-width: 640px) {
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        
+    }
+}

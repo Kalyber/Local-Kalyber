@@ -1,0 +1,95 @@
+// Clearfix
+@mixin clearfix { 
+  &:after { content:""; display:block; clear:both; }
+}
+
+@mixin shortcol($wd, $maxwd) {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  width: $wd; 
+  max-width: $maxwd; 
+  margin: 0 auto;
+  overflow: auto;
+}
+
+// horizontal line
+@mixin horizline($color, $initwidth) {
+ color: $color;
+ width: $initwidth;
+}
+
+// Image Grid
+@mixin imagegrid($qty, $margin) {
+  width: ((100% - (($qty - 1) * $margin))/$qty);
+  &:nth-child(n) {
+    margin-bottom: $margin;
+    margin-right: $margin;
+  }
+  &:nth-child(#{$qty}n) {
+    margin-bottom: 0;
+    margin-right: 0;
+  }
+}
+
+// Media Queries - @require $breakpoints
+@mixin respondto($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+      $width: map_get($breakpoints, $width);
+      @if $type == max {
+          $width: $width - 1px;
+      }
+      @media only screen and (#{$type}-width: $width) {
+          @content;
+      }
+  }
+}
+
+// Centers things
+@mixin centerer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin vcenterer {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
+}
+
+// Modals
+@mixin modalbackground($color) {
+  display: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: $color;
+  opacity: .95;
+  z-index: 1000;
+}
+
+@mixin modal($color, $width, $height) {
+  @include centerer;
+
+  display: none;
+  background-color: $color;
+  box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.57);
+  width: $width;
+  height: $height;
+  z-index: 1025;
+}
+
+@mixin modal-no-ht($width) {
+  @include centerer;
+
+  display: none;
+  background-color: white;
+  box-shadow: 1px 1px 8px 0px rgba(0,0,0,0.57);
+  width: $width;
+  z-index: 1025;
+}

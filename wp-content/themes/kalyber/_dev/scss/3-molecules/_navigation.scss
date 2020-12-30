@@ -1,0 +1,29 @@
+#menu-top-menu { // top level ul
+  position: relative;
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+}
+
+#menu-top-menu li { // top level ul
+ display: inline-block;
+ position: relative;
+ font-family: $fontprime;
+ font-weight: 900;
+ font-size: 1em;
+ margin: 0 1.4em 0 0;
+ text-transform: uppercase;
+ padding:6px 0;
+
+  @include respondto('medium') {
+    padding:0;
+  }
+}
+
+#menu-top-menu a:link, #menu-top-menu a:focus, #menu-top-menu a:visited {
+  color:$dkgray;
+
+  &:hover {
+    color:$gold;
+  }
+}

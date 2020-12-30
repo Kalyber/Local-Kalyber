@@ -1,0 +1,113 @@
+// footer
+.footer-search {
+  display: none;
+
+  @include respondto('medium') {
+    display: block;
+    position: relative;
+    overflow: auto;
+    border: 1px solid white;
+    height: 30px;
+  }
+}
+
+.footer-search__image {
+  float: left;
+  width: 10%;
+  margin: 4px 0 0 4px;
+  cursor: pointer;
+}
+
+.footer-search input[type='text'] {
+  float: right;
+  margin: 0;
+  width: 80%;
+  border: none;
+  background: none;
+  color: white;
+  padding: 6px 4px 7px 4px;
+  font-family: $fontsans;
+  font-size: .8rem;
+}
+
+.footer-search input:focus {
+  outline: none;
+}
+
+// placeholder color
+.ginput_container ::-webkit-input-placeholder { /* Chrome */
+  color: $dkgray !important;
+}
+
+::-webkit-input-placeholder { /* Chrome */
+  color: white !important;
+}
+
+
+// form input
+.gform_wrapper {
+  margin-top: 0 !important;
+}
+
+.ginput_container, .gfield {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.gform_footer {
+  margin: 1em 0 0 0 !important;
+  padding: 0 0 0 0 !important;
+}
+
+.ginput_container input {
+  padding: 7px 7px 6px 9px !important;
+  font-family: $fontsans !important;
+  font-size: 16px !important;
+  border: 1px solid $ltgray !important;
+}
+
+.ginput_container textarea {
+  height: 200px !important;
+  padding: 7px 7px 6px 9px !important;
+  font-family: $fontsans !important;
+  font-size: 16px !important;
+  margin-top: 12px !important;
+  border: 1px solid $ltgray !important;
+}
+
+.ginput_recaptcha {
+  width: 100% !important;
+  margin-top: 14px !important;
+}
+
+.rc-anchor-normal {
+  width: 100% !important;
+}
+
+.gform_wrapper .gfield_radio li label, .gform_wrapper .gfield_checkbox li label {
+  margin-top: .6em !important;
+}
+
+// submit button
+input[type='submit'] {
+  @extend %button-basic;
+
+  border: 1px solid #e9b34b; 
+  background-color: transparent; 
+  color: #e9b34b;
+  margin: 0 auto !important;
+  font-size: $fontregular !important;
+
+  transition: all 0.5s ease;
+
+  &:hover {
+    border: 1px solid #e9b34b; 
+    background-color: $gold; 
+    color: white;
+  }
+}
+
+// get rid of spinner
+body img.gform_ajax_spinner {
+ display: none !important;
+}

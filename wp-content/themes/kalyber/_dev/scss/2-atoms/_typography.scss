@@ -1,0 +1,187 @@
+html, body {
+  font-family: $fontprime; 
+  font-weight: $regular;
+  font-size: 16px;
+  color: $dkgray;
+
+  @include respondto('medium') {
+    font-size: 16px;
+  }
+}
+
+a {
+  text-decoration: none !important;
+}
+
+a:hover {
+
+}
+
+h1 {
+  font-family: $fontprime;
+  font-weight: 300;
+  color: $dkgray;
+  font-size: 1.8em;
+  line-height: 1;
+  text-transform: uppercase;
+  margin: 0 0 18px 0;
+
+  @include respondto('medium') {
+    font-size: 2.4em;
+    line-height: 1;
+  }
+}
+
+h2 {
+  font-family: $fontprime;
+  font-weight: 400;
+  color: $dkgray;
+  font-size: 1.4em;
+  line-height: 1;
+  margin: 0 0 24px 0;
+
+  @include respondto('medium') {
+    font-size: $h2sized;
+    line-height: 1;
+  }
+}
+
+h3 {
+  font-family: $fontprime;
+  font-weight: $bold;
+  color: $dkgray;
+  font-size: $h3sizem;
+  line-height: 1;
+  margin: 0 0 0 0;
+
+  @include respondto('medium') {
+    font-size: $h3sized;
+    line-height: 1;
+  }
+}
+
+h4 {
+  font-family: $fontprime;
+  font-weight: $bold;
+  color: $gold;
+  font-size: $h4sizem;
+  line-height: 1.2;
+  margin: 0 0 0 0;
+  text-align: center;
+
+  @include respondto('medium') {
+    font-size: $h4sized;
+    line-height: 1;
+  }
+}
+
+p, li { 
+  font-size: $fontregular; 
+}
+
+p {
+  line-height: 1.625;
+  margin: 0 0 1.4rem 0;
+
+  @include respondto('medium') {
+
+  }
+}
+
+ul, ol {
+  margin: 0 0 1.4rem 0;
+  line-height: 1.625;
+}
+
+.quote-text {
+  font-family: $fontsecond;
+  font-weight: $regular;
+  font-size: $h2sizem;
+  line-height: 1.2;
+  padding: 0 0 .2em 0;
+
+  @include respondto('medium') {
+    font-size: $h2sized;
+    padding: 0 0 .6em 0;
+  }
+}
+
+.quote-name {
+  font-family: $fontprime;
+  font-weight: $regular;
+  font-size: $h4sizem;
+  letter-spacing: 2px;
+  line-height: 1;
+  margin: 0 0 0 0;
+
+  @include respondto('medium') {
+    font-size: $h3sized;
+  }
+}
+
+.quote-title {
+  margin: 0 0 1em 0;
+  font-size: $fontregular;
+}
+
+.contact-locations > p {
+  margin: .2em 0 0 0 !important;
+  padding: 0 0 0 0;
+
+  @include respondto('medium') {
+    margin: .2em 0 0 0 !important;
+  }
+}
+
+.contact-locations a {
+  display: block;
+  color: white;
+  text-decoration: none;
+  margin: 0 0 0 0;
+
+  @include respondto('medium') {
+    margin: 0 0 4em 0
+  }
+}
+
+.contact-locations a:last-child {
+  margin: 0 0 0 0;
+
+  @include respondto('medium') {
+    margin: 0 0 0 0
+  }
+}
+
+.directions {
+  padding: 0 0 2em 0;
+
+  @include respondto('medium') {
+    padding: 0 0 0 0
+  }
+}
+
+.directions:last-child {
+  padding: 0 0 0 0;
+}
+
+
+// culture
+.culture-box-text h3 {
+  color: $gold;
+  margin: 0 0 0 0 !important;
+}
+
+.culture-box-text p {
+  color: white;
+  margin: 0 0 3em 0 !important;
+}
+
+// sitemap
+.sitemap a {
+  display: block;
+  margin: 0 0 .4em 0;
+  color: $dkgray;
+}
+.sitemap h3 {
+  margin: 1.2em 0 .4em 0;
+}

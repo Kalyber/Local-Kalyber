@@ -1,0 +1,19 @@
+.text-block__wrap {
+     padding:60px 0 40px;
+     margin-bottom:50px;
+
+     @include respond(medium) {
+          padding:120px 0 100px;
+          margin-bottom: 100px;
+     }
+}
+
+.text-block__inner {
+     color:white;
+     font-size:20px;
+     line-height: 1.6;
+
+     @include respond(medium) {
+          font-size: 24px;
+     }
+}

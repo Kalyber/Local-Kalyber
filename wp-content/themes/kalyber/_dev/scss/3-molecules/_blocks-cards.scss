@@ -1,0 +1,206 @@
+// cta
+.cta-interior, .cta-interior--light {
+  width: 78%;
+  text-align: center;
+}
+
+.cta-interior h2, .cta-interior p {
+  color: white;
+}
+
+.cta-interior--light h2, .cta-interior--light p {
+  color: $dkgray;
+}
+
+.cta-interior p {
+  margin: .4em 0 1.4em 0;
+
+  @include respondto('medium') {
+    margin: .4em 0 2.2em 0;
+  }
+}
+
+
+
+// project photo grid item
+.overlay__holder {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  clear: both;
+
+  @include respondto('medium') {
+    flex-direction: row;
+  }
+  
+}
+
+.overlay__item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  cursor: pointer;
+
+  @include respondto('medium') {
+    width: 33.3333%;
+  }
+}
+
+.overlay__50-percent {
+  width: 100% !important;
+
+  @include respondto('medium') {
+    width: 50% !important;
+  }
+}
+
+.overlay__text {
+  position: absolute; 
+  width: 100%;
+  z-index: 1000;
+
+  @include respondto('medium') {
+    width: 33.3333%;
+  }
+}
+
+.overlay__text--home {
+  position: absolute; 
+  width: 100%;
+  z-index: 1000;
+
+  @include respondto('medium') {
+    width: 50%;
+  }
+}
+
+.overlay__text__title, .overlay__text__description, 
+.overlay__text__title--home, .overlay__text__description--home {
+  width: 80%;
+  margin: 0 auto;
+  font-family: $fontprime;
+  text-align: center;
+  mix-blend-mode: normal;
+  color: white;
+
+  @include respondto('medium') {
+    
+  }
+}
+
+.overlay__text__title {
+  font-size: $h3sized;
+  line-height: 1;
+  padding: 1.8em 0 0 0;
+}
+
+.overlay__text__title--home {
+  font-size: $h2sized;
+  line-height: 1;
+  padding: 1.8em 0 0 0;
+}
+
+.overlay__text__description {
+  opacity: 1;
+  font-family: $fontprime;
+  font-size: 1em;
+  padding: .6em 0 2em 0;
+  transition: all ease-in .5s;
+
+  @include respondto('medium') {
+    opacity: 0;
+  }
+}
+
+.overlay__text__description--home {
+  opacity: 1;
+  font-family: $fontprime;
+  font-size: 1em;
+  padding: .6em 0 2em 0;
+  transition: all ease-in .5s;
+
+  @include respondto('medium') {
+    opacity: 0;
+  }
+}
+
+.overlay__image-holder {
+  position: relative;
+  background-color: $dkblue;
+  width: 100%;
+}
+
+.overlay__image-holder img {
+  width: 100%;
+  filter: normal;
+  opacity: 1;
+  transition: all ease-out .5s;
+}
+
+.overlay__item:hover .overlay__text .overlay__text__description {
+  opacity: 1;
+  padding: 0 0 2.6em 0;
+}
+
+.overlay__item--home:hover .overlay__text--home .overlay__text__description--home {
+  opacity: 1;
+  padding: 0 0 2.6em 0;
+}
+
+
+
+// photo grids
+%photo-grid-defaults {
+  display: none;
+  grid-gap: 10px;
+  background-color: white;
+
+  @include respondto('medium') {
+    display: grid;
+  }
+}
+
+.photo-grid-a {
+  @extend %photo-grid-defaults;
+
+  grid-template-columns: 2fr 1fr;
+  padding: 10px 0 10px 0;
+}
+
+.photo-grid-b {
+  @extend %photo-grid-defaults;
+
+  grid-template-columns: 1fr 2fr;
+  padding: 10px 0 10px 0;
+}
+
+.photo-grid-c {
+  @extend %photo-grid-defaults;
+
+  grid-template-columns: 1fr 2fr;
+  padding: 10px 0 10px 0;
+}
+
+.photo-grid-d {
+  @extend %photo-grid-defaults;
+
+  grid-template-columns: 2fr 1fr;
+  padding: 10px 0 0 0;
+}
+
+.photo-grid-e {
+  @extend %photo-grid-defaults;
+
+  grid-template-columns: 1fr 2fr;
+  padding: 10px 0 0 0;
+}
+
+.grid-item img {
+  width: 100%;
+}
+
+.grid-2-high {
+  grid-row: span 2;
+}

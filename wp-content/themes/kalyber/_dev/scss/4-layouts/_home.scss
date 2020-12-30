@@ -1,0 +1,165 @@
+// top photo
+.home__top-section {
+  display:flex;
+  justify-content: center;
+  background: $ltgray url('assets/img/photos/home__top-photo-bkg.jpg') no-repeat;
+  background-position: center center;
+  background-size: cover;
+  //height:600px;
+  margin:0 0 150px 0;
+}
+
+.home__top-section__inner {
+  @extend .content-width;
+  display: flex;
+  flex-direction: column;
+
+  @include respondto(small) {
+    flex-direction: row;
+  }
+}
+
+.home__top-section__bkg {
+  width:100%;
+  background: $ltgray url('assets/img/photos/sunset.png') no-repeat;
+  background-position: center center;
+  background-size: cover;
+  height:250px;
+
+  @include respondto(small) {
+    width:40%;
+    height:auto;
+  }
+  @include respondto(medium) {
+    width:42%;
+  }
+  @include respondto(large) {
+    width:44%;
+  }
+}
+
+.home__top-section__photos {
+  display: flex;
+  flex-direction: row;
+  width:100%;
+
+  @include respondto(small) {
+    flex-direction: column;
+    width:20%;
+  }
+  @include respondto(medium) {
+    width:16%;
+  }
+  @include respondto(large) {
+    width:12%;
+  }
+}
+
+.home__top-section__photo {
+  padding:0;
+  margin:0;
+
+  img {
+    display:block;
+    padding:0;
+    margin:0;
+  }
+}
+
+.home__top-section__text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width:100%;
+  background-color: #565a5c;
+  color:white;
+  font-size: 1.2em;
+  line-height:1.8em;
+
+  @include respondto(small) {
+    width:40%;
+    font-size: .9em;
+  }
+  @include respondto(medium) {
+    width:42%;
+    font-size: 1em;
+  }
+  @include respondto(large) {
+    width:44%;
+    font-size: 1.2em;
+  }
+}
+
+.home__top-section__text-inner {
+  width:84%;
+  padding:1.4rem 0 0;
+
+  @include respondto(small) {
+    width:70%;
+    padding:1.4rem 0 0;
+  }
+
+  @include respondto(large) {
+    width:70%;
+    padding:1.4rem 0 0;
+  }
+}
+
+.home__top-copy {
+  @extend .content-width;
+  margin:0 auto 150px;
+  font-size:1.4em;
+}
+
+.home__services-holder {
+  @extend .content-width;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding:50px 40px 24px 40px;
+  margin:0 auto 50px;
+  background-color:$gold;
+  color:$dkgray;
+}
+
+.home__services-holder h2 {
+  width:100%;
+  text-align: center;
+  color:$dkgray;
+}
+
+.home__services-holder p {
+  width:100%;
+  text-align: center;
+  font-size:1.4em;
+}
+
+.home__about-holder {
+  @extend .content-width;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding:50px 40px 24px 40px;
+  margin:0 auto 100px;
+  background-color:$dkgray;
+  color:white;
+}
+
+.home__about-photo {
+  width:100%;
+  display:block;
+  margin:0 0 30px 0;
+}
+
+.home__about-text {
+  text-align: center;
+}
+
+.home__about-text h2 {
+  color:$gold;
+}
+
+.home__divider {
+  padding:0 12px;
+}

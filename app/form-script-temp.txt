@@ -1,0 +1,279 @@
+// $( document ).ready(function() {
+//     var contactFormIframe = $('.contact-form'),
+//     contactForm = contactFormIframe.contents(),
+//     firstNameField = contactForm.find('.first_name');
+//         console.log(contactForm);
+//         console.log(firstNameField);
+// });
+
+function parentTest() {
+  console.log("calling from child iframe");
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const displayNameAttribute = "data-display-name",
+    formFields = ["first_name", "last_name", "email", "company", "comments"],
+    showDebug = false;
+
+  function addFieldDisplayNames() {
+    const form = document.querySelector("form");
+
+    if (form) {
+      const fields = form.elements;
+
+      if (fields && fields.length > -1) {
+        const classIndexNumber = 1,
+          fieldsLength = fields.length;
+
+        let displayName = "",
+          field = null,
+          iterator = 0,
+          parent = null;
+
+        for (iterator = 0; iterator < fieldsLength; iterator++) {
+          field = fields[iterator];
+
+          if (field) {
+            parent = field.parentElement;
+
+            if (parent && parent.classList && parent.classList.length > 1) {
+              displayName = parent.classList.item(classIndexNumber);
+
+              if (displayName) {
+                field.setAttribute(displayNameAttribute, displayName);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  function postMessages(formFieldsCompleted) {
+    try {
+      let formDepthObject = JSON.stringify({
+          fieldsCompleted: formFieldsCompleted,
+          numberOfFieldsComplete: formFieldsCompleted.length,
+        }),
+        postUrls = [
+          "http://local.kalyber.com",
+          "http://qa.kalyber.com",
+          "https://kalyber.com",
+        ];
+
+      if (showDebug) {
+        window.console &&
+          window.console.log("Form fields completed: " + formDepthObject);
+      }
+
+      parent.postMessage("test message", "http://local.kalyber.com");
+
+    //   for (const url of postUrls) {
+    //     try {
+    //       parent.postMessage(formDepthObject, url);
+    //     } catch (e) {
+    //       if (showDebug) {
+    //         window.console && window.console.log(e);
+    //       }
+    //     }
+    //   }
+    } catch (e) {
+      if (showDebug) {
+        window.console && window.console.log(e);
+      }
+    }
+  }
+
+  window.addEventListener("beforeunload", function (e) {
+    const form = document.querySelector("form"),
+      formFieldsCompleted = [];
+
+    if (form) {
+      const fields = form.elements;
+
+      if (fields && fields.length > -1) {
+        const fieldsLength = fields.length;
+        let displayName = "",
+          field = null,
+          iterator = 0;
+
+        for (iterator = 0; iterator < fieldsLength; iterator++) {
+          field = fields[iterator];
+
+          if (
+            field &&
+            field.type !== "" &&
+            field.type !== "submit" &&
+            field.type !== "button" &&
+            field.type !== "hidden"
+          ) {
+            displayName = field.getAttribute(displayNameAttribute);
+
+            if (displayName) {
+              if (showDebug) {
+                window.console &&
+                  window.console.log(
+                    displayName + " - " + "field value is: " + field.value
+                  );
+              }
+
+              if (field.value && field.value !== "" && field.value.length > 0) {
+                formFieldsCompleted.push(displayName);
+              }
+            }
+          }
+        }
+      }
+    }
+    postMessages(formFieldsCompleted);
+
+    if (showDebug) {
+      // Cancel the event
+      e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+      // Chrome requires returnValue to be set
+      e.returnValue = "";
+    } else {
+      // the absence of a returnValue property on the event will guarantee the browser unload happens
+      delete e["returnValue"];
+    }
+  });
+
+  addFieldDisplayNames();
+});
+
+// GTM TAG
+
+(function (window) {
+  var showDebug = true;
+  
+    function receivePardotAbandonMessage(event) {
+        if (showDebug) {
+            console.log("origin: " + event.origin);
+            console.log("message: " + event.data);
+        }
+
+        if (event.data && event.origin === "https://go.kalyber.com") {
+            var formData = JSON.parse(event.data);
+
+      if (showDebug) {
+        console.log("message data: " + formData);
+      }
+
+      var fieldData =
+        formData.fieldsCompleted.toString() +
+        " - " +
+        formData.numberOfFieldsComplete;
+
+      dataLayer.push({
+        event: "formAbandoned",
+        fields: fieldData,
+      });
+        }
+    }
+
+  window.addEventListener("message", receivePardotAbandonMessage, false);
+//   addEvent(window, "message", function (message) {
+//     var dataLayer = window.dataLayer || (window.dataLayer = []);
+
+//     if (showDebug) {
+//       console.log("origin: " + message.origin);
+//     }
+
+//     if (message.data && message.origin === "https://go.kalyber.com") {
+//       var formData = JSON.parse(message.data);
+
+//       if (showDebug) {
+//         console.log("message data: " + formData);
+//       }
+
+//       var fieldData =
+//         formData.fieldsCompleted.toString() +
+//         " - " +
+//         formData.numberOfFieldsComplete;
+
+//       dataLayer.push({
+//         event: "formAbandoned",
+//         fields: fieldData,
+//       });
+//     }
+//   });
+
+//   function addEvent(el, evt, fn) {
+//     if (el.addEventListener) {
+//       el.addEventListener(evt, fn);
+//     } else if (el.attachEvent) {
+//       el.attachEvent("on" + evt, function (evt) {
+//         fn.call(el, evt);
+//       });
+//     } else if (
+//       typeof el["on" + evt] === "undefined" ||
+//       el["on" + evt] === null
+//     ) {
+//       el["on" + evt] = function (evt) {
+//         fn.call(el, evt);
+//       };
+//     }
+//   }
+})(window);
+
+// OLD
+{
+  /* <script type="text/javascript">
+document.addEventListener("DOMContentLoaded", function(){
+  var formFieldsCompleted = [];
+  
+  window.console.log('testing');
+  
+  function addFieldEvents() {
+    var firstnameContainer = document.querySelector('.first_name'),
+        firstnameInput = firstnameContainer.querySelector('input[type=text]');
+    
+    window.console.log('container for the first name: ' + firstnameContainer);
+    window.console.log(firstnameInput);
+    
+    firstnameInput.onkeypress = trackKeyPress(event, 'first name');
+  }
+  
+  function trackKeyPress(e, fieldName) {
+    
+    if (!formFieldsCompleted.includes(fieldName)) {
+      formFieldsCompleted.push(fieldName);
+      window.console.log(formFieldsCompleted);
+    }
+    
+    window.console && window.console.log(e);
+  }
+
+  function postMessages() {
+    try {
+      var formDepthObject = JSON.stringify({
+       fieldsComplete: formFieldsCompleted,
+       numberOfFieldsComplete: formFieldsCompleted.length
+      });
+
+      try {
+        parent.postMessage(formDepthObject, 'http://local.kalyber.com');
+      } catch (e) {
+        window.console && window.console.log(e);
+      }
+
+      try {
+        parent.postMessage(formDepthObject, 'http://qa.kalyber.com');
+      } catch (e) {
+        window.console && window.console.log(e);
+      }
+    } catch (e) {
+      window.console && window.console.log(e);
+    }
+  }
+  
+  window.addEventListener('beforeunload', function (e) {
+    // the absence of a returnValue property on the event will guarantee the browser unload happens
+    postMessages();
+    delete e['returnValue'];
+  });
+  
+  addFieldEvents();
+});
+</script> */
+}

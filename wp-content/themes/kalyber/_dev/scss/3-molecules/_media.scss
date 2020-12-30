@@ -1,0 +1,104 @@
+// top video
+.video-holder {
+  position: relative;
+}
+
+video {
+  width: 100%;
+}
+
+.video-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  padding: .6em 1em .6em 1em;
+  margin: 0;
+  border: 2px solid white;
+  color: white;
+  text-align: center;
+  font-family: $fontprime;
+  font-size: 2em;
+  line-height: 1em;
+  transform: translate(-50%, -20%);
+
+  @include respondto('medium') {
+    font-size: 3em;
+    line-height: 1em;
+    transform: translate(-50%, -34%);
+  }
+}
+
+// embedded video
+.embed-container { 
+  position: relative; 
+  padding-bottom: 56.25%; 
+  height: 0; 
+  overflow: hidden; 
+  max-width: 100%; 
+} 
+.embed-container iframe, 
+.embed-container object, 
+.embed-container embed { 
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  width: 100%; 
+  height: 100%; 
+}
+
+.video-image-mobile-hold {
+  @include clearfix;
+
+  position: relative;
+}
+
+.video-image-mobile {
+  width: 100%;
+}
+
+// responsive iframe
+.iframe-content {
+    width: 100%;
+    margin: 0px auto;
+}
+.iframe-embed-container--home {
+    height: 0;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    position: relative;
+
+    & iframe {
+      min-width: 100%;
+      width: 10px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+  @include respondto('medium') {
+    padding-bottom: 100%;
+  }
+}
+
+.iframe-embed-container--services {
+    height: 0;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+    position: relative;
+
+    & iframe {
+      min-width: 100%;
+      width: 10px;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+  @include respondto('medium') {
+    padding-bottom: 60%;
+  }
+}

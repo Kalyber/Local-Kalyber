@@ -1,0 +1,67 @@
+.blog__social__container {
+    background-color: $gold;
+    width: 320px;
+    padding: 20px 10px;
+    margin: 0 auto;
+    color: white;
+    @include respond(medium) {
+        width: 100%;
+    }
+}
+
+.blog__social__wrap{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    h4{
+        margin: 0;
+    }
+
+    svg {
+        transition: 0.3s all;
+        cursor: pointer;
+        fill: white !important;
+        margin: 0 2px;
+        &:hover {
+            transform: scale(1.3);
+        }
+    }
+}
+
+.social-icons__wrap {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.pop-up-fav__wrap {
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    h3 {
+        margin: 0;
+        margin-right: 10px;
+    }
+
+    .wpulike-heart .wp_ulike_general_class {
+        box-shadow: none;
+        border: 2px solid white;
+        .count-box {
+            color: white;
+        }
+    }
+    .wpulike-heart .wp_ulike_put_image:after {
+        filter: brightness(0) invert(1);
+    }
+    .wpulike-heart .wp_ulike_put_image.wp_ulike_btn_is_active:after {
+        filter: invert(44%) sepia(40%) saturate(3852%) hue-rotate(329deg) brightness(100%) contrast(111%);
+    }
+}

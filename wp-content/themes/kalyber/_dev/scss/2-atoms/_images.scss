@@ -1,0 +1,96 @@
+.top-image-holder {
+  @include clearfix;
+
+  //position: fixed; 
+  //top: 0; 
+  position: relative;
+  width: 100%; 
+  padding: 0; 
+  margin: 0; 
+  z-index: 10;
+}
+
+.top-image-holder img, .post-slider__feat-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.top-image {
+  position: absolute; 
+  top: 0; 
+  left: 0; 
+  right: 0;
+  bottom: 0;
+}
+
+// icon in text blocks
+.text-icon {
+  margin: 0 auto;
+  padding: 0 0 1em 0;
+}
+
+.text-icon--services-overview {
+  margin: 0 auto;
+  padding: 0 0 1em 0;
+  width: 60px !important;
+}
+
+// services svg
+.home-svg-hold {
+  position: absolute; 
+  width:70%;
+  left:16%;
+  padding: 2em 0 0 0;
+
+  @include respondto('large') {
+    padding: 1.4em 0 1em 0;
+  }
+}
+
+// services svg
+.services-overview-svg-hold {
+  position: absolute; 
+  width:50%;
+  left:24%;
+}
+
+// why hutton svg
+.why-hutton-svg-hold {
+  position: absolute; 
+  width:80%;
+  left:8%;
+  transition: all 200ms ease-in;
+}
+
+.svg-whyHutton__horiz-line {
+  opacity: 0;
+  fill: none;
+  stroke: #DDDEDE;
+  stroke-miterlimit: 10;
+  transition: all 200ms ease-in;
+}
+
+.js-whyHutton-animate {
+  opacity: 1;
+}
+
+
+
+.why-hutton__horiz-path {
+  stroke:#DDDEDE;
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 3s linear forwards;
+
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.why-hutton__opacity-anim {
+  opacity: 1 !important;
+}

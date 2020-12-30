@@ -1,0 +1,38 @@
+.landing_inner_wrap {
+     max-width: 1280px;
+     padding-bottom: 40px;
+     margin: 0 auto;
+     display: block;
+     background-color: #fff;
+     box-shadow: 0 2.8px 2.2px rgba(0,0,0,.034), 0 6.7px 5.3px rgba(0,0,0,.048), 0 12.5px 10px rgba(0,0,0,.06);
+}
+
+.landing__rich-text--wrap {
+     max-width: 870px;
+     display: block;
+     margin: 0 auto;
+     padding: 3rem 15px 3.125rem 15px;
+
+     ul {
+          margin:0 0 16px 0;
+
+          li {
+               margin-left:20px;
+          }
+     }
+
+     table {
+          border:1px solid gray;
+          border-collapse: collapse;
+          margin-bottom:16px;
+
+          tr {
+          }
+
+          td {
+               padding:14px;
+               font-size:14px;
+               border:1px solid gray;
+          }
+     }
+}

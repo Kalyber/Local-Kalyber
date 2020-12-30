@@ -1,0 +1,188 @@
+.pop-up__container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 100px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    @include respond(medium) {
+        position: sticky;
+        bottom: unset;
+        left: unset;
+        top: 100px;
+        height: 100%;
+        width: 30%;
+    }
+    .blog__social__container {
+        display: none;
+        @include respond(medium) {
+            display: block;
+        }
+        .blog__social__wrap {
+            margin-top: 0;
+            h4 {
+                margin: 0;
+            }
+        }
+    }
+
+}
+
+.pop-up__wrap {
+    background-color: $primary-blue;
+    color: white;
+    padding: 20px 30px;
+    bottom: -200%;
+    width: 320px;
+    left: 50%;
+    transform: translateX(-50%);
+    position: absolute;
+    text-align: center;
+    transition: 0.5s all;
+    @include respond(medium) {
+        width: 100%;
+        transform: translateX(0%);
+        margin-bottom: 10px;
+        position: unset;
+        bottom: unset;
+    }
+    a{
+        color: $primary-blue;
+        transition: 0.5s all;
+        &:hover {
+            background-color: rgba($primary-blue, 0.7);
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+
+.pop-up__wrap--red {
+    background-color: $primary-red;
+    a{
+        color: $primary-red;
+        &:hover {
+            background-color: rgba($primary-red, 0.7);
+        }
+    }
+}
+
+.pop-up-svg__container {
+    background-color: $primary-blue;
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    bottom: 0;
+    left: 0;
+    height: 80px;
+    width: 100%;
+    z-index: 3;
+    box-shadow: 0px 10px 5px 10px black;
+    @include respond(medium) {
+        display: none;
+    }
+}
+
+
+
+.pop-up-chat__wrap {
+
+}
+
+.pop-up-chat-svg__wrap {
+
+}
+
+.pop-up-copy__wrap {
+
+}
+
+.pop-up-copy__header {
+    font-size: 30px;
+    margin: 0 !important;
+}
+
+.pop-up-copy__subheader {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.pop-up-button__wrap {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+
+}
+
+.pop-up-button {
+    background-color: white;
+    padding: 5px 20px;
+    cursor: pointer;
+
+}
+
+.pop-up-input__wrap {
+    
+}
+
+.pop-up-input {
+    padding: 10px;
+    width: 100%;
+}
+
+.pop-up-show { 
+    bottom: 80%;
+}
+
+.pop-up-svg__wrap {
+    margin: 0 20px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    p{
+        margin-bottom: 0;
+    }
+}
+
+.pop-up-svg {
+    width: 30px;
+    height: 30px;
+}
+
+.pop-up-exit{
+    width:30px;
+    height:30px;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 5%;
+    right: 5%;
+    @include respond(medium) {
+        display: none;
+    }
+}
+
+.pop-up-exit:before,.pop-up-exit:after{
+    content:'';
+    position:absolute;
+    width:25px;
+    height:2px;
+    background-color:white;
+}
+
+.pop-up-exit:before{
+    -webkit-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    transform:rotate(45deg);
+    left:2px;
+}
+.pop-up-exit:after{
+    -webkit-transform:rotate(-45deg);
+    -moz-transform:rotate(-45deg);
+    transform:rotate(-45deg);
+    right:2px;
+}

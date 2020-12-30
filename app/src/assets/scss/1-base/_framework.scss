@@ -1,0 +1,56 @@
+.page__container {
+    margin:0;
+    padding:0;
+    margin-top: 80px;
+    width:100%;
+
+    @include respond(medium) {
+        margin-top: 100px;
+    }
+}
+ 
+.container {
+    margin: 0 auto;
+    width: 90%;
+    max-width: 1440px;
+    position: relative;
+}
+
+.spacer100v {
+    width:100%;
+    height:60px;
+    margin:0;
+
+    @include respond(medium) {
+        height: 100px;
+    }
+}
+
+.divider--vertical {
+    width:2px;
+}
+
+hr { 
+    position: relative; 
+    top: 20px; 
+    border: none; 
+    height: 1px; 
+    background: $blue;
+    margin-bottom: 60px; 
+}
+
+.hide--mobile {
+    display:none;
+
+    @include respond(small) {
+        display:block;
+    }
+}
+
+.hide--desktop {
+    display:block;
+
+    @include respond(small) {
+        display:none;
+    }
+}

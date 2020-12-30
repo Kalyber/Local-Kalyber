@@ -1,0 +1,146 @@
+.interior__header {
+  background: $ltgray url('assets/img/photos/home__top-photo-bkg.jpg') no-repeat;
+  background-position: center center;
+  background-size: cover;
+
+
+}
+
+.interior__header__inner {
+  @extend .content-width;
+  margin:110px auto 0;
+  padding:50px 0 40px;
+
+  @include respondto(small) {
+    padding:80px 0 80px;
+  }
+
+  p {
+    font-size:1.4em;
+    width:100%;
+    margin:0;
+
+    @include respondto(small) {
+      width:70%;
+    }
+    @include respondto(medium) {
+      width:60%;
+    }
+    @include respondto(large) {
+      width:50%;
+    }
+  }
+}
+
+.interior__container {
+  @extend .content-width;
+  margin:50px auto 50px;
+  font-size:1.4em;
+
+  @include respondto(small){
+    margin:100px auto 50px;
+  }
+}
+
+
+
+
+// contact page
+.contact__people-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  width:90%;
+  margin:0 auto 400px;
+
+  @include respondto(small){
+    width:84%;
+  }
+}
+.contact__item {
+  display: flex;
+  flex-direction:column;
+  margin:30px auto;
+
+  @include respondto(small) {
+    flex-direction: row;
+    margin:30px 0;
+  }
+}
+.contact__item-photo {
+  padding-right:0;
+
+  @include respondto(small) {
+    padding-right: 30px;
+  }
+
+  img {
+    max-width:260px;
+
+    @include respondto(small) {
+      max-width:200px;
+    }
+    @include respondto(medium) {
+      max-width:140px;
+    }
+    @include respondto(large) {
+      max-width:160px;
+    }
+    @include respondto(x-large) {
+      max-width:200px;
+    }
+  }
+}
+.contact__item-text{
+  margin-top:50px;
+  padding:0 2rem 0 0;
+  font-size:.8em;
+
+  a:link, a:focus, a:visited {
+    color: #565a5c;
+
+    &:hover {
+      color:#e9b34b;
+    }
+  }
+
+  span {
+    display:block;
+  }
+  span:nth-child(1) { // name/title
+    margin-bottom:8px;
+    font-weight: 700;
+  }
+  span:nth-child(2) { // email
+    padding-bottom:16px;
+    margin-bottom:16px;
+    font-size:.8em;
+    border-bottom:4px solid #e9b34b;
+  }
+  span:nth-child(3) { // phone
+    font-weight: 700;
+
+    a:link, a:focus, a:visited {
+      color:#565a5c;
+    }
+  }
+}
+
+// gallery page
+.gallery__container {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin:0 0 400px 0;
+}
+
+.gallery__item {
+  width:300px;
+
+  p {
+    padding:16px;
+    font-size:.8em;
+    line-height:1.2em;
+    text-align:center;
+  }
+}

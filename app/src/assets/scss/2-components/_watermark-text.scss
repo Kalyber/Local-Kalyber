@@ -1,0 +1,63 @@
+.watermark-text__wrap {
+    padding: 50px 0;
+
+    @include respond(medium) {
+        padding: 100px 0;
+    }
+}
+
+.watermark-text__inner {
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    @include respond(medium) {
+        flex-direction: row;
+    }
+}
+
+.watermark-text__head {
+    font-size: 50px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: tint($primary-blue, 20%);
+    line-height: .9;
+    padding-top:0;
+    margin: 0 0 24px 0;
+
+    @include respond(small) {
+        font-size: 70px;
+        width: 100%;
+    }
+    @include respond(medium) {
+        width: 48%;
+        font-size: 70px;
+        padding-top: 15px;
+        margin: 0 0 0 0;
+    }
+    @include respond(large) {
+        font-size: 90px;
+    }
+    @include respond(x-large) {
+        font-size: 100px;
+    }
+}
+
+.watermark-text__copy {
+    display:flex;
+    align-items:center;
+    width: 100%;
+    font-size: 20px;
+    line-height: 1.6;
+    color:white;
+    margin:0;
+
+    @include respond(medium) {
+        width:40%;
+        font-size: 24px;
+    }
+
+    p {
+        margin:0;
+    }
+}

@@ -1,0 +1,58 @@
+/*!
+Theme Name: Todd Gimlin WP Master Theme
+Author: Todd Gimlin
+Author URI: https://www.toddgimlin.com
+Description: TG master theme
+Version: 1.0.0
+Text Domain: tgwp-master
+*/
+
+// Init
+@import
+  "0-init/_variables",
+  "0-init/_functions",
+  "0-init/_mixins",
+  "0-init/_helpers";
+
+// Base
+@import 
+  "1-base/_normalize",
+  "1-base/_fonts",
+  "1-base/_grid";
+
+// Atoms
+@import 
+  "2-atoms/_typography",
+  "2-atoms/_color-texture",
+  "2-atoms/_images",
+  "2-atoms/_structure";
+
+// Molecules
+@import
+  "3-molecules/_blocks-cards",
+  "3-molecules/_charts-graphs",
+  "3-molecules/_forms",
+  "3-molecules/_icons",
+  "3-molecules/_buttons",
+  "3-molecules/_interactive-panels",
+  "3-molecules/_lists-collections",
+  "3-molecules/_media",
+  "3-molecules/_messaging",
+  "3-molecules/_navigation",
+  "3-molecules/_tables",
+  "3-molecules/_text";
+
+// Layouts
+@import 
+  "4-layouts/_header",
+  "4-layouts/_footer",
+  "4-layouts/_home",
+  "4-layouts/_interior";
+
+// Vendor specific CSS
+@import 
+  "5-vendor/_vendor";
+
+// Print CSS
+@import 
+  "6-print/_print";

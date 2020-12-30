@@ -1,0 +1,176 @@
+.cards__wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+    @include respond(medium) {
+        flex-direction: row;
+    }
+}
+
+.card__container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    color: black;
+    position: relative;
+    margin:0 0 50px 0;
+    box-shadow:
+    0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048),
+    0 12.5px 10px rgba(0, 0, 0, 0.06);
+
+    @include respond(medium) {
+        width: 30%;
+        margin:0 0 0 0;
+    }
+
+    img {
+        display: block;
+        width:100%;
+    }
+}
+
+.card__image-wrap {
+    width:100%;
+    
+    img {
+        display:block;
+        filter: grayscale(100%);
+        opacity:.5;
+    }
+}
+
+.copy-card__container {
+    padding: 3vw 5vw 3vw 2vw;
+}
+
+.image-copy-card__container {
+    padding: 0;
+}
+
+.image-card-content__wrap {
+    width: 100%;
+}
+
+.card-bottom {
+    z-index: 2;
+}
+
+.card-color {
+    position: absolute;
+    width: 50px;
+    height: 100%;
+    right: 0;
+    top: 0;
+}
+
+.card-color-1 {
+    background-color: $primary-red;   
+}
+
+.card-color-2 {
+    background-color: $green;   
+}
+
+.card-color-3 {
+    background-color: $light-blue
+}
+
+.card-icon-watermark__wrap {
+    position: absolute;
+    left:  -60%;
+    width: 100%;
+    opacity: 10%;
+    top: 50%;
+    transform: translateY(-50%);
+    .card-icon {
+        width: 100%;
+        margin: 0 auto;
+    }
+}
+
+.card-copy__wrap {
+    text-align: center;
+}
+
+.image-card-content__wrap {
+    width: 100%;
+}
+
+.image-card-copy__wrap {
+    margin: 40px auto 60px;
+    width: 88%;
+
+    @include respond(medium) {
+        margin: 40px auto 60px;
+        width: 80%;
+    }
+
+    .card-copy__header {
+        margin-bottom: 10px;
+    }
+    .card-copy__brief {
+        font-size: 18px;
+        color: #333;
+    }
+}
+
+.image-card-button__wrap {
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    bottom: -28px;
+    right: 116px;
+    transform: translateX(50%);
+    background-color: $primary-red;
+    color: white;
+    letter-spacing: 1px;
+    font-weight: 700;
+    padding: 8px 24px;
+    text-transform: uppercase;
+    border: 10px solid #fff;
+    cursor: pointer;
+    transition: all .5s ease-in;
+
+    @include respond(medium) {
+        right: 116px;
+    }
+
+    &:hover {
+        box-shadow: inset 0 0 20px shade($primary-red, 60%);
+    }
+}
+
+.card-copy__header {
+    font-size: 24px;
+    line-height: 125%;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.card-copy__brief {
+    font-size: 16px;
+    line-height:1.6;
+}
+
+.card-button__wrap {
+    margin: 20px auto 0;
+    display: inline-block;
+    display: flex;
+    justify-content: center;
+}
+
+.card-button {
+    background-color: $primary-red;
+    color: white;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    border: 2px solid;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
