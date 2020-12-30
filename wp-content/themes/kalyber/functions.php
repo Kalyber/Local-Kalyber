@@ -53,66 +53,30 @@ if (! function_exists('kalybernew_enqueue')) :
 
 		// SCRIPTS
 		// kill WordPress version of jquery
-		//wp_deregister_script( 'jquery' );
+		wp_deregister_script( 'jquery' );
 		// google hosted jQuery in header - because plugins
-		//wp_enqueue_script( 'jquery', '//ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js', array(), '2.1.0', false );
+		wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
 		// custom js
-		//wp_enqueue_script( 'kalybernew_js', get_template_directory_uri() . '/assets/js/kalyber.js', array(), '1.0' );
+          wp_enqueue_script( 'kalybernew_js', get_template_directory_uri() . '/assets/js/kalyber.js', array(), '1.0' );
+          
+          // OPTIONAL - SELECTIVELY TURN ON JQUERY
+          // if(is_admin()){
+          //     wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
+          // }
+
+          // if(is_page()){
+          //     $template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
+
+          //     if($template_name !== 'test.php'){
+          //         wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
+          //     } else {
+          //         wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
+          //     }
+          // }
+
 	}
 	add_action( 'wp_enqueue_scripts', 'kalybernew_enqueue' );
 endif;
-
-
-
-// *** ENQUEUE SCRIPTS ***
-function js_scripts() {
-    wp_enqueue_script( 'kalyber', get_template_directory_uri() . '/assets/js/kalyber.js', array(), '1.0' );
-    wp_enqueue_script( 'kalyber', get_template_directory_uri() . '/assets/js/vendor/vendor.js', array(), '1.0' );
-    //wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
-
-
-    // if(is_admin()){
-    //     wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
-    // }
-
-    // if(is_page()){
-    //     $template_name = get_post_meta( $wp_query->post->ID, '_wp_page_template', true );
-
-    //     if($template_name !== 'test.php'){
-    //         wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
-    //     } else {
-    //         wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
-    //     }
-    // }
-
-
-}
-add_action( 'wp_enqueue_scripts', 'js_scripts' );
-
-
-
-
-
-
-
-
-
-
-/**
- * Custom template tags for this theme.
- */
-//require get_template_directory() . '/inc/template-tags.php';
-
-/**
- * Functions which enhance the theme by hooking into WordPress.
- */
-//require get_template_directory() . '/inc/template-functions.php';
-
-
-
-
-
-
 
 
 
@@ -139,22 +103,22 @@ add_image_size('small', 600, 600, false);
 
 
 // *** DEREGISTER GUTENBERG STYLES IF NOT LOGGED IN
-// if (!is_admin()) add_action("wp_enqueue_scripts", "kill_gutenberg_styles", 100);
-// function kill_gutenberg_styles() {
-//     wp_dequeue_style( 'wp-block-library' );
-//     wp_dequeue_style( 'wp-block-library-theme' );
-// }
+if (!is_admin()) add_action("wp_enqueue_scripts", "kill_gutenberg_styles", 100);
+function kill_gutenberg_styles() {
+    wp_dequeue_style( 'wp-block-library' );
+    wp_dequeue_style( 'wp-block-library-theme' );
+}
 
 
 
 
 // *** GET RID OF DASHICONS IF YOU AREN'T LOGGED IN ***
-// function remove_dashicons() {
-//     if ( ! is_user_logged_in() ) {
-//           wp_dequeue_style('dashicons');
-//     }
-// }
-// add_action( 'wp_enqueue_scripts', 'remove_dashicons' );
+function remove_dashicons() {
+    if ( ! is_user_logged_in() ) {
+          wp_dequeue_style('dashicons');
+    }
+}
+add_action( 'wp_enqueue_scripts', 'remove_dashicons' );
 
 
 
@@ -201,18 +165,18 @@ function colourBrightness($hex, $percent) {
 
 
 // *** MOVE MATH RANK TO BOTTOM ***
-// function rank_math_change_metabox_priority() {
-//     return 'low';
-// }
-// add_filter( 'rank_math/metabox/priority', 'rank_math_change_metabox_priority' );
+function rank_math_change_metabox_priority() {
+    return 'low';
+}
+add_filter( 'rank_math/metabox/priority', 'rank_math_change_metabox_priority' );
 
 
 
 
 // *** ACF OPTIONS PAGE ***
-// if( function_exists('acf_add_options_page') ) {
-// 	acf_add_options_page();
-// }
+if( function_exists('acf_add_options_page') ) {
+	acf_add_options_page();
+}
 
 
 
