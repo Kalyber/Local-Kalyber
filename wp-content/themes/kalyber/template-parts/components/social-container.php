@@ -29,7 +29,7 @@
                 </svg>
                 </a>
             </div>
-            <div class="pop-up-fav__wrap">
+            <div class="blog__social-fav__wrap">
                 <?php the_content(); ?>
             </div>
         </div>

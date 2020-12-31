@@ -185,11 +185,14 @@
         .crp-list { 
             list-style: none;
             flex-direction: row;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
             display: flex;
             text-align: center;
             justify-content: center;
             margin-left: 0;
+            @media (max-width: 640px) {
+                flex-wrap: wrap;
+            }
         }
           
         .crp-list-title { 
@@ -198,7 +201,7 @@
         .crp-list-item {
             align-items: center;
             flex-direction: column !important;
-            width: 30%;
+            width: 100%;            
             margin: 20px 1.5%;
             padding: 20px;
             box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
@@ -210,7 +213,6 @@
             }
             @media (max-width: 640px) {
                 margin: 10px 2.5%;
-                width: 100%;
                 flex-direction: row !important;
             }
         }
