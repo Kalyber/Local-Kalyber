@@ -1,8 +1,8 @@
-document.addEventListener('scroll', function(){
+window.addEventListener('scroll', function(){
     sidebarHandler()
 })
 
-document.addEventListener('resize', function(){
+window.addEventListener('resize', function(){
     sidebarHandler()
 })
 
@@ -16,7 +16,6 @@ function sidebarHandler() {
     if(popUpBar) {
         if(x.matches){
             blogWrap.style.overflow = 'hidden';                
-
             if(scrollPos + window.innerHeight >= document.body.clientHeight) {
                 svgBar.style.position = 'absolute';
                 popUpBar.style.position = 'absolute';
