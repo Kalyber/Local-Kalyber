@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", function(){
-    const popupButtons = document.getElementsByClassName('pop-up-svg__wrap')
     const popups = document.getElementsByClassName('pop-up__wrap')
 
 
