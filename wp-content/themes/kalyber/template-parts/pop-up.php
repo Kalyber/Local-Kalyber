@@ -1,11 +1,11 @@
 <div class="pop-up__container">
     <div class="pop-up__wrap" id="web-review">
         <div class="pop-up-copy__wrap">
-            <h3 class="pop-up-copy__header">Webpage Review</h3>
-            <p class="pop-up-copy__subheader">Sign up for a free webpage diagnosis.</p>
+            <h3 class="pop-up-copy__header">Website Audit</h3>
+            <p class="pop-up-copy__subheader">Sign up for a free website diagnosis.</p>
         </div>
         <div class="pop-up-button__wrap">
-            <a class="pop-up-button">Get Your Free Review</a>
+            <a class="pop-up-button">Learn More</a>
         </div>
 
         <div class="pop-up-exit"></div>
@@ -13,7 +13,7 @@
     <div class="pop-up__wrap pop-up__wrap--red" id="newsletter">
         <div class="pop-up-copy__wrap">
             <h3 class="pop-up-copy__header">Newsletter</h3>
-            <p class="pop-up-copy__subheader">Subscribe to our monthly newsletter</p>
+            <p class="pop-up-copy__subheader">Get monthly insights from Kalyber</p>
         </div>
         <div class="pop-up-input__wrap">
             <input class="pop-up-input" type="text" placeholder="Email"/>

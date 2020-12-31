@@ -1,11 +1,14 @@
 .blog{
     &__rich-text {
+        max-width: 1800px;
         background: #ffffff;
         display: flex;
         flex-flow: row;
         margin: 40px 10px;
+
         @include respond(medium) {
-            margin: 50px 75px;
+            margin: 70px auto;
+            padding:0 40px;
         }
 
         &--wrap {

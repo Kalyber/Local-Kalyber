@@ -4,8 +4,10 @@
     left: 0;
     height: 100px;
     width: 100%;
+    max-width: 460px;
     display: flex;
     flex-direction: column;
+
     @include respond(medium) {
         position: sticky;
         bottom: unset;
@@ -14,6 +16,21 @@
         height: 100%;
         width: 30%;
     }
+
+    h3 {
+        font-size:30px;
+        line-height: 1;
+        font-weight:600;
+        padding-bottom:6px;
+    }
+
+    h4 {
+        font-size:30px;
+        line-height: 1;
+        font-weight:600;
+    }
+
+
     .blog__social__container {
         display: none;
         @include respond(medium) {
@@ -32,7 +49,7 @@
 .pop-up__wrap {
     background-color: $primary-blue;
     color: white;
-    padding: 20px 30px;
+    padding: 28px 30px 32px;
     bottom: -200%;
     width: 320px;
     left: 50%;
@@ -40,6 +57,7 @@
     position: absolute;
     text-align: center;
     transition: 0.5s all;
+
     @include respond(medium) {
         width: 100%;
         transform: translateX(0%);
@@ -48,11 +66,12 @@
         bottom: unset;
     }
     a{
-        color: $primary-blue;
+        color: white;
+        letter-spacing: .5px;
         transition: 0.5s all;
         &:hover {
-            background-color: rgba($primary-blue, 0.7);
-            color: white;
+            background-color: white;
+            color: $primary-blue !important;
             text-decoration: none;
         }
     }
@@ -61,9 +80,13 @@
 .pop-up__wrap--red {
     background-color: $primary-red;
     a{
-        color: $primary-red;
+        color: white;
+        letter-spacing: .5px;
+        transition: 0.5s all;
         &:hover {
-            background-color: rgba($primary-red, 0.7);
+            background-color: white;
+            color: $primary-red !important;
+            text-decoration: none;
         }
     }
 }
@@ -80,6 +103,7 @@
     width: 100%;
     z-index: 3;
     box-shadow: 0px 10px 5px 10px black;
+
     @include respond(medium) {
         display: none;
     }
@@ -113,23 +137,28 @@
     margin-top: 20px;
     display: flex;
     justify-content: center;
-
 }
 
 .pop-up-button {
-    background-color: white;
+    background-color: transparent;
+    border:2px solid white;
     padding: 5px 20px;
     cursor: pointer;
-
+    color:white !important;
+    font-size:18px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .pop-up-input__wrap {
-    
+    padding-top:10px;
 }
 
 .pop-up-input {
     padding: 10px;
-    width: 100%;
+    width: 274px;
+    border:none;
+    font-size:16px;
 }
 
 .pop-up-show { 
@@ -161,6 +190,7 @@
     align-items: center;
     top: 5%;
     right: 5%;
+
     @include respond(medium) {
         display: none;
     }

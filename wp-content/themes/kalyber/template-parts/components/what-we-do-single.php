@@ -3,5 +3,10 @@
      $image            = get_field('section_image');
 ?>
 
-<?= $content ?>
 
+
+<article class="container container-padding">
+
+     <?= $content ?>
+
+</article>

@@ -23,7 +23,7 @@
                 </svg>
                 </a>
                 <!-- email -->
-                <a href="mailto:?subject=<?php the_title();?>&amp;body=Check out this post by Greteman Group: <?php echo get_permalink( $post->ID ); ?>"title="Share <?php echo urlencode(wp_title('',false)); ?> by Greteman Group">
+                <a href="mailto:?subject=<?php the_title();?>&amp;body=Check out this post by Kalyber: <?php echo get_permalink( $post->ID ); ?>"title="Share <?php echo urlencode(wp_title('',false)); ?> by Kalyber">
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 20 20">
                     <path id="icon_email--single" class="social--header" d="M10,0C4.5,0,0,4.5,0,10s4.5,10,10,10s10-4.5,10-10S15.5,0,10,0z M4.7,6h10.6c0.2,0,0.2,0.2,0.1,0.3l-5.1,4.2 c-0.2,0.2-0.5,0.2-0.7,0L4.6,6.3C4.4,6.2,4.5,6,4.7,6z M15.6,13.7c0,0.2-0.1,0.3-0.3,0.3H4.7c-0.2,0-0.3-0.1-0.3-0.3V7.8 c0-0.1,0.1-0.1,0.2-0.1l4.6,3.9c0.5,0.4,1.2,0.4,1.7,0l4.6-3.9c0.1-0.1,0.2,0,0.2,0.1V13.7z"/>
                 </svg>
