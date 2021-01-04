@@ -1,0 +1,26 @@
+.what-we-do-single__container {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+}
+
+.what-we-do-single__content {
+     width:65%;
+}
+
+.what-we-do-single__form {
+     width:30%;
+     padding:40px 40px 40px 40px;
+     background-color: $primary-blue;
+
+     label {
+          width: 100%;
+          padding:0 0 34px 0;
+          color:white;
+     }
+     input, textarea {
+          width:100%;
+          border:none;
+          margin:0 0 16px 0;
+     }
+}
