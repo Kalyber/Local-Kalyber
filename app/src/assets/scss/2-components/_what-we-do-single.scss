@@ -5,22 +5,90 @@
 }
 
 .what-we-do-single__content {
-     width:65%;
+     width:60%;
+
+     h3 {
+          color:$primary-blue;
+          margin:30px 0 0 0;
+     }
+
+     ul {
+          margin:0 0 24px 20px;
+          list-style-type: none;
+     }
+
+     li::before {
+          content: "•";
+          color:$primary-red;
+          font-weight: 700;
+          left: 0px;
+          position: absolute;
+     }
+
+     .what-we-do-callout {
+          display:flex;
+          flex-direction:row;
+          justify-content: space-between;
+          align-items: center;
+          margin:-1px 0;
+          padding: 20px 0;
+          border-top:1px solid $primary-blue;
+          border-bottom:1px solid $primary-blue;
+
+          .what-we-do-callout__icon {
+               width:100px;
+               height:100px;
+          }
+
+          .what-we-do-callout__text {
+               width:90%;
+               padding:0 0 0 30px;
+          }
+     }
+
+     .callout-first {
+          margin-top:12px;
+     }
 }
 
 .what-we-do-single__form {
-     width:30%;
-     padding:40px 40px 40px 40px;
+     display:flex;
+     flex-direction:column;
+     width:35%;
+     padding:50px 50px 50px 50px;
      background-color: $primary-blue;
 
      label {
+          display:block;
           width: 100%;
-          padding:0 0 34px 0;
+          margin:0 0 8px 0;
           color:white;
      }
      input, textarea {
           width:100%;
           border:none;
-          margin:0 0 16px 0;
+          margin:0 0 24px 0;
+          padding:13px 14px 11px 14px;
+          font-size: 16px;
+     }
+
+     textarea {
+          height:100px;
+     }
+
+     input[type="submit"] {
+          display: block;
+          width:auto;
+          margin:0 auto;
+          padding-left:20px;
+          padding-right:20px;
+          background-color:transparent;
+          border:2px solid white;
+          color:white;
+          font-size: 18px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: .5px;
+          transition: .5s all;
      }
 }
