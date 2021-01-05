@@ -10,7 +10,7 @@
           <?= $content ?>
      </div>
      <div class="what-we-do-single__form">
-          <h3 class="color__white">Get in Touch</h3>
+          <h3 class="color__white">Supercharge Your Marketing</h3>
           <p class="color__white">For more information about how Kalyber can help your business, use the form below.</p>
           <br>
           <form class="go-rightx">

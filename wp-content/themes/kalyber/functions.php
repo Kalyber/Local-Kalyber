@@ -81,6 +81,27 @@ endif;
 
 
 
+function mind_defer_scripts( $tag, $handle, $src ) {
+     $defer = array( 
+          'admin-bar', 
+          'wordfenceAJAXjs', 
+          'wp_ulike', 
+          'smush-lazy-load', 
+          'rank-math', 
+          'kalybernew_js', 
+          'cmplz-cookie', 
+          'cmplz-cookie-config'
+     );
+     if ( in_array( $handle, $defer ) ) {
+        return '<script src="' . $src . '" defer="defer" type="text/javascript"></script>' . "\n";
+     }
+       
+       return $tag;
+   } 
+   add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
+
+// 
+
 // Nav Menus
 register_nav_menus(array(
     'top-menu' => __('Top Menu', 'theme'),
