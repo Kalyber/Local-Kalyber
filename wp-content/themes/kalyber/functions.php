@@ -73,7 +73,6 @@ if (! function_exists('kalybernew_enqueue')) :
           //         wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
           //     }
           // }
-
 	}
 	add_action( 'wp_enqueue_scripts', 'kalybernew_enqueue' );
 endif;
@@ -81,7 +80,7 @@ endif;
 
 
 
-function mind_defer_scripts( $tag, $handle, $src ) {
+function defer_scripts( $tag, $handle, $src ) {
      $defer = array( 
           'admin-bar', 
           'wordfenceAJAXjs', 
@@ -93,14 +92,28 @@ function mind_defer_scripts( $tag, $handle, $src ) {
           'cmplz-cookie-config'
      );
      if ( in_array( $handle, $defer ) ) {
-        return '<script src="' . $src . '" defer="defer" type="text/javascript"></script>' . "\n";
+        return '<script src="' . $src . '" defer="defer"></script>' . "\n";
      }
        
        return $tag;
-   } 
-   add_filter( 'script_loader_tag', 'mind_defer_scripts', 10, 3 );
+} 
+add_filter( 'script_loader_tag', 'defer_scripts', 10, 3 );
 
-// 
+
+
+
+function add_rel_preload($html, $handle, $href) {
+     if (is_admin())
+         return $html;
+ 
+          $html = '<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" id='$handle' href='$href' type='text/css' media='all' />';
+
+          return $html;
+ }
+ add_filter( 'style_loader_tag', 'add_rel_preload', 10, 4 );
+
+
+
 
 // Nav Menus
 register_nav_menus(array(
@@ -214,3 +227,20 @@ if( function_exists('acf_add_options_page') ) {
 //   }
   
 //   add_action( 'wp_print_scripts', 'mind_detect_enqueued_scripts' );
+
+function crunchify_print_scripts_styles() {
+     // Print all loaded Scripts
+     global $wp_scripts;
+     foreach( $wp_scripts->queue as $script ) :
+         echo $script . '  **  ';
+     endforeach;
+  
+     // Print all loaded Styles (CSS)
+     global $wp_styles;
+     foreach( $wp_styles->queue as $style ) :
+         echo $style . '  ||  ';
+     endforeach;
+ }
+  
+ add_action( 'wp_print_scripts', 'crunchify_print_scripts_styles' );
+ 

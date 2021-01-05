@@ -588,12 +588,12 @@ if ( ! class_exists( "cmplz_document" ) ) {
 			if ( isset( $element['annex'] ) ) {
 				$nr = __( "Annex", 'complianz-gdpr' ) . " " . $annex . ": ";
 				if ( isset( $element['title'] ) ) {
-					return '<h2 class="annex">' . cmplz_esc_html( $nr )
-					       . cmplz_esc_html( $element['title'] ) . '</h2>';
+					return '<h2 class="annex">' . esc_html( $nr )
+					       . esc_html( $element['title'] ) . '</h2>';
 				}
 				if ( isset( $element['subtitle'] ) ) {
-					return '<p class="subtitle annex">' . cmplz_esc_html( $nr )
-					       . cmplz_esc_html( $element['subtitle'] ) . '</p>';
+					return '<p class="subtitle annex">' . esc_html( $nr )
+					       . esc_html( $element['subtitle'] ) . '</p>';
 				}
 			}
 
@@ -610,8 +610,8 @@ if ( ! class_exists( "cmplz_document" ) ) {
 					$nr         = $nr . $index_char . ' ';
 				}
 
-				return '<h2>' . cmplz_esc_html( $nr )
-				       . cmplz_esc_html( $element['title'] ) . '</h2>';
+				return '<h2>' . esc_html( $nr )
+				       . esc_html( $element['title'] ) . '</h2>';
 			}
 
 			if ( isset( $element['subtitle'] ) ) {
@@ -621,8 +621,8 @@ if ( ! class_exists( "cmplz_document" ) ) {
 					$nr = $paragraph . "." . $sub_paragraph . " ";
 				}
 
-				return '<p class="cmplz-subtitle">' . cmplz_esc_html( $nr )
-				       . cmplz_esc_html( $element['subtitle'] ) . '</p>';
+				return '<p class="cmplz-subtitle">' . esc_html( $nr )
+				       . esc_html( $element['subtitle'] ) . '</p>';
 			}
 		}
 
@@ -659,7 +659,7 @@ if ( ! class_exists( "cmplz_document" ) ) {
 				return "";
 			}
 
-			return '<b>' . cmplz_esc_html( $header ) . '</b><br>';
+			return '<b>' . esc_html( $header ) . '</b><br>';
 		}
 
 		/**
@@ -702,13 +702,13 @@ if ( ! class_exists( "cmplz_document" ) ) {
 			foreach ( $paragraph_id_arr as $id => $paragraph ) {
 				$html = str_replace( "[article-$id]",
 					sprintf( __( '(See paragraph %s)', 'complianz-gdpr' ),
-						cmplz_esc_html( $paragraph['main'] ) ), $html );
+						esc_html( $paragraph['main'] ) ), $html );
 			}
 
 			foreach ( $annex_arr as $id => $annex ) {
 				$html = str_replace( "[annex-$id]",
 					sprintf( __( '(See annex %s)', 'complianz-gdpr' ),
-						cmplz_esc_html( $annex ) ), $html );
+						esc_html( $annex ) ), $html );
 			}
 
 			$active_cookiebanner_id = apply_filters( 'cmplz_user_banner_id', cmplz_get_default_banner_id() );
@@ -720,8 +720,8 @@ if ( ! class_exists( "cmplz_document" ) ) {
 				$banner->save_preferences_x, $html );
 
 			$html = str_replace( "[domain]",
-				'<a href="' . cmplz_esc_url_raw( get_home_url() ) . '">'
-				. cmplz_esc_url_raw( get_home_url() ) . '</a>', $html );
+				'<a href="' . esc_url_raw( get_home_url() ) . '">'
+				. esc_url_raw( get_home_url() ) . '</a>', $html );
 			$html = str_replace( "[cookie-statement-url]",
 				cmplz_get_document_url( 'cookie-statement', $region ), $html );
 
@@ -734,37 +734,28 @@ if ( ! class_exists( "cmplz_document" ) ) {
 			$html = str_replace( "[site_url]", site_url(), $html );
 
 			//us can have two types of titles
-			$cookie_policy_title
-				  = esc_html( $this->get_document_title( 'cookie-statement',
-				$region ) );
-			$html = str_replace( '[cookie-statement-title]',
-				$cookie_policy_title, $html );
+			$cookie_policy_title = esc_html( $this->get_document_title( 'cookie-statement', $region ) );
+			$html = str_replace( '[cookie-statement-title]', $cookie_policy_title, $html );
 
 			$date = $post_id
 				? get_the_date( '', $post_id )
 				: date( get_option( 'date_format' ),
 					get_option( 'cmplz_publish_date' ) );
 			$date = cmplz_localize_date( $date );
-			$html = str_replace( "[publish_date]", cmplz_esc_html( $date ),
-				$html );
+			$html = str_replace( "[publish_date]", esc_html( $date ), $html );
 
-			$html = str_replace( "[sync_date]",
-				cmplz_esc_html( COMPLIANZ::$cookie_admin->get_last_cookie_sync_date() ),
-				$html );
+			$html = str_replace( "[sync_date]", esc_html( COMPLIANZ::$cookie_admin->get_last_cookie_sync_date() ), $html );
 
-			$checked_date = date( get_option( 'date_format' ),
-				get_option( 'cmplz_documents_update_date' ) );
+			$checked_date = date( get_option( 'date_format' ), get_option( 'cmplz_documents_update_date' ) );
 			$checked_date = cmplz_localize_date( $checked_date );
-			$html         = str_replace( "[checked_date]",
-				cmplz_esc_html( $checked_date ), $html );
+			$html         = str_replace( "[checked_date]", esc_html( $checked_date ), $html );
 
 			//because the phonenumber is not required, we need to allow for an empty phonenr, making a dynamic string necessary.
 			$contact_dpo = cmplz_get_value( 'email_dpo' );
 			$phone_dpo   = cmplz_get_value( 'phone_dpo' );
 			if ( strlen( $phone_dpo ) !== 0 ) {
 				$contact_dpo .= " " . sprintf( _x( "or by telephone on %s",
-						'if phonenumber is entered, this string is part of the sentence "you may contact %s, via %s or by telephone via %s"',
-						"complianz-gdpr" ), $phone_dpo );
+						'if phonenumber is entered, this string is part of the sentence "you may contact %s, via %s or by telephone via %s"', "complianz-gdpr" ), $phone_dpo );
 			}
 			$html = str_replace( "[email_dpo]", $contact_dpo, $html );
 
@@ -772,8 +763,7 @@ if ( ! class_exists( "cmplz_document" ) ) {
 			$phone_dpo_uk   = cmplz_get_value( 'phone_dpo_uk' );
 			if ( strlen( $phone_dpo ) !== 0 ) {
 				$contact_dpo_uk .= " " . sprintf( _x( "or by telephone on %s",
-						'if phonenumber is entered, this string is part of the sentence "you may contact %s, via %s or by telephone via %s"',
-						"complianz-gdpr" ), $phone_dpo_uk );
+						'if phonenumber is entered, this string is part of the sentence "you may contact %s, via %s or by telephone via %s"', "complianz-gdpr" ), $phone_dpo_uk );
 			}
 			$html = str_replace( "[email_dpo_uk]", $contact_dpo_uk, $html );
 
@@ -783,8 +773,7 @@ if ( ! class_exists( "cmplz_document" ) ) {
 				if ( strpos( $html, "[$fieldname]" ) !== false ) {
 
 					$html = str_replace( "[$fieldname]",
-						$this->get_plain_text_value( $fieldname, $post_id , true,  $type ),
-						$html );
+						$this->get_plain_text_value( $fieldname, $post_id , true,  $type ), $html );
 					//when there's a closing shortcode it's always a link
 					$html = str_replace( "[/$fieldname]", "</a>", $html );
 				}
@@ -807,14 +796,12 @@ if ( ! class_exists( "cmplz_document" ) ) {
 		 * @param string $fieldname
 		 * @param int    $post_id
 		 * @param bool   $list_style
+		 * @param string $type
 		 *
 		 * @return string
 		 */
 
-
-		private function get_plain_text_value(
-			$fieldname, $post_id, $list_style = true, $type
-		) {
+		private function get_plain_text_value( $fieldname, $post_id, $list_style, $type ) {
 			$value = cmplz_get_value( $fieldname, $post_id );
 
 			$front_end_label
@@ -855,7 +842,7 @@ if ( ! class_exists( "cmplz_document" ) ) {
 					}
 
 					if ( $list_style ) {
-						$labels .= "<li>" . cmplz_esc_html( $options[ $index ] )
+						$labels .= "<li>" . esc_html( $options[ $index ] )
 						           . '</li>';
 					} else {
 						$labels .= $options[ $index ] . ', ';
@@ -866,7 +853,7 @@ if ( ! class_exists( "cmplz_document" ) ) {
 				if ( $list_style ) {
 					$labels = "<ul>" . $labels . "</ul>";
 				} else {
-					$labels = cmplz_esc_html( rtrim( $labels, ', ' ) );
+					$labels = esc_html( rtrim( $labels, ', ' ) );
 					$labels = strrev( implode( strrev( ' ' . __( 'and',
 							'complianz-gdpr' ) ),
 						explode( strrev( ',' ), strrev( $labels ), 2 ) ) );
@@ -1028,11 +1015,14 @@ if ( ! class_exists( "cmplz_document" ) ) {
 						'Subject in notification email', 'complianz-gdpr' ),
 						home_url() );
 				}
+				$link = '<a href="'.add_query_arg( array('page' => 'cmplz-wizard'), admin_url('admin.php?page=cmplz-wizard') ).'">';
 
 				$message
-					= sprintf( _x( 'Your legal documents on %s have not been updated in 12 months. Please log in and run the wizard to check if everything is up to date.',
-					'Email message in notification email', 'complianz-gdpr' ),
-					home_url() );
+					= sprintf( _x( 'Your legal documents on %s have not been updated in 12 months. Please log in and run the %swizard%s in the Complianz plugin to check if everything is up to date.',
+					'notification email', 'complianz-gdpr' ),
+					home_url(), $link, "</a>" );
+
+				$message .= '<br><br>'.__("This message was generated by Complianz GDPR/CCPA.", "complianz-gdpr");
 
 				add_filter( 'wp_mail_content_type', function ( $content_type ) {
 					return 'text/html';

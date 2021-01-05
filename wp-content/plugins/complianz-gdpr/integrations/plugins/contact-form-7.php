@@ -85,12 +85,9 @@ add_action( 'wp_footer', 'cmplz_cf7_initDomContentLoaded' );
  */
 function cmplz_contactform7_errormessage( $message, $status ) {
 	if ( $status === 'spam' ) {
-		$accept_text = apply_filters( 'cmplz_accept_cookies_contactform7',
-			__( 'Click to accept marketing cookies and enable this form',
-				'complianz-gdpr' ) );
-		$message
-		             = '<div class="cmplz-blocked-content-notice cmplz-accept-marketing"><a href="#">'
-		               . $accept_text . '</a></div>';
+		$accept_text = apply_filters( 'cmplz_accept_cookies_contactform7', __( 'Click to accept marketing cookies and enable this form', 'complianz-gdpr' ) );
+		$message = '<span class="cmplz-blocked-content-notice cmplz-accept-marketing"><a href="#" role="button">'
+				  . $accept_text . '</a></span>';
 	}
 
 	return $message;
@@ -139,10 +136,10 @@ add_filter( 'cmplz_known_script_tags', 'cmplz_contactform7_script' );
 function cmplz_contactform7_script( $tags ) {
 	$service = WPCF7_RECAPTCHA::get_instance();
 	if (cmplz_get_value('block_recaptcha_service') === 'yes'){
-	if ( $service->is_active() ) {
-		$tags[] = 'modules/recaptcha/script.js';
+		if ( $service->is_active() ) {
+			$tags[] = 'modules/recaptcha/script.js';
+		}
 	}
-}
 	return $tags;
 }
 

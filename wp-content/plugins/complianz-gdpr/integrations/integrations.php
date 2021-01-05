@@ -11,10 +11,33 @@ if ( is_admin() ) {
 
 global $cmplz_integrations_list;
 $cmplz_integrations_list = apply_filters( 'cmplz_integrations', array(
+	'advanced-nocaptcha-recaptcha' => array(
+			'constant_or_function' => 'ANR_PLUGIN_VERSION',
+			'label'                => 'Advanced noCaptcha & invisible Captcha',
+			'firstparty_marketing' => false,
+	),
+
+	'invisible-recaptcha' => array(
+			'constant_or_function' => 'InvisibleReCaptcha',
+			'label'                => 'Google Invisible reCaptcha voor WordPress',
+			'firstparty_marketing' => false,
+	),
 
 	'nudgify'          => array(
 		'constant_or_function' => 'NUDGIFY_PLUGIN_VERSION',
 		'label'                => 'Nudgify',
+		'firstparty_marketing' => false,
+	),
+
+	'generatepress-maps'          => array(
+		'constant_or_function' => 'GeneratePress',
+		'label'                => 'GeneratePress Maps',
+		'firstparty_marketing' => false,
+	),
+
+	'volocation'          => array(
+		'constant_or_function' => 'VOSL_VERSION',
+		'label'                => 'VO Locator',
 		'firstparty_marketing' => false,
 	),
 
@@ -155,6 +178,16 @@ $cmplz_integrations_list = apply_filters( 'cmplz_integrations', array(
 		'firstparty_marketing' => false,
 	),
 
+	'woocommerce-google-analytics-pro' => array(
+		'constant_or_function' => 'WC_Google_Analytics_Pro_Loader',
+		'label'                => 'Woocommerce Google Analytics Pro',
+		'firstparty_marketing' => false,
+	),
+	'woocommerce-google-analytics-integration' => array(
+		'constant_or_function' => 'WC_Google_Analytics_Integration',
+		'label'                => 'Woocommerce Google Analytics Integration',
+		'firstparty_marketing' => false,
+	),
 	'geo-my-wp' => array(
 		'constant_or_function' => 'GMW_VERSION',
 		'label'                => 'Geo My WP',
@@ -271,10 +304,6 @@ $cmplz_integrations_list = apply_filters( 'cmplz_integrations', array(
 	'gravity-forms' => array(
 		'constant_or_function' => 'GF_MIN_WP_VERSION',
 		'label'                => 'Gravity Forms',
-		'callback_condition'   => array(
-			'privacy-statement' => 'generated',
-			'regions'           => 'eu',
-		),
 		'firstparty_marketing' => false,
 	),
 ) );
@@ -345,9 +374,11 @@ function cmplz_integration_plugin_is_active( $plugin ){
 	$fields = get_option( 'complianz_options_integrations' );
 	$details = $cmplz_integrations_list[ $plugin ];
 	$enabled = isset( $fields[ $plugin ] ) ? $fields[ $plugin ] : true;
+	$theme = wp_get_theme();
 	if ( ( defined( $details['constant_or_function'] )
 	       || function_exists( $details['constant_or_function'] )
 	       || class_exists( $details['constant_or_function'] ) )
+	       || ( $theme && ($theme->name === $details['constant_or_function']) )
 	     && $enabled
 	) {
 		return true;

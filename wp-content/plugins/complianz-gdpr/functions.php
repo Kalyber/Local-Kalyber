@@ -146,48 +146,6 @@ if ( ! function_exists( 'cmplz_revoke_link' ) ) {
 	}
 }
 
-if (!function_exists('cmplz_manage_consent_html_ajax')) {
-	/**
-	 * Output category consent checkboxes html
-	 */
-	function cmplz_manage_consent_html_ajax()
-	{
-		$do_not_track = apply_filters( 'cmplz_dnt_enabled', false );
-		if ( $do_not_track ) {
-			$html = sprintf(_x("We have received a privacy signal from your browser. For this reason we have set your privacy settings on this website to strictly necessary. If you want to have full functionality, please consider excluding %s from your privacy settings.", "cookie policy", "complianz-gdpr"), site_url() );
-		} else {
-			$consenttype = apply_filters( 'cmplz_user_consenttype', COMPLIANZ::$company->get_default_consenttype() );
-			$banner = new CMPLZ_COOKIEBANNER(apply_filters('cmplz_user_banner_id', cmplz_get_default_banner_id()));
-
-			$use_revoke_button = false;
-			if ( $consenttype === 'optin' && $banner->use_categories === 'no' ) {
-				$use_revoke_button = true;
-			} elseif ( $consenttype === 'optinstats' && $banner->use_categories_optinstats === 'no' ) {
-				$use_revoke_button = true;
-			} elseif ( $consenttype ==='optout' ){
-				$use_revoke_button = true;
-			}
-
-			if ( $use_revoke_button ) {
-				$html = cmplz_revoke_link();
-			} else {
-				$html = $banner->get_consent_checkboxes('document', $consenttype);
-			}
-		}
-
-		$data     = array(
-			'html' => $html,
-		);
-		$response = json_encode( $data );
-		header( "Content-Type: application/json" );
-		echo $response;
-		exit;
-
-	}
-	add_action('wp_ajax_nopriv_cmplz_manage_consent_html_ajax', 'cmplz_manage_consent_html_ajax');
-	add_action('wp_ajax_cmplz_manage_consent_html_ajax', 'cmplz_manage_consent_html_ajax');
-}
-
 if ( ! function_exists( 'cmplz_do_not_sell_personal_data_form' ) ) {
 	/**
 	 * Shortcode for DNSMPI form
@@ -672,9 +630,7 @@ if ( ! function_exists( 'cmplz_update_option' ) ) {
 	}
 }
 
-
 if ( ! function_exists( 'cmplz_uses_statistics' ) ) {
-
 	function cmplz_uses_statistics() {
 		$stats = cmplz_get_value( 'compile_statistics' );
 		if ( $stats !== 'no' ) {
@@ -965,6 +921,18 @@ if ( ! function_exists( 'cmplz_init_cookie_blocker' ) ) {
 }
 
 /**
+ * check if a pdf document is being generated
+ *
+ * @return bool
+ */
+
+if ( !function_exists('cmplz_is_loading_pdf')) {
+	function cmplz_is_loading_pdf() {
+		return is_user_logged_in() && isset( $_GET['nonce'] ) && wp_verify_nonce( $_GET['nonce'], 'cmplz_pdf_nonce' );
+	}
+}
+
+/**
  *
  * Check if we are currently in preview mode from one of the known page builders
  *
@@ -980,6 +948,8 @@ if ( ! function_exists( 'cmplz_is_pagebuilder_preview' ) ) {
 		     || isset( $_GET['et_pb_preview'] )
 		     || isset( $_GET['et_fb'] )
 		     || isset( $_GET['elementor-preview'] )
+		     || isset( $_GET['vc_action'] )
+		     || isset( $_GET['vcv-action'] )
 		     || isset( $_GET['fl_builder'] )
 		     || isset( $_GET['tve'] )
 		) {
@@ -996,7 +966,7 @@ if ( !function_exists('cmplz_uses_marketing_cookies') ) {
 	 * @return bool
 	 */
 	function cmplz_uses_marketing_cookies(){
-		return cmplz_get_value('uses_ad_cookies') ==='yes' || cmplz_get_value('uses_firstparty_marketing_cookies') === 'yes' || cmplz_get_value('uses_thirdparty_services')==='yes' || cmplz_get_value('uses_social_media') === 'yes' ;
+		return apply_filters( 'cmplz_uses_marketing_cookies', cmplz_get_value('uses_ad_cookies') ==='yes' || cmplz_get_value('uses_firstparty_marketing_cookies') === 'yes' || cmplz_get_value('uses_thirdparty_services')==='yes' || cmplz_get_value('uses_social_media') === 'yes' );
 	}
 }
 
@@ -1007,36 +977,6 @@ if (!function_exists('cmplz_file_exists_on_url')) {
 		$upload_url = $uploads['baseurl'];
 		$path        = str_replace( $upload_url, $upload_dir, $url );
 		return file_exists($path);
-	}
-}
-
-if ( ! function_exists( 'cmplz_ajax_user_settings' ) ) {
-	/**
-	 * By default, the region which is returned is the region as selected in the wizard settings.
-	 *
-	 * */
-
-	function cmplz_ajax_user_settings() {
-		$data                       = apply_filters( 'cmplz_user_data', array() );
-		$data['consenttype']        = apply_filters( 'cmplz_user_consenttype', COMPLIANZ::$company->get_default_consenttype() );
-		$data['region']             = apply_filters( 'cmplz_user_region', COMPLIANZ::$company->get_default_region() );
-		$data['version']            = cmplz_version;
-		$data['forceEnableStats']   = apply_filters( 'cmplz_user_force_enable_stats', false );
-		$data['do_not_track']       = apply_filters( 'cmplz_dnt_enabled', false );
-		//We need this here because the integrations are not loaded yet, so the filter will return empty, overwriting the loaded data.
-		//@todo: move this to the inline script  generation
-		//and move all generic, not banner specific data away from the banner.
-
-		unset( $data["set_cookies"] );
-		$banner_id              = cmplz_get_default_banner_id();
-		$banner                 = new CMPLZ_COOKIEBANNER( $banner_id );
-		$data['banner_version'] = $banner->banner_version;
-		$data                   = apply_filters('cmplz_ajax_loaded_banner_data', $data);
-		$response               = json_encode( $data );
-
-		header( "Content-Type: application/json" );
-		echo $response;
-		exit;
 	}
 }
 
@@ -1075,28 +1015,6 @@ if (!function_exists('cmplz_read_more')) {
 }
 
 /*
- *
- * Track the status selected by the user, for statistics.
- *
- *
- * */
-
-add_action( 'wp_ajax_nopriv_cmplz_track_status', 'cmplz_ajax_track_status' );
-add_action( 'wp_ajax_cmplz_track_status', 'cmplz_ajax_track_status' );
-if ( ! function_exists( 'cmplz_ajax_track_status' ) ) {
-	function cmplz_ajax_track_status() {
-		do_action( 'cmplz_track_status' );
-
-		$response = json_encode( array(
-			'success' => true,
-		) );
-		header( "Content-Type: application/json" );
-		echo $response;
-		exit;
-	}
-}
-
-/*
  * Get string of supported laws
  *
  * */
@@ -1124,38 +1042,12 @@ if ( ! function_exists( 'cmplz_supported_laws' ) ) {
 	}
 }
 
-if ( ! function_exists( 'cmplz_get_option' ) ) {
-	function cmplz_get_option( $name ) {
-		return get_option( $name );
-	}
-}
-
-if ( ! function_exists( 'cmplz_esc_html' ) ) {
-	function cmplz_esc_html( $html ) {
-		return esc_html( $html );
-	}
-}
-
-if ( ! function_exists( 'cmplz_esc_url_raw' ) ) {
-	function cmplz_esc_url_raw( $url ) {
-		return esc_url_raw( $url );
-	}
-}
-
-if ( ! function_exists( 'cmplz_is_admin' ) ) {
-
-	function cmplz_is_admin() {
-		return is_admin();
-	}
-}
-
 register_activation_hook( __FILE__, 'cmplz_set_activation_time_stamp' );
 if ( ! function_exists( 'cmplz_set_activation_time_stamp' ) ) {
 	function cmplz_set_activation_time_stamp( $networkwide ) {
 		update_option( 'cmplz_activation_time', time() );
 	}
 }
-
 
 /*
  * For all legal documents for the US, privacy statement, dataleaks or processing agreements, the language should always be en_US
@@ -1382,6 +1274,9 @@ if ( ! function_exists( 'cmplz_allowed_html' ) ) {
 			'label'      => array(
 				'for' => array(),
 				'class' => array(),
+				'style' => array(
+					'visibility' => array(),
+				),
 			),
 			'li'         => array(
 				'class' => array(),
