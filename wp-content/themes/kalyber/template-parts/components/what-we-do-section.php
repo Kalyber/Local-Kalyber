@@ -20,8 +20,10 @@
           <div class="what-we-do__inner">
                <div class="what-we-do__left">
                     <?= $content ?>
+<!--  
                     <br>
                     <a class="button button--white" href="<?= $page_link ?>" style="color:<?= $background_dark ?> !important;">LEARN MORE</a>
+-->
                </div>
                <div class="what-we-do__right">
                <?php 
