@@ -102,16 +102,16 @@ add_filter( 'script_loader_tag', 'defer_scripts', 10, 3 );
 
 
 
-function add_rel_preload($html, $handle, $href, $media) {
-     if (is_admin())
-         return $html;
+// function add_rel_preload($html, $handle, $href, $media) {
+//      if (is_admin())
+//          return $html;
  
-      $html = <<<EOT
- <link rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='$handle' href='$href' type='text/css' media='all' />
- EOT;
-     return $html;
- }
- add_filter( 'style_loader_tag', 'add_rel_preload', 10, 4 );
+//       $html = <<<EOT
+//  <link rel='preload' as='style' onload="this.onload=null;this.rel='stylesheet'" id='$handle' href='$href' type='text/css' media='all' />
+//  EOT;
+//      return $html;
+//  }
+//  add_filter( 'style_loader_tag', 'add_rel_preload', 10, 4 );
 
 
 
@@ -229,19 +229,19 @@ if( function_exists('acf_add_options_page') ) {
   
 //   add_action( 'wp_print_scripts', 'mind_detect_enqueued_scripts' );
 
-function crunchify_print_scripts_styles() {
-     // Print all loaded Scripts
-     global $wp_scripts;
-     foreach( $wp_scripts->queue as $script ) :
-         echo $script . '  **  ';
-     endforeach;
+// function crunchify_print_scripts_styles() {
+//      // Print all loaded Scripts
+//      global $wp_scripts;
+//      foreach( $wp_scripts->queue as $script ) :
+//          echo $script . '  **  ';
+//      endforeach;
   
-     // Print all loaded Styles (CSS)
-     global $wp_styles;
-     foreach( $wp_styles->queue as $style ) :
-         echo $style . '  ||  ';
-     endforeach;
- }
+//      // Print all loaded Styles (CSS)
+//      global $wp_styles;
+//      foreach( $wp_styles->queue as $style ) :
+//          echo $style . '  ||  ';
+//      endforeach;
+//  }
   
- add_action( 'wp_print_scripts', 'crunchify_print_scripts_styles' );
+//  add_action( 'wp_print_scripts', 'crunchify_print_scripts_styles' );
  
