@@ -1,11 +1,30 @@
+
+<script> 
+    function eventTrigger(eventName) {
+        
+        dataLayer.push({
+            event: eventName,
+        });
+    }
+</script>
+
+<?php 
+
+    $audit_type = get_field('audit_type');
+    $header  = get_field('audit_title');
+    $copy = get_field('audit_copy');
+    $btn_copy = get_field('audit_button_copy');
+
+?>
+
 <div class="pop-up__container">
     <div class="pop-up__wrap" id="web-review">
         <div class="pop-up-copy__wrap">
-            <h3 class="pop-up-copy__header">Website Audit</h3>
-            <p class="pop-up-copy__subheader">Sign up for a free website diagnosis.</p>
+            <h3 class="pop-up-copy__header"><?= $header ?></h3>
+            <p class="pop-up-copy__subheader"><?= $copy ?></p>
         </div>
         <div class="pop-up-button__wrap">
-            <a class="pop-up-button">Learn More</a>
+            <a class="pop-up-button" onclick="javascript:eventTrigger('websiteAudit')"><?= $btn_copy ?></a>
         </div>
 
         <div class="pop-up-exit"></div>
@@ -19,7 +38,7 @@
             <input class="pop-up-input" type="text" placeholder="Email"/>
         </div>
         <div class="pop-up-button__wrap">
-            <a class="pop-up-button">Subscribe</a>
+            <a class="pop-up-button"  onclick="javascript:eventTrigger('subscribe')">Subscribe</a>
         </div>
         <div class="pop-up-exit"></div>
     </div>
@@ -40,5 +59,4 @@
         <p>Chat</p>
     </div>
 </div>
-
 

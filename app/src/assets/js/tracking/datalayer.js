@@ -19,7 +19,8 @@ document.addEventListener("DOMContentLoaded", function () {
             'pageName': pageName,
             'pageTemplate': pageTemplate,
             'pageTitle': pageTitle,
-            'tags': tags
+            'tags': tags,
         }
     })
+
 });
