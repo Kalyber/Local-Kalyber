@@ -58,7 +58,7 @@ if (! function_exists('kalybernew_enqueue')) :
 		wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );
 		// custom js
           wp_enqueue_script( 'kalybernew_js', get_template_directory_uri() . '/assets/js/kalyber.js', array(), '1.0' );
-          
+
           // OPTIONAL - SELECTIVELY TURN ON JQUERY
           // if(is_admin()){
           //     wp_enqueue_script( 'jquery', 'https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js', array(), '3.4.1' );

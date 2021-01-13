@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var displayNameAttribute = "data-display-name",
-        showDebug = true;
+        showDebug = true,
+        formButtonClicked = false;
 
     function addFieldDisplayNames() {
         var form = document.querySelector("form");
@@ -44,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 eventType: 'pardotFormAbandoned', // Required to process multiple post message events
                 fieldsCompleted: formFieldsCompleted,
                 numberOfFieldsComplete: formFieldsCompleted.length,
-                postUrl: parentSiteUrl
+                postUrl: parentSiteUrl,
+                formType: 'contact_form'
             };
     
             if (showDebug) {
@@ -70,6 +72,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }   
     }
+
+
+    window.addEventListener('click', function(event) {
+        if(event.target.type === 'submit'){
+            formButtonClicked = true;
+        } else {
+            formButtonClicked = false;
+        }
+    })
 
     window.addEventListener("beforeunload", function (e) {
         try {
@@ -146,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // we only need to post the message when the form isn't completed
-            if (matchedRequiredFields.length < requiredFields.length) {
+            if (matchedRequiredFields.length < requiredFields.length || !formButtonClicked) {
                 postMessages(formFieldsCompleted);
 
                 if (showDebug) {
