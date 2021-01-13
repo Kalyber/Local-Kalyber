@@ -54,13 +54,14 @@ footer {
         padding:0 0 0 0;
     }
 
-    span {
+    .footer__break-span {
         display:block;
         opacity: 0;
         height:4px;
         
         @include respond(small) {
             display: inline-block;
+            opacity:1;
             height:auto;
         }
     }
