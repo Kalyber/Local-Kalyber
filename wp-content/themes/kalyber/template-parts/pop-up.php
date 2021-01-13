@@ -1,20 +1,27 @@
 
 <script> 
     function eventTrigger(eventName) {
-        
-        dataLayer.push({
-            event: eventName,
-        });
+        var submissionType = event.target.parentElement.parentElement.id;
+        if(submissionType == 'web-review'){
+            var type = event.target.dataset.type;
+            dataLayer.push({
+                event: eventName,
+                auditType: type,
+            });
+        }else {
+            dataLayer.push({
+                event: eventName,
+            });
+        }
     }
 </script>
 
 <?php 
-
     $audit_type = get_field('audit_type');
     $header  = get_field('audit_title');
     $copy = get_field('audit_copy');
     $btn_copy = get_field('audit_button_copy');
-
+    $audit_url = get_field('audit_url');
 ?>
 
 <div class="pop-up__container">
@@ -24,7 +31,7 @@
             <p class="pop-up-copy__subheader"><?= $copy ?></p>
         </div>
         <div class="pop-up-button__wrap">
-            <a class="pop-up-button" onclick="javascript:eventTrigger('websiteAudit')"><?= $btn_copy ?></a>
+            <a class="pop-up-button" href="<?= $audit_url ?>" target="_blank" data-type="<?= $audit_type ?>"onclick="javascript:eventTrigger('websiteAudit')"><?= $btn_copy ?></a>
         </div>
 
         <div class="pop-up-exit"></div>

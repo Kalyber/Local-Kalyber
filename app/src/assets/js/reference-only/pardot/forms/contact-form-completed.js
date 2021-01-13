@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function (e) {
             formCompletedObject = {
                 eventType: 'pardotFormCompleted', // Required to process multiple post message events
                 formCompleted: true,
-                formType: 'contact',
+                formType: 'contact_form',
                 postUrl: parentSiteUrl
             };
 
