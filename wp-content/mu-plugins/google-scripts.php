@@ -9,7 +9,7 @@
 function gtm_content () {
     $environments = (object) [
         'localDev' => 'local.',
-        'qa' => 'kalyberdev.',
+        'kalyberdev' => 'kalyberdev.',
         'prod' => 'kalyber.com'
     ];
     $gtm_body_tag = '
@@ -21,7 +21,7 @@ function gtm_content () {
     $gtm_data_layer_init = '<script>window.dataLayer = window.dataLayer || [];</script>';
     $gtm_local_dev_options = ['F3DhZmsoDAOMxq4whBFASw', 'env-5'];
     $gtm_production_options = ['CfTqtOPB6O00tILfPXswbw', 'env-1'];
-    $gtm_qa_options = ['FvMn6K_w-LCxCwYMvOT5VQ', 'env-6'];
+    $gtm_kalyberdev_options = ['FvMn6K_w-LCxCwYMvOT5VQ', 'env-6'];
     $host = $_SERVER['HTTP_HOST'];
     $gtm_head_script = '
         <!-- Google Tag Manager -->
@@ -45,9 +45,9 @@ function gtm_content () {
     if (strpos($host, $environments -> localDev) > -1) {
         $gtm_head_script = str_replace($gtm_head_script_tokens, $gtm_local_dev_options, $gtm_head_script);
         $gtm_body_tag = str_replace($gtm_head_script_tokens, $gtm_local_dev_options, $gtm_body_tag);
-    } else if (strpos($host, $environments -> qa) > -1) {
-        $gtm_head_script = str_replace($gtm_head_script_tokens, $gtm_qa_options, $gtm_head_script);
-        $gtm_body_tag = str_replace($gtm_head_script_tokens, $gtm_qa_options, $gtm_body_tag);
+    } else if (strpos($host, $environments -> kalyberdev) > -1) {
+        $gtm_head_script = str_replace($gtm_head_script_tokens, $gtm_kalyberdev_options, $gtm_head_script);
+        $gtm_body_tag = str_replace($gtm_head_script_tokens, $gtm_kalyberdev_options, $gtm_body_tag);
     } else if (strpos($host, $environments -> prod) > -1){
         $gtm_head_script = str_replace($gtm_head_script_tokens, $gtm_production_options, $gtm_head_script);
         $gtm_body_tag = str_replace($gtm_head_script_tokens, $gtm_production_options, $gtm_body_tag);
