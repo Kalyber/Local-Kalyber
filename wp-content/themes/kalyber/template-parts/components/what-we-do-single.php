@@ -5,7 +5,7 @@
 
 
 
-<article class="container container-padding what-we-do-single__container">
+<article class="container__full-mobile what-we-do-single__container">
      <div class="what-we-do-single__content">
           <?= $content ?>
      </div>
