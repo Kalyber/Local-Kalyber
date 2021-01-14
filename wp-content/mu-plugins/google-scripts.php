@@ -9,7 +9,8 @@
 function gtm_content () {
     $environments = (object) [
         'localDev' => 'local.',
-        'qa' => 'qa.'
+        'qa' => 'kalyberdev.'
+        'prod' => 'kalyber.com'
     ];
     $gtm_body_tag = '
         <!-- Google Tag Manager (noscript) -->
@@ -47,7 +48,7 @@ function gtm_content () {
     } else if (strpos($host, $environments -> qa) > -1) {
         $gtm_head_script = str_replace($gtm_head_script_tokens, $gtm_qa_options, $gtm_head_script);
         $gtm_body_tag = str_replace($gtm_head_script_tokens, $gtm_qa_options, $gtm_body_tag);
-    } else {
+    } else if (strpos($host, $environments -> prod) > -1){
         $gtm_head_script = str_replace($gtm_head_script_tokens, $gtm_production_options, $gtm_head_script);
         $gtm_body_tag = str_replace($gtm_head_script_tokens, $gtm_production_options, $gtm_body_tag);
     }
