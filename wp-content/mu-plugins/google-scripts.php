@@ -9,7 +9,7 @@
 function gtm_content () {
     $environments = (object) [
         'localDev' => 'local.',
-        'qa' => 'kalyberdev.'
+        'qa' => 'kalyberdev.',
         'prod' => 'kalyber.com'
     ];
     $gtm_body_tag = '
