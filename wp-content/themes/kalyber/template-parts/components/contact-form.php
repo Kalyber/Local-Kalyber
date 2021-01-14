@@ -11,7 +11,7 @@
                <hr>
 
                <p><strong>Email</strong> <a href="mailto:hello@kalyber.com">hello@kalyber.com</a></p>
-               <p><strong>Phone</strong>888.525.9237</p>
+               <p><strong>Phone</strong> 888.525.9237</p>
           </div>
           <div class="contact-form__form">
 

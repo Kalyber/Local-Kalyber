@@ -1,5 +1,6 @@
 <?php
      $background_color = get_field('background_color');
+     $headline         = "";
 
      if(get_field('text_block_headline')):
           $headline = "<h2>".get_field('headline')."</h2>";

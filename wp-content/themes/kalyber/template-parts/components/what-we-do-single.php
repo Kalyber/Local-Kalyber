@@ -7,7 +7,7 @@
 
 <article class="container__full-mobile what-we-do-single__container">
      <div class="what-we-do-single__content">
-          <?= $content ?>
+          <?php the_content(); ?>
      </div>
      <div class="what-we-do-single__form">
           <h3 class="color__white">Supercharge Your Marketing</h3>
