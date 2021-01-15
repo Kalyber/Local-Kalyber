@@ -3,7 +3,7 @@
  * WP ULike Process Class
  * 
  * @package    wp-ulike
- * @author     TechnoWich 2020
+ * @author     TechnoWich 2021
  * @link       https://wpulike.com
  */
 
@@ -132,9 +132,10 @@ if ( ! class_exists( 'wp_ulike_cta_template' ) ) {
 					"down_vote_inner_text" => $this->args['down_vote_inner_text'],
 					"style"                => esc_html( $this->args['style'] ),
 					"button_type"          => esc_html( $this->args['button_type'] ),
-					"display_likers"       => esc_attr( $this->args['display_likers'] ),
+					"display_likers"       => $this->args['display_likers'],
 					"display_counters"     => wp_ulike_setting_repo::isCounterBoxVisible( $this->args['slug'] ),
 					"disable_pophover"     => esc_attr( $this->args['disable_pophover'] ),
+					"likers_style"         => esc_attr( $this->args['likers_style'] ),
 					"button_text"          => $button_text,
 					"general_class"        => $this->get_general_selectors( $method_id ),
 					"button_class"         => esc_attr( $button_class_name )

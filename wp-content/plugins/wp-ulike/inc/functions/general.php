@@ -3,7 +3,7 @@
  * Global Functions
  * 
  * @package    wp-ulike
- * @author     TechnoWich 2020
+ * @author     TechnoWich 2021
  * @link       https://wpulike.com
  */
 
@@ -387,7 +387,7 @@ if( ! function_exists( 'wp_ulike_get_likers_template' ) ){
 			}
 		}
 
-		return NULL;
+		return '';
 	}
 }
 

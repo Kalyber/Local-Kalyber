@@ -3,7 +3,7 @@
  * Third-Party Plugins
  * 
  * @package    wp-ulike
- * @author     TechnoWich 2020
+ * @author     TechnoWich 2021
  * @link       https://wpulike.com
  */
 
@@ -624,11 +624,11 @@ if( ! function_exists( 'wp_ulike_purge_wp_fastest_cache' ) ){
 
 			if(isset($url["path"])){
 				if($url["path"] == "/"){
-					$this->rm_folder_recursively($this->getWpContentDir("/cache/all/index.html"));
+					$cache_interface->rm_folder_recursively( $cache_interface->getWpContentDir("/cache/all/index.html") );
 				}else{
 					// to prevent changing path with ../ or with another method
 					if($url["path"] == realpath(".".$url["path"])){
-						$this->rm_folder_recursively($this->getWpContentDir("/cache/all").$url["path"]);
+						$cache_interface->rm_folder_recursively( $cache_interface->getWpContentDir("/cache/all").$url["path"] );
 					}
 				}
 			}
