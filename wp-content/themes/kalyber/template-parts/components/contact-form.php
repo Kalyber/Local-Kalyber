@@ -1,6 +1,6 @@
 <?php
      $host = $_SERVER['HTTP_HOST'];
-     $hostUrl = 'https://' . $host;
+     $hostUrl = 'https://' . $host
 ?>
 
 
@@ -21,9 +21,3 @@
           </div>
      </div>
 </div>
-
-<script> 
-     var origin = window.location.origin;
-     var iframe = document.querySelector('iframe')
-     iframe.src = `https://go.kalyber.com/l/869051/2020-06-01/71btl6?parentUrl=${origin}`
-</script>

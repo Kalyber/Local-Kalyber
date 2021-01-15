@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             // we only need to post the message when the form isn't completed
-            if (matchedRequiredFields.length < requiredFields.length && !formButtonClicked) {
+            if (matchedRequiredFields.length < requiredFields.length || !formButtonClicked) {
                 postMessages(formFieldsCompleted);
 
                 if (showDebug) {
