@@ -75,7 +75,7 @@
 
 <style type='text/css'>
     .embeddedServiceHelpButton .helpButton .uiButton {
-        background-color: #005290;
+        background-color: #0077c8;
         font-family: "Arial", sans-serif;
     }
     .embeddedServiceHelpButton .helpButton .uiButton:focus {
@@ -91,17 +91,11 @@
         embedded_svc.settings.displayHelpButton = true; //Or false
         embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
 
- 
-
         //embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
         //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
 
- 
-
         //embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
         //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
-
- 
 
         // Settings for Chat
         //embedded_svc.settings.directToButtonRouting = function(prechatFormData) {
@@ -112,12 +106,8 @@
         //embedded_svc.settings.fallbackRouting = []; //An array of button IDs, user IDs, or userId_buttonId
         //embedded_svc.settings.offlineSupportMinimizedText = '...'; //(Defaults to Contact Us)
 
- 
-
         embedded_svc.settings.enabledFeatures = ['LiveAgent'];
         embedded_svc.settings.entryFeature = 'LiveAgent';
-
- 
 
         embedded_svc.init(
             'https://na172.salesforce.com',
@@ -131,12 +121,10 @@
                 buttonId: '5735w000000GPGl',
                 baseLiveAgentURL: 'https://d.la1-c2-ia5.salesforceliveagent.com/chat',
                 eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I5w000000ToDAEA0_17629c3bad9',
-                isOfflineSupportEnabled: true
+                isOfflineSupportEnabled: false
             }
         );
     };
-
- 
 
     if (!window.embedded_svc) {
         var s = document.createElement('script');

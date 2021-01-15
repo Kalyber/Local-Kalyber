@@ -9,13 +9,19 @@ get_header();
 ?>
 
 
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<?php 
+    if (have_posts()) : while (have_posts()) : the_post(); 
+    
+    $thumb_id = get_post_thumbnail_id();
+    $thumb_url_array = wp_get_attachment_image_src($thumb_id, 'thumbnail-size', true);
+    $thumb_url = $thumb_url_array[0];    
+?>
 
 
 <main class="blog">
     <div class="blog__inner__wrap">
         <div class="blog__hero__wrap">
-            <div class="blog__hero-image" style="background-image: url(<?php the_field('banner_image'); ?>)"></div>
+            <div class="blog__hero-image" style="background-image: url(<?= $thumb_url ?>)"></div>
             <div class="blog__hero-text__wrap">
                 <h1><?php the_field('title'); ?></h1>
                 <p><?php the_field('subheader'); ?></p>
