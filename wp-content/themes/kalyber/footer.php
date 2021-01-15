@@ -75,7 +75,7 @@
 
 <style type='text/css'>
     .embeddedServiceHelpButton .helpButton .uiButton {
-        background-color: #005290;
+        background-color: #0077c8;
         font-family: "Arial", sans-serif;
     }
     .embeddedServiceHelpButton .helpButton .uiButton:focus {
@@ -131,7 +131,7 @@
                 buttonId: '5735w000000GPGl',
                 baseLiveAgentURL: 'https://d.la1-c2-ia5.salesforceliveagent.com/chat',
                 eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I5w000000ToDAEA0_17629c3bad9',
-                isOfflineSupportEnabled: true
+                isOfflineSupportEnabled: false
             }
         );
     };
