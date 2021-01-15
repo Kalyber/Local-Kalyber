@@ -1,5 +1,6 @@
 <?php
-
+     $host = $_SERVER['HTTP_HOST'];
+     $hostUrl = 'https://' . $host;
 ?>
 
 
@@ -15,8 +16,14 @@
           </div>
           <div class="contact-form__form">
 
-               <iframe src="https://go.kalyber.com/l/869051/2020-06-01/71btl6?parentUrl=https://local.kalyber.com" width="100%" height="500" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>
+               <iframe src="https://go.kalyber.com/l/869051/2020-06-01/71btl6?parentUrl=<?= $hostUrl ?>" width="100%" height="500" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>
 
           </div>
      </div>
 </div>
+
+<script> 
+     var origin = window.location.origin;
+     var iframe = document.querySelector('iframe')
+     iframe.src = `https://go.kalyber.com/l/869051/2020-06-01/71btl6?parentUrl=${origin}`
+</script>
