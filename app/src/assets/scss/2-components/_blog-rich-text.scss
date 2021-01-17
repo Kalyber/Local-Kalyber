@@ -1,4 +1,4 @@
-.blog{
+.blog {
     &__rich-text {
         max-width: 1800px;
         background: #ffffff;
@@ -16,10 +16,19 @@
             margin: 0px auto;
             padding: 0 15px 3.125rem 15px;
             line-height: 1.6;
+
             @include respond(medium) {
                 width: 70%;
                 padding: 0 50px 3.125rem 15px;
             }
+
+            a {
+                color: $primary-blue;
+                &:hover, &:focus {
+                    text-decoration: underline;
+                }
+            }
+
             .blog__social__container {
                 display: block;
                 @include respond(medium) {
@@ -75,13 +84,6 @@
             }
             @media (max-width: 640px) {
                 font-size: 16px;
-            }
-        }
-
-        a{
-            color: $primary-blue;
-            &:hover, &:focus {
-                text-decoration: underline;
             }
         }
         

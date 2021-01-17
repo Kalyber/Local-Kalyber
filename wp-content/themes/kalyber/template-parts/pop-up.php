@@ -42,7 +42,7 @@
                 <p class="pop-up-copy__subheader"><?= $audit_copy ?></p>
             </div>
             <div class="pop-up-button__wrap">
-                <a class="pop-up-button" href="<?= $audit_url ?>" target="_blank" data-type="<?= $audit_type ?>"onclick="javascript:eventTrigger('websiteAudit')"><?= $audit_btn_copy ?></a>
+                <a class="button__reverse--blue" href="<?= $audit_url ?>" target="_blank" data-type="<?= $audit_type ?>"onclick="javascript:eventTrigger('websiteAudit')"><?= $audit_btn_copy ?></a>
             </div>
 
             <div class="pop-up-exit"></div>
@@ -53,7 +53,7 @@
     <?php
         if(get_field('show_newsletter_signup')) :
     ?>
-    <div class="pop-up__wrap pop-up__wrap--red" id="newsletter">
+    <div class="pop-up__wrap color__green--bk" id="newsletter">
         <div class="pop-up-copy__wrap">
             <h3 class="pop-up-copy__header">Newsletter</h3>
             <p class="pop-up-copy__subheader">Get monthly insights from Kalyber</p>
@@ -62,7 +62,7 @@
             <input class="pop-up-input" type="text" placeholder="Email"/>
         </div>
         <div class="pop-up-button__wrap">
-            <a class="pop-up-button"  onclick="javascript:eventTrigger('subscribe')">Subscribe</a>
+            <a class="button__reverse--green"  onclick="javascript:eventTrigger('subscribe')">Subscribe</a>
         </div>
         <div class="pop-up-exit"></div>
     </div>
@@ -78,7 +78,7 @@
             <p class="pop-up-copy__subheader"><?= $downloads_copy ?></p>
         </div>
         <div class="pop-up-button__wrap">
-            <a class="pop-up-button" href="<?= $downloads_link ?>" target="_blank" data-type="<?= $audit_type ?>"onclick="javascript:eventTrigger('websiteAudit')">
+            <a class="button__reverse--dark-blue-green" href="<?= $downloads_link ?>" target="_blank" data-type="<?= $audit_type ?>"onclick="javascript:eventTrigger('websiteAudit')">
                 DOWNLOAD
             </a>
         </div>

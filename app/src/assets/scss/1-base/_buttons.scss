@@ -37,3 +37,57 @@
         }
     }
 }
+
+.button__reverse {
+    background-color: transparent;
+    border:2px solid white;
+    padding: 5px 20px;
+    cursor: pointer;
+    color:white;
+    font-size:18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration:none;
+    letter-spacing: .5px;
+    transition: 0.5s all;
+
+    &:hover {
+        background-color:white;
+        text-decoration: none !important;
+    }
+
+    &--blue {
+        @extend .button__reverse;
+        &:hover {
+            color:$primary-blue;
+        }
+    }
+
+    &--green {
+        @extend .button__reverse;
+        &:hover {
+            color:$green;
+        }
+    }
+
+    &--dark-blue-green {
+        @extend .button__reverse;
+        &:hover {
+            color:$dark-blue-green;
+        }
+    }
+
+    &--red {
+        @extend .button__reverse;
+        &:hover {
+            color:$primary-red;
+        }
+    }
+
+    &--gold {
+        @extend .button__reverse;
+        &:hover {
+            color:$gold;
+        }
+    }
+}

@@ -64,30 +64,6 @@
         position: unset;
         bottom: unset;
     }
-    a{
-        color: white;
-        letter-spacing: .5px;
-        transition: 0.5s all;
-        &:hover {
-            background-color: white;
-            color: $primary-blue !important;
-            text-decoration: none;
-        }
-    }
-}
-
-.pop-up__wrap--dark-blue-green {
-    background-color: $primary-red;
-    a{
-        color: white;
-        letter-spacing: .5px;
-        transition: 0.5s all;
-        &:hover {
-            background-color: white;
-            color: $primary-red !important;
-            text-decoration: none;
-        }
-    }
 }
 
 .pop-up__wrap--red {
@@ -150,17 +126,6 @@
     margin-top: 20px;
     display: flex;
     justify-content: center;
-}
-
-.pop-up-button {
-    background-color: transparent;
-    border:2px solid white;
-    padding: 5px 20px;
-    cursor: pointer;
-    color:white !important;
-    font-size:18px;
-    font-weight: 700;
-    text-transform: uppercase;
 }
 
 .pop-up-input__wrap {
