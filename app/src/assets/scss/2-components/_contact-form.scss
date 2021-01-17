@@ -32,6 +32,16 @@
                display:block;
           }
      }
+
+     svg {
+          margin:0 12px 0 0;
+          fill:$primary-blue;
+     }
+
+     svg, a:link, a:focus, a:visited {
+          vertical-align: middle !important;
+          color:#444444 !important;
+     }
 }
 
 .contact-form__form {

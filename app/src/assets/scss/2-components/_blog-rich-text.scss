@@ -31,6 +31,7 @@
 
             .blog__social__container {
                 display: block;
+
                 @include respond(medium) {
                     display: none;
                 }
@@ -40,6 +41,8 @@
         h1 {
             font-size: 50px;
             margin-top: 3.4rem;
+            letter-spacing: -1px;
+
             @media (max-width: 640px) {
                 font-size: 30px;
                 margin-top: 3.125rem
@@ -47,26 +50,36 @@
         }
 
         h2 {
-            font-weight: 900;
-            font-size: 30px;
-            margin-top: 3rem;
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 1.2;
+            color:$primary-blue;
+            margin-top: 2rem;
             margin-bottom: .5rem;
-            @media (max-width: 640px) {
-                font-size: 20px
+            letter-spacing: -.75px;
+
+            @include respond(small) {
+                font-size: 30px;
+                margin-top: 3rem;
             }
         }
 
         h3 {
-            font-size: 22px;
-            margin-top: 3rem;
-            margin-bottom: .5rem;
+            font-size: 16px;
+            margin-top: 2rem;
+            margin-bottom: .125rem;
 
+            @include respond(small) {
+                font-size: 20px;
+                margin-top:2.6rem;
+            }
         }
 
         h4 {
             font-size: 24px;
             margin-top: 4rem;
             margin-bottom: 1.5rem;
+
             @media (max-width: 640px) {
                 font-size: 16px;
                 line-height: 1.4rem;
