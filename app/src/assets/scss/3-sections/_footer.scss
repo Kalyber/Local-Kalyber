@@ -1,12 +1,16 @@
 footer {
     background-color: $dark-gray;
-    padding: 54px 0 50px;
+    padding: 54px 0 80px;
     width: 100%;
     //display: flex;
     align-items: center;
     justify-content: center;
     z-index: 3;
     position: relative;
+
+    @include respond(small) {
+        padding: 44px 0 60px;
+    }
 }
 
 .footer__inner {

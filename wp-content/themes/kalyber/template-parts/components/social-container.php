@@ -1,4 +1,4 @@
-<div class="blog__social__container">
+<div class="blog__social__container color__gold--bk">
     <div class="blog__social__wrap">
         <h4>Share and Like</h4>
             <!-- sharing -->

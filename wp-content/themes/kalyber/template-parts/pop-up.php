@@ -18,11 +18,16 @@
 
 <?php 
     if(get_field('show_audit')) :
-        $audit_type = get_field('audit_type');
-        $header  = get_field('audit_title');
-        $copy = get_field('audit_copy');
-        $btn_copy = get_field('audit_button_copy');
-        $audit_url = get_field('audit_url');
+        $audit_type     = get_field('audit_type');
+        $audit_copy     = get_field('audit_copy');
+        $audit_btn_copy = get_field('audit_button_copy');
+        $audit_url      = get_field('audit_url');
+    endif;
+
+    if(get_field('show_downloads')) :
+        $downloads_headline = get_field('downloads_headline');
+        $downloads_copy     = get_field('downloads_copy');
+        $downloads_link     = get_field('download_link');
     endif;
 ?>
 
@@ -31,13 +36,13 @@
     <?php
         if(get_field('show_audit')) :
     ?>
-        <div class="pop-up__wrap" id="web-review">
+        <div class="pop-up__wrap color__blue--bk" id="web-review">
             <div class="pop-up-copy__wrap">
                 <h3 class="pop-up-copy__header"><?= $audit_type ?> Audit</h3>
-                <p class="pop-up-copy__subheader"><?= $copy ?></p>
+                <p class="pop-up-copy__subheader"><?= $audit_copy ?></p>
             </div>
             <div class="pop-up-button__wrap">
-                <a class="pop-up-button" href="<?= $audit_url ?>" target="_blank" data-type="<?= $audit_type ?>"onclick="javascript:eventTrigger('websiteAudit')"><?= $btn_copy ?></a>
+                <a class="pop-up-button" href="<?= $audit_url ?>" target="_blank" data-type="<?= $audit_type ?>"onclick="javascript:eventTrigger('websiteAudit')"><?= $audit_btn_copy ?></a>
             </div>
 
             <div class="pop-up-exit"></div>
@@ -63,14 +68,33 @@
     </div>
     <?php endif; ?>
 
+    <!-- downloads -->
+    <?php
+        if(get_field('show_downloads')) :
+    ?>
+    <div class="pop-up__wrap color__dark-blue-green--bk" id="downloads">
+        <div class="pop-up-copy__wrap">
+            <h3 class="pop-up-copy__header"><?= $downloads_headline ?></h3>
+            <p class="pop-up-copy__subheader"><?= $downloads_copy ?></p>
+        </div>
+        <div class="pop-up-button__wrap">
+            <a class="pop-up-button" href="<?= $downloads_link ?>" target="_blank" data-type="<?= $audit_type ?>"onclick="javascript:eventTrigger('websiteAudit')">
+                DOWNLOAD
+            </a>
+        </div>
+        <div class="pop-up-exit"></div>
+    </div>
+    <?php endif; ?>
+
     <!-- social sharing -->
     <?php
         if(get_field('show_social_sharing')) :
     ?>
         <?php get_template_part('template-parts/components/social-container'); ?>
     <?php endif; ?>
-
 </div>
+
+
 
 <div class="pop-up-svg__container">
     <?php

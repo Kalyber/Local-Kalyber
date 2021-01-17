@@ -68,4 +68,11 @@
 
 
 
-// tertiary colors are in variables but not specced here
+// tertiary colors - not all specced - in variables
+.color__dark-blue-green {
+    color: $dark-blue-green;
+
+    &--bk {
+        background-color: $dark-blue-green;
+    }
+}
