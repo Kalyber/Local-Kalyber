@@ -1,9 +1,13 @@
 window.addEventListener('scroll', function(){
-    sidebarHandler()
+    if(document.querySelector('.pop-up-svg__container')) {
+        sidebarHandler()
+    }
 })
 
 window.addEventListener('resize', function(){
-    sidebarHandler()
+    if(document.querySelector('.pop-up-svg__container')) {
+        sidebarHandler()
+    }
 })
 
 function sidebarHandler() {
