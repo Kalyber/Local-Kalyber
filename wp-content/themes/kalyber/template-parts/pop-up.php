@@ -27,7 +27,7 @@
     if(get_field('show_downloads')) :
         $downloads_headline = get_field('downloads_headline');
         $downloads_copy     = get_field('downloads_copy');
-        $downloads_link     = get_field('download_link');
+        $downloads_link     = get_field('downloads_link');
     endif;
 ?>
 
