@@ -1,0 +1,46 @@
+.chat-bot__wrap {
+    position: fixed;
+    bottom: 100px;
+    right: 5%;
+    cursor: pointer;
+    @include respond(medium) {
+        bottom: 0;
+    }
+}
+
+.chat-bot__desktop {
+    background-color: $primary-blue;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 5px 5px 0 0;
+    box-shadow: inset 0px -5px 9px 0px rgba(0,0,0,.3);
+    display: none;
+    transition: all 1s;
+    &:hover {
+        filter: contrast(200%);
+    }
+    @include respond(medium) {
+        display: flex;
+    }
+}
+
+.chat-bot__desktop-copy {
+    margin-left: 5px;
+}
+
+.chat-bot__mobile {
+    background-color: $primary-blue;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: all 1s;
+    &:hover {
+        filter: contrast(200%);
+    }
+    @include respond(medium) {
+        display: none;
+    }
+}

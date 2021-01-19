@@ -94,9 +94,7 @@
     <?php endif; ?>
 </div>
 
-<?php
-    if(get_field('show_audit') || get_field('show_newsletter_signup')) :
-?>
+
 
 <div class="pop-up-svg__container">
     <?php
@@ -118,4 +116,4 @@
     <?php endif; ?>
 </div>
 
-<?php endif; ?>
+
