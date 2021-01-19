@@ -25,7 +25,7 @@
     }
 
     &:hover {
-        background-color: $light-blue;
+        filter: contrast(200%);
     }
     @include respond(medium) {
         display: flex;
@@ -49,7 +49,7 @@
     border: 3px solid white;
     transition: all 1s;
     &:hover {
-        background-color: $light-blue;
+        filter: contrast(200%);
     }
     @include respond(medium) {
         display: none;
