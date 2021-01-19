@@ -1,6 +1,6 @@
 footer {
     background-color: $dark-gray;
-    padding: 54px 0 80px;
+    padding: 80px 0 45px;
     width: 100%;
     //display: flex;
     align-items: center;
@@ -9,7 +9,7 @@ footer {
     position: relative;
 
     @include respond(small) {
-        padding: 44px 0 60px;
+        padding: 44px 0;
     }
 }
 
