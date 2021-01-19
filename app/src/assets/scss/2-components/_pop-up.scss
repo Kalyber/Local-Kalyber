@@ -47,6 +47,7 @@
 }
 
 .pop-up__wrap {
+    background-color: $primary-blue;
     color: white;
     padding: 28px 30px 32px;
     bottom: -200%;
@@ -63,6 +64,16 @@
         margin-bottom: 10px;
         position: unset;
         bottom: unset;
+    }
+    a{
+        color: white;
+        letter-spacing: .5px;
+        transition: 0.5s all;
+        &:hover {
+            background-color: white;
+            color: $primary-blue !important;
+            text-decoration: none;
+        }
     }
 }
 
@@ -126,6 +137,17 @@
     margin-top: 20px;
     display: flex;
     justify-content: center;
+}
+
+.pop-up-button {
+    background-color: transparent;
+    border:2px solid white;
+    padding: 5px 20px;
+    cursor: pointer;
+    color:white !important;
+    font-size:18px;
+    font-weight: 700;
+    text-transform: uppercase;
 }
 
 .pop-up-input__wrap {
