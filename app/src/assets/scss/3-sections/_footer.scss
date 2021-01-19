@@ -9,7 +9,7 @@ footer {
     position: relative;
 
     @include respond(small) {
-        padding: 44px 0;
+        padding: 44px 0 60px;
     }
 }
 
