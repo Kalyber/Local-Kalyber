@@ -206,10 +206,11 @@
             flex-wrap: nowrap;
             display: flex;
             text-align: center;
-            justify-content: center;
+            flex-wrap: wrap;
+            justify-content: left;
             margin-left: 0;
-            @media (max-width: 640px) {
-                flex-wrap: wrap;
+            @include respond(small) {
+                flex-wrap: nowrap;
             }
         }
           
@@ -218,10 +219,11 @@
 
         .crp-list-item {
             align-items: center;
-            flex-direction: column !important;
-            width: 100%;            
-            margin: 20px 1.5%;
+            flex-direction: row !important;
+            width: 100%;
             padding: 20px;
+            margin: 20px 0% 20px 0px;
+
             box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
             0 6.7px 5.3px rgba(0, 0, 0, 0.048),
             0 12.5px 10px rgba(0, 0, 0, 0.06),
@@ -229,27 +231,34 @@
             &::before {
                 content: "";
             }
-            @media (max-width: 640px) {
+            @include respond(small) {
                 margin: 10px 2.5%;
-                flex-direction: row !important;
+                flex-direction: column !important;
+                width: 33%;
+                margin: 20px 3% 20px 0px;
+                &:last-of-type{
+                    margin: 20px 0px 20px 0px;
+                }
             }
         }
 
         .crp-list-item-image {
+            margin-right: 20px;
             img {
                 max-width: 100% !important;
                 height: auto !important;
                 width: 200px;
             }
-            @media (max-width: 640px) {
-                margin-right: 20px;
+            @include respond(small) {
+                margin-right: 0px;
             }
         }
 
         .crp-list-item-title {
-            margin-top: 20px;
-            @media (max-width: 640px) {
-                margin-top: 0px;
+            margin-top: 0px;
+            @include respond(small) {
+                margin-top: 20px;
+
             }
         }
 
