@@ -58,7 +58,11 @@ header {
 }
 
 .current-menu-item a {
-     color:$primary-red !important;
+     color:tint($primary-blue, 50%) !important;
+
+     @include respond(small) {
+          color:$primary-red !important;
+     }
 }
 
 
