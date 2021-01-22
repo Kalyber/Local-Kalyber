@@ -86,8 +86,8 @@
 
  
 
-<script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
-<script type='text/javascript'>
+<script src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
+<script>
     var initESW = function(gslbBaseURL) {
         embedded_svc.settings.displayHelpButton = false; //Or false
         embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'

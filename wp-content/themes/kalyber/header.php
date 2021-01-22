@@ -21,11 +21,11 @@
 		<meta name="robots" content="noindex, nofollow" /> 
 	<?php } ?>
 
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="font" type="font/woff2" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="font" rel="preload" type="font/woff2" crossorigin="anonymous">
 
 	<?php do_action( 'wpseo_head' );  ?>
 
-	<script type="text/javascript">
+	<script>
 	//document.domain = 'kalyber.com';
 	</script>
 
