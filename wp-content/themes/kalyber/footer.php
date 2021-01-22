@@ -60,7 +60,7 @@
 
 	<div class="page-info" style="height:0px;">
 		<input style="height:0px;border:none;padding:0;" id="categories" type="hidden" value="<?=$categories?>" />
-		<input style="height:0px;border:none;padding:0;" id="is404" tyoe="hidden" value="<?=is_404(); ?>" />
+		<input style="height:0px;border:none;padding:0;" id="is404" type="hidden" value="<?=is_404(); ?>" />
 		<input style="height:0px;border:none;padding:0;" id="lastUpdated" type="hidden" value="<?=the_modified_date(); ?>" />
 		<input style="height:0px;border:none;padding:0;" id="pageId" type="hidden" value="<?=$id?>" />
 		<input style="height:0px;border:none;padding:0;" id="pageName" type="hidden" value ="<?=$page_name?>" />

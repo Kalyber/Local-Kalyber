@@ -4,7 +4,7 @@
 
 namespace Google_Web_Stories_Composer\Autoload;
 
-class ComposerStaticInit4aea7c2182bac732c0ad9b0e31ade894
+class ComposerStaticInit0d491072b27f8d86ee526a6b7f327018
 {
     public static $classMap = array (
         'Google\\Web_Stories_Dependencies\\AMP_Allowed_Tags_Generated' => __DIR__ . '/..' . '/ampproject/amp-wp/includes/sanitizers/class-amp-allowed-tags-generated.php',
@@ -121,12 +121,23 @@ class ComposerStaticInit4aea7c2182bac732c0ad9b0e31ade894
         'Google\\Web_Stories_Dependencies\\Sabberworm\\CSS\\Value\\Value' => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/Value.php',
         'Google\\Web_Stories_Dependencies\\Sabberworm\\CSS\\Value\\ValueList' => __DIR__ . '/..' . '/sabberworm/php-css-parser/lib/Sabberworm/CSS/Value/ValueList.php',
         'Google\\Web_Stories_Dependencies\\Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\ElementReference\\Resolver' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/ElementReference/Resolver.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\ElementReference\\Subject' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/ElementReference/Subject.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\ElementReference\\Usage' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/ElementReference/Usage.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\Exceptions\\NestingException' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/Exceptions/NestingException.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\Helper' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/Helper.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\Sanitizer' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/Sanitizer.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\data\\AllowedAttributes' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/data/AllowedAttributes.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\data\\AllowedTags' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/data/AllowedTags.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\data\\AttributeInterface' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/data/AttributeInterface.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\data\\TagInterface' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/data/TagInterface.php',
+        'Google\\Web_Stories_Dependencies\\enshrined\\svgSanitize\\data\\XPath' => __DIR__ . '/..' . '/enshrined/svg-sanitize/src/data/XPath.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit4aea7c2182bac732c0ad9b0e31ade894::$classMap;
+            $loader->classMap = ComposerStaticInit0d491072b27f8d86ee526a6b7f327018::$classMap;
 
         }, null, ClassLoader::class);
     }

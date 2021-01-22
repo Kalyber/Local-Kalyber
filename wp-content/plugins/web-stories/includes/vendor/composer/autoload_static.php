@@ -4,9 +4,10 @@
 
 namespace Google_Web_Stories_Composer\Autoload;
 
-class ComposerStaticInit2964b50cf5892309c438068680e28777
+class ComposerStaticInitf55a00f094a5a57503c8504389c49cdc
 {
     public static $classMap = array (
+        'ComposerAutoloaderInitf55a00f094a5a57503c8504389c49cdc' => __DIR__ . '/..' . '/composer/autoload_real.php',
         'Google\\Web_Stories\\AMP\\Canonical_Sanitizer' => __DIR__ . '/../..' . '/AMP/Canonical_Sanitizer.php',
         'Google\\Web_Stories\\AMP\\Integration\\AMP_Story_Sanitizer' => __DIR__ . '/../..' . '/AMP/Integration/AMP_Story_Sanitizer.php',
         'Google\\Web_Stories\\AMP\\Meta_Sanitizer' => __DIR__ . '/../..' . '/AMP/Meta_Sanitizer.php',
@@ -16,6 +17,8 @@ class ComposerStaticInit2964b50cf5892309c438068680e28777
         'Google\\Web_Stories\\AMP\\Traits\\Sanitization_Utils' => __DIR__ . '/../..' . '/AMP/Traits/Sanitization_Utils.php',
         'Google\\Web_Stories\\Activation_Flag' => __DIR__ . '/../..' . '/Activation_Flag.php',
         'Google\\Web_Stories\\Activation_Notice' => __DIR__ . '/../..' . '/Activation_Notice.php',
+        'Google\\Web_Stories\\AdSense' => __DIR__ . '/../..' . '/AdSense.php',
+        'Google\\Web_Stories\\Ad_Manager' => __DIR__ . '/../..' . '/Ad_Manager.php',
         'Google\\Web_Stories\\Admin' => __DIR__ . '/../..' . '/Admin.php',
         'Google\\Web_Stories\\Analytics' => __DIR__ . '/../..' . '/Analytics.php',
         'Google\\Web_Stories\\Block\\Embed_Block' => __DIR__ . '/../..' . '/Block/Embed_Block.php',
@@ -45,6 +48,7 @@ class ComposerStaticInit2964b50cf5892309c438068680e28777
         'Google\\Web_Stories\\REST_API\\Stories_Media_Controller' => __DIR__ . '/../..' . '/REST_API/Stories_Media_Controller.php',
         'Google\\Web_Stories\\REST_API\\Stories_Settings_Controller' => __DIR__ . '/../..' . '/REST_API/Stories_Settings_Controller.php',
         'Google\\Web_Stories\\REST_API\\Stories_Users_Controller' => __DIR__ . '/../..' . '/REST_API/Stories_Users_Controller.php',
+        'Google\\Web_Stories\\SVG' => __DIR__ . '/../..' . '/SVG.php',
         'Google\\Web_Stories\\Settings' => __DIR__ . '/../..' . '/Settings.php',
         'Google\\Web_Stories\\Shortcode\\Embed_Shortcode' => __DIR__ . '/../..' . '/Shortcode/Embed_Shortcode.php',
         'Google\\Web_Stories\\Story_Post_Type' => __DIR__ . '/../..' . '/Story_Post_Type.php',
@@ -57,13 +61,15 @@ class ComposerStaticInit2964b50cf5892309c438068680e28777
         'Google\\Web_Stories\\Traits\\Document_Parser' => __DIR__ . '/../..' . '/Traits/Document_Parser.php',
         'Google\\Web_Stories\\Traits\\Publisher' => __DIR__ . '/../..' . '/Traits/Publisher.php',
         'Google\\Web_Stories\\Traits\\Types' => __DIR__ . '/../..' . '/Traits/Types.php',
+        'Google_Web_Stories_Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',
+        'Google_Web_Stories_Composer\\Autoload\\ComposerStaticInitf55a00f094a5a57503c8504389c49cdc' => __DIR__ . '/..' . '/composer/autoload_static.php',
         'Web_Stories_Compatibility' => __DIR__ . '/../..' . '/compat/Web_Stories_Compatibility.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit2964b50cf5892309c438068680e28777::$classMap;
+            $loader->classMap = ComposerStaticInitf55a00f094a5a57503c8504389c49cdc::$classMap;
 
         }, null, ClassLoader::class);
     }

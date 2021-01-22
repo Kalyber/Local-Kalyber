@@ -79,7 +79,7 @@
 
 <div id="header__mobile-nav">
     <?php
-        wp_nav_menu( array( 'container'=> false, 'menu_class'=> false, 'menu_id'=> 'menu__header-menu' ) ); 
+        wp_nav_menu( array( 'container'=> false, 'menu_class'=> false, 'menu_id'=> 'menu__mobile-menu' ) ); 
     ?>
 </div>
 
