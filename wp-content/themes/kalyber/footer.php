@@ -74,7 +74,7 @@
 <?php wp_footer(); ?>
 
 
-<style type='text/css'>
+<style>
     .embeddedServiceHelpButton .helpButton .uiButton {
         background-color: #0077c8;
         font-family: "Arial", sans-serif;
