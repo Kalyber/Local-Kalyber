@@ -45,11 +45,7 @@
 
 <?php wp_body_open(); ?>
 
-
-<div id="page" class="site">
-<a class="skip-link screen-reader-text" href="#main_content"><?php esc_html_e( 'Skip to content', 'kalybernew' ); ?></a>
-
-
+<a class="skip-link screen-reader-text" href="#main_content">Skip to content</a>
 
 <header>
     <div class="header__inner">
