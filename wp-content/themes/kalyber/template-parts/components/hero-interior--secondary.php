@@ -16,7 +16,7 @@
 ?>
      <div class="hero-interior--secondary__subhead__wrap" style="background-color:<?= $background_color ?>;">
           <div class="container hero-interior--secondary__subhead__inner">
-               <h1><?= $subhead ?></h1>
+               <h2><?= $subhead ?></h2>
           </div>
      </div>
 <?php
