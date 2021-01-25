@@ -79,10 +79,13 @@
             font-size: 24px;
             margin-top: 4rem;
             margin-bottom: 1.5rem;
+            font-weight:700;
 
-            @media (max-width: 640px) {
+            @include respond(small) {
                 font-size: 16px;
                 line-height: 1.4rem;
+                margin-top: 2rem;
+                margin-bottom:.25rem;
             }
         }
         
