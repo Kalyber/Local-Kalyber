@@ -48,7 +48,7 @@
 <header>
     <div class="header__inner">
         <a href="/" class="header__logo">
-            <svg data-name="Layer 1" width="200" viewBox="0 0 720 131.62" xmlns="http://www.w3.org/2000/svg">
+            <svg data-name="Layer 1" width="200" viewBox="0 0 720 131.62" xmlns="http://www.w3.org/2000/svg"><title>Kalyber Logo</title>
             <defs>
                 <linearGradient id="a" x1="36.8" x2="86.2" y1="5.57" y2="128.87" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#e02826" offset="0"/>
