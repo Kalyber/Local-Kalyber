@@ -8,40 +8,32 @@
  */
 ?>    
 
-	<?php
-		$categories_list = get_the_category(get_the_ID(), array(
-			'orderby' => 'name',
-			'order' => 'ASC'
-		) );
+<?php
+    $categories_list = get_the_category(get_the_ID(), array(
+        'orderby' => 'name',
+        'order' => 'ASC'
+    ) );
 
-		function category($var){
-			return esc_html($val -> name);
-		}
+    function category($var){
+        return esc_html($val -> name);
+    }
 
-		$category_names = array_map("category", $categories_list);
-		
-		$id = get_the_ID();
-		$page_name = get_the_title(); //basename(get_permalink());
-		$page_template = basename(get_page_template());
-		$categories = implode(', ', $category_names);
-		$postTags = get_the_tags();
-		$tagsList = [];
-		if ($postTags) {
-			foreach($postTags as $tag) {
-				array_push($tagsList, $tag->name);
-			}
-		}
-		
-		$tags = implode(', ' ,$tagsList);
-		
-		if( get_field('show_form', $id) ):
-			if ( !is_404() ):
-				get_template_part('template-parts/section','flyoutcontactus');
-			endif;
-		endif;
-	?>
-	
-		
+    $category_names = array_map("category", $categories_list);
+    
+    $id = get_the_ID();
+    $page_name = get_the_title(); //basename(get_permalink());
+    $page_template = basename(get_page_template());
+    $categories = implode(', ', $category_names);
+    $postTags = get_the_tags();
+    $tagsList = [];
+    if ($postTags) {
+        foreach($postTags as $tag) {
+            array_push($tagsList, $tag->name);
+        }
+    }
+    
+    $tags = implode(', ' ,$tagsList);
+?>
 
 
 </div><!-- / page__container -->
@@ -73,18 +65,6 @@
 
 <?php wp_footer(); ?>
 
-
-<style>
-    .embeddedServiceHelpButton .helpButton .uiButton {
-        background-color: #0077c8;
-        font-family: "Arial", sans-serif;
-    }
-    .embeddedServiceHelpButton .helpButton .uiButton:focus {
-        outline: 1px solid #005290;
-    }
-</style>
-
- 
 
 <script src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 <script>
