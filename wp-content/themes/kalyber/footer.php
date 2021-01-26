@@ -6,7 +6,7 @@
  *
  * @package KalyberNew
  */
-?>    
+?>
 
 	<?php
 		$categories_list = get_the_category(get_the_ID(), array(
@@ -19,7 +19,7 @@
 		}
 
 		$category_names = array_map("category", $categories_list);
-		
+
 		$id = get_the_ID();
 		$page_name = get_the_title(); //basename(get_permalink());
 		$page_template = basename(get_page_template());
@@ -31,17 +31,17 @@
 				array_push($tagsList, $tag->name);
 			}
 		}
-		
+
 		$tags = implode(', ' ,$tagsList);
-		
+
 		if( get_field('show_form', $id) ):
 			if ( !is_404() ):
 				get_template_part('template-parts/section','flyoutcontactus');
 			endif;
 		endif;
 	?>
-	
-		
+
+
 
 
 </div><!-- / page__container -->
@@ -67,7 +67,6 @@
 		<input style="height:0px;border:none;padding:0;" id="pageTemplate" type="hidden" value="<?=$page_template?>" />
 		<input style="height:0px;border:none;padding:0;" id="tags" type="hidden" value="<?=$tags?>" />
 	</div>
-    <?php get_template_part('template-parts/chat-bot'); ?>
 </footer>
 
 
@@ -79,23 +78,87 @@
         background-color: #0077c8;
         font-family: "Arial", sans-serif;
     }
+
     .embeddedServiceHelpButton .helpButton .uiButton:focus {
         outline: 1px solid #005290;
     }
-</style>
 
- 
+    .embeddedServiceHelpButton .helpButton {
+        position: fixed;
+        bottom: 12px;
+        right: 12px;
+        height: 46px;
+        -webkit-font-smoothing: subpixel-antialiased;
+        transition: all 0.5s;
+        transform: translateX(85%);
+    }
+
+    .embeddedServiceHelpButton .helpButton:hover {
+        transform: translateX(0);
+    }
+
+    .embeddedServiceHelpButton .helpButton .uiButton {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0 12px;
+        height: 46px;
+        box-shadow: 0 0 12px 0 rgba(0,0,0,0.5);
+        border-radius: 23px;
+        line-height: 1;
+        background: #000;
+        font-size: 0.875em;
+        background: #0077c8;
+        font-weight: normal;
+        text-shadow: none;
+        font-family: inherit;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-align-items: center;
+        -ms-flex-align: center;
+        align-items: center;
+        -webkit-box-pack: justify;
+        -webkit-justify-content: space-between;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        -ms-flex-direction: row;
+        flex-direction: row;
+    }
+
+    .embeddedServiceHelpButton .uiButton .helpButtonLabel {
+        justify-content: center;
+    }
+
+    .embeddedServiceHelpButton .helpButton .helpButtonEnabled:hover::before, .embeddedServiceHelpButton .helpButton .helpButtonEnabled:focus::before {
+        content: " ";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 23px;
+        background-color: #da291c;;
+        opacity: 0.2;
+        pointer-events: none;
+    }
+ </style>
+
 
 <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
 <script type='text/javascript'>
     var initESW = function(gslbBaseURL) {
-        embedded_svc.settings.displayHelpButton = false; //Or false
+
+        embedded_svc.settings.displayHelpButton = true; //Or false
         embedded_svc.settings.language = ''; //For example, enter 'en' or 'en-US'
 
         //embedded_svc.settings.defaultMinimizedText = '...'; //(Defaults to Chat with an Expert)
         //embedded_svc.settings.disabledMinimizedText = '...'; //(Defaults to Agent Offline)
 
-        //embedded_svc.settings.loadingText = ''; //(Defaults to Loading)
+        // embedded_svc.settings.loadingText = ""; //(Defaults to Loading)
         //embedded_svc.settings.storageDomain = 'yourdomain.com'; //(Sets the domain for your deployment so that visitors can navigate subdomains during a chat session)
 
         // Settings for Chat
