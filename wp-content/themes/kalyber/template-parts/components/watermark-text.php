@@ -7,7 +7,7 @@
 <div class="watermark-text__wrap" style="background-color:#0077c8;">
     <div class="container watermark-text__inner">
         <div class="watermark-text__head">
-            <h2><?= $headline ?></h2>
+            <p><?= $headline ?></p>
         </div>
         
         <div class="divider--vertical color__white--bk"></div>

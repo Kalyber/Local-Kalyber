@@ -25,7 +25,4 @@
           </a>
 
      </div>
-     <div class="hero-image__wrap">
-          <div class="hero-image"></div>
-     </div>
 </div>

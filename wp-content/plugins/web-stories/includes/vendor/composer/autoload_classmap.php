@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'ComposerAutoloaderInitf55a00f094a5a57503c8504389c49cdc' => $vendorDir . '/composer/autoload_real.php',
     'Google\\Web_Stories\\AMP\\Canonical_Sanitizer' => $baseDir . '/AMP/Canonical_Sanitizer.php',
     'Google\\Web_Stories\\AMP\\Integration\\AMP_Story_Sanitizer' => $baseDir . '/AMP/Integration/AMP_Story_Sanitizer.php',
     'Google\\Web_Stories\\AMP\\Meta_Sanitizer' => $baseDir . '/AMP/Meta_Sanitizer.php',
@@ -15,6 +16,8 @@ return array(
     'Google\\Web_Stories\\AMP\\Traits\\Sanitization_Utils' => $baseDir . '/AMP/Traits/Sanitization_Utils.php',
     'Google\\Web_Stories\\Activation_Flag' => $baseDir . '/Activation_Flag.php',
     'Google\\Web_Stories\\Activation_Notice' => $baseDir . '/Activation_Notice.php',
+    'Google\\Web_Stories\\AdSense' => $baseDir . '/AdSense.php',
+    'Google\\Web_Stories\\Ad_Manager' => $baseDir . '/Ad_Manager.php',
     'Google\\Web_Stories\\Admin' => $baseDir . '/Admin.php',
     'Google\\Web_Stories\\Analytics' => $baseDir . '/Analytics.php',
     'Google\\Web_Stories\\Block\\Embed_Block' => $baseDir . '/Block/Embed_Block.php',
@@ -44,6 +47,7 @@ return array(
     'Google\\Web_Stories\\REST_API\\Stories_Media_Controller' => $baseDir . '/REST_API/Stories_Media_Controller.php',
     'Google\\Web_Stories\\REST_API\\Stories_Settings_Controller' => $baseDir . '/REST_API/Stories_Settings_Controller.php',
     'Google\\Web_Stories\\REST_API\\Stories_Users_Controller' => $baseDir . '/REST_API/Stories_Users_Controller.php',
+    'Google\\Web_Stories\\SVG' => $baseDir . '/SVG.php',
     'Google\\Web_Stories\\Settings' => $baseDir . '/Settings.php',
     'Google\\Web_Stories\\Shortcode\\Embed_Shortcode' => $baseDir . '/Shortcode/Embed_Shortcode.php',
     'Google\\Web_Stories\\Story_Post_Type' => $baseDir . '/Story_Post_Type.php',
@@ -56,5 +60,7 @@ return array(
     'Google\\Web_Stories\\Traits\\Document_Parser' => $baseDir . '/Traits/Document_Parser.php',
     'Google\\Web_Stories\\Traits\\Publisher' => $baseDir . '/Traits/Publisher.php',
     'Google\\Web_Stories\\Traits\\Types' => $baseDir . '/Traits/Types.php',
+    'Google_Web_Stories_Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
+    'Google_Web_Stories_Composer\\Autoload\\ComposerStaticInitf55a00f094a5a57503c8504389c49cdc' => $vendorDir . '/composer/autoload_static.php',
     'Web_Stories_Compatibility' => $baseDir . '/compat/Web_Stories_Compatibility.php',
 );

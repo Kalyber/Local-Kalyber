@@ -81,22 +81,6 @@
     }
 }
 
-.hero-image__wrap {
-    
-}
-
-.hero-image {
-    background-color: $dark-gray;
-    background-image: url(../../images/home__header.jpg);
-    background-position: center bottom;
-    background-size: cover;
-    height: 80px;
-
-    @include respond(medium) {
-        height: 7vw;
-    }
-}
-
 .hero-button__wrap {
     background-color: $primary-red;
     display: inline-block;

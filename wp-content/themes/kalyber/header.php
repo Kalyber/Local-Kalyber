@@ -15,17 +15,15 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
 
-	<title><?php wp_title(''); ?></title>
-
 	<?php if (is_search()) { ?>
 		<meta name="robots" content="noindex, nofollow" /> 
 	<?php } ?>
 
-	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="font" type="font/woff2" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" as="font" rel="preload" type="font/woff2" crossorigin="anonymous">
 
 	<?php do_action( 'wpseo_head' );  ?>
 
-	<script type="text/javascript">
+	<script>
 	//document.domain = 'kalyber.com';
 	</script>
 
@@ -45,16 +43,12 @@
 
 <?php wp_body_open(); ?>
 
-
-<div id="page" class="site">
-<a class="skip-link screen-reader-text" href="#main_content"><?php esc_html_e( 'Skip to content', 'kalybernew' ); ?></a>
-
-
+<a class="skip-link screen-reader-text" href="#main_content">Skip to content</a>
 
 <header>
     <div class="header__inner">
         <a href="/" class="header__logo">
-            <svg data-name="Layer 1" width="200" viewBox="0 0 720 131.62" xmlns="http://www.w3.org/2000/svg">
+            <svg data-name="Layer 1" width="200" viewBox="0 0 720 131.62" xmlns="http://www.w3.org/2000/svg"><title>Kalyber Logo</title>
             <defs>
                 <linearGradient id="a" x1="36.8" x2="86.2" y1="5.57" y2="128.87" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#e02826" offset="0"/>
@@ -83,7 +77,7 @@
 
 <div id="header__mobile-nav">
     <?php
-        wp_nav_menu( array( 'container'=> false, 'menu_class'=> false, 'menu_id'=> 'menu__header-menu' ) ); 
+        wp_nav_menu( array( 'container'=> false, 'menu_class'=> false, 'menu_id'=> 'menu__mobile-menu' ) ); 
     ?>
 </div>
 

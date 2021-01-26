@@ -42,7 +42,14 @@
 }
 
 .hero-interior--secondary__subhead__wrap {
-     padding:20px 0;
-     font-size: 24px;
-     color:white;
+     padding:24px 0 24px;
+
+     h2 {
+          font-size:24px;
+          font-weight:400;
+          letter-spacing:0;
+          color:white;
+          margin:0;
+          text-transform:unset;
+     }
 }

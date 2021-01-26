@@ -215,14 +215,19 @@
         left: 0;
       
 
-      h5 {
-        margin: 0 2rem 40px 2rem;
+      h2 {
+        font-size: 20px;
+        font-weight: 500;
+        line-height: 1.2;
+        text-transform: unset;
+        margin: 0 2rem 30px 2rem;
       }
 
       .read {
         background-color:$primary-red;
         text-transform: uppercase;
         font-size:16px;
+        font-weight:700;
         padding: 8px 24px 12px 28px;
         border-top:4px solid white;
         border-left:4px solid white;

@@ -38,7 +38,7 @@
     ?>
         <div class="pop-up__wrap color__blue--bk" id="web-review">
             <div class="pop-up-copy__wrap">
-                <h3 class="pop-up-copy__header"><?= $audit_type ?> Audit</h3>
+                <h4 class="pop-up-copy__header"><?= $audit_type ?> Audit</h4>
                 <p class="pop-up-copy__subheader"><?= $audit_copy ?></p>
             </div>
             <div class="pop-up-button__wrap">
@@ -53,9 +53,9 @@
     <?php
         if(get_field('show_newsletter_signup')) :
     ?>
-    <div class="pop-up__wrap color__green--bk" id="newsletter">
+    <div class="pop-up__wrap color__dark-blue-green--bk" id="newsletter">
         <div class="pop-up-copy__wrap">
-            <h3 class="pop-up-copy__header">Newsletter</h3>
+            <h4 class="pop-up-copy__header">Newsletter</h4>
             <p class="pop-up-copy__subheader">Get monthly insights from Kalyber</p>
         </div>
         <div class="pop-up-input__wrap">
@@ -72,9 +72,9 @@
     <?php
         if(get_field('show_downloads')) :
     ?>
-    <div class="pop-up__wrap color__dark-blue-green--bk" id="downloads">
+    <div class="pop-up__wrap" id="downloads">
         <div class="pop-up-copy__wrap">
-            <h3 class="pop-up-copy__header"><?= $downloads_headline ?></h3>
+            <h4 class="pop-up-copy__header"><?= $downloads_headline ?></h4>
             <p class="pop-up-copy__subheader"><?= $downloads_copy ?></p>
         </div>
         <div class="pop-up-button__wrap">

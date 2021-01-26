@@ -15,7 +15,7 @@
           <div class="alternating-content__wrap">
                <div class="container alternating-content">
                     <div class="feature-text">
-                         <h3><?= $headline ?></h3>
+                         <h2><?= $headline ?></h2>
                          <?= $copy ?>
                     </div>
                     <div class="feature-image__wrap">
