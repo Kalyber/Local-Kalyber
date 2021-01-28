@@ -128,6 +128,10 @@
         justify-content: left;
     }
 
+    .embeddedServiceHelpButton .helpButton .uiButton:focus {
+        outline: 0px;
+    }
+
     .embeddedServiceHelpButton .helpButton .helpButtonEnabled:hover::before, .embeddedServiceHelpButton .helpButton .helpButtonEnabled:focus::before {
         content: " ";
         position: absolute;
