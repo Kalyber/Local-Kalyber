@@ -141,8 +141,8 @@
         pointer-events: none;
     }
 
-    .embeddedServiceIcon {
-        font-size:2.5em;
+    .embeddedServiceHelpButton .embeddedServiceIcon::before {
+        font-size: 2.25em;
     }
 
     .embeddedServiceHelpButton .embeddedServiceIcon {
