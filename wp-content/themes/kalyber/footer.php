@@ -160,8 +160,8 @@
             right: 12px;
         }
 
-        .embeddedServiceIcon {
-            font-size:1.25em;
+        .embeddedServiceHelpButton .embeddedServiceIcon::before {
+            font-size: 1.25em;
         }
 
         .embeddedServiceHelpButton .embeddedServiceIcon {
