@@ -85,23 +85,18 @@
 
     .embeddedServiceHelpButton .helpButton {
         position: fixed;
-        bottom: 12px;
-        right: 12px;
+        bottom: 35px;
+        right: 45px;
         height: 46px;
         -webkit-font-smoothing: subpixel-antialiased;
-        transition: all 0.5s;
         transform: translateX(85%);
-    }
-
-    .embeddedServiceHelpButton .helpButton:hover {
-        transform: translateX(0);
     }
 
     .embeddedServiceHelpButton .helpButton .uiButton {
         box-sizing: border-box;
         margin: 0;
         padding: 0 12px;
-        height: 46px;
+        height: 60px;
         box-shadow: 0 0 12px 0 rgba(0,0,0,0.5);
         border-radius: 23px;
         line-height: 1;
@@ -130,7 +125,7 @@
     }
 
     .embeddedServiceHelpButton .uiButton .helpButtonLabel {
-        justify-content: center;
+        justify-content: left;
     }
 
     .embeddedServiceHelpButton .helpButton .helpButtonEnabled:hover::before, .embeddedServiceHelpButton .helpButton .helpButtonEnabled:focus::before {
@@ -144,6 +139,41 @@
         background-color: #da291c;;
         opacity: 0.2;
         pointer-events: none;
+    }
+
+    .embeddedServiceIcon {
+        font-size:2.5em;
+    }
+
+    .embeddedServiceHelpButton .embeddedServiceIcon {
+        margin-right: 30px;
+    }
+
+    @media only screen and (min-width: 768px) {
+        .embeddedServiceHelpButton .helpButton {
+            transform: translateX(0%);
+        }
+
+        .embeddedServiceHelpButton .helpButton {
+            bottom: 12px;
+            right: 12px;
+        }
+
+        .embeddedServiceIcon {
+            font-size:1.25em;
+        }
+
+        .embeddedServiceHelpButton .embeddedServiceIcon {
+            margin-right: 10px;
+        }
+
+        .embeddedServiceHelpButton .helpButton .uiButton {
+            height: 46px;
+        }
+
+        .embeddedServiceHelpButton .uiButton .helpButtonLabel {
+            justify-content: center;
+        }
     }
  </style>
 
