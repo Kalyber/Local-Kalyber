@@ -98,7 +98,7 @@
         padding: 0 12px;
         height: 60px;
         box-shadow: 0 0 12px 0 rgba(0,0,0,0.5);
-        border-radius: 23px;
+        border-radius: 50px;
         line-height: 1;
         background: #000;
         font-size: 0.875em;
@@ -147,6 +147,7 @@
 
     .embeddedServiceHelpButton .embeddedServiceIcon {
         margin-right: 30px;
+        margin-left: 5px;
     }
 
     @media only screen and (min-width: 768px) {
@@ -165,6 +166,7 @@
 
         .embeddedServiceHelpButton .embeddedServiceIcon {
             margin-right: 10px;
+            margin-left: 0px;
         }
 
         .embeddedServiceHelpButton .helpButton .uiButton {
