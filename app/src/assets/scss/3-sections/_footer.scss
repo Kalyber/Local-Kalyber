@@ -1,21 +1,20 @@
 footer {
     background-color: $dark-gray;
-    padding: 80px 0 45px;
+    padding: 50px 0 20px;
     width: 100%;
-    //display: flex;
     align-items: center;
     justify-content: center;
     z-index: 3;
     position: relative;
 
     @include respond(small) {
-        padding: 44px 0 60px;
+        padding: 60px 0 40px;
     }
 }
 
 .footer__inner {
     @extend %inner-container;
-    @extend %flex-center-between;
+    @extend %flex-left-between;
 
     flex-direction: column-reverse;
     color:white;
@@ -50,7 +49,7 @@ footer {
 }
 
 .footer__text {
-    text-align: center;
+    text-align: left;
     padding:16px 0 0 0;
 
     @include respond(small) {

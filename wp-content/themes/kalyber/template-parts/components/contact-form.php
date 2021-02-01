@@ -30,9 +30,9 @@
           var browser_width = window.innerWidth;
 
           if(browser_width < 712) {
-               var iframe_height = "700";
+               var iframe_height = "800";
           } else {
-               var iframe_height = "500";
+               var iframe_height = "470";
           }
           document.getElementById("contact_form").height = iframe_height;
      }

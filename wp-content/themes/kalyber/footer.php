@@ -49,7 +49,7 @@
 <footer>
 	<div class="footer__inner">
 		<div class="footer__text">
-			&copy; <?php echo date("Y"); ?> Kalyber • <a href="mailto:hello@kalyber.com">hello@kalyber.com</a> <span class="footer__break-span">•</span> <a href="/privacy-policy/">Privacy Policy</a> • <a href="/terms-and-conditions/">Terms & Conditions</a>
+			&copy; <?php echo date("Y"); ?> Kalyber <span class="footer__break-span">•</span> 888.525.9237 • <a href="mailto:hello@kalyber.com">hello@kalyber.com</a> <span class="footer__break-span">•</span> <a href="/privacy-policy/">Privacy</a> • <a href="/terms-and-conditions/">Terms & Conditions</a>
 		</div>
 		<div class="footer__social-links">
 			<a href="https://www.linkedin.com/company/kalyber" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><title>Kalyber LinkedIn Page</title><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2 16h-2v-6h2v6zm-1-6.891c-.607 0-1.1-.496-1.1-1.109 0-.612.492-1.109 1.1-1.109s1.1.497 1.1 1.109c0 .613-.493 1.109-1.1 1.109zm8 6.891h-1.998v-2.861c0-1.881-2.002-1.722-2.002 0v2.861h-2v-6h2v1.093c.872-1.616 4-1.736 4 1.548v3.359z"/></svg></a>
@@ -72,112 +72,6 @@
 
 <?php wp_footer(); ?>
 
-
-<style type='text/css'>
-    .embeddedServiceHelpButton .helpButton .uiButton {
-        background-color: #0077c8;
-        font-family: "Arial", sans-serif;
-    }
-
-    .embeddedServiceHelpButton .helpButton .uiButton:focus {
-        outline: 1px solid #005290;
-    }
-
-    .embeddedServiceHelpButton .helpButton {
-        position: fixed;
-        bottom: 35px;
-        right: 45px;
-        height: 46px;
-        -webkit-font-smoothing: subpixel-antialiased;
-        transform: translateX(85%);
-    }
-
-    .embeddedServiceHelpButton .helpButton .uiButton {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0 12px;
-        height: 60px;
-        box-shadow: 0 0 12px 0 rgba(0,0,0,0.5);
-        border-radius: 50px;
-        line-height: 1;
-        background: #000;
-        font-size: 0.875em;
-        background: #0077c8;
-        font-weight: normal;
-        text-shadow: none;
-        font-family: inherit;
-        display: -webkit-box;
-        display: -webkit-flex;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-align-items: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: justify;
-        -webkit-justify-content: space-between;
-        -ms-flex-pack: justify;
-        justify-content: space-between;
-        -webkit-box-orient: horizontal;
-        -webkit-box-direction: normal;
-        -webkit-flex-direction: row;
-        -ms-flex-direction: row;
-        flex-direction: row;
-    }
-
-    .embeddedServiceHelpButton .uiButton .helpButtonLabel {
-        justify-content: left;
-    }
-
-    .embeddedServiceHelpButton .helpButton .helpButtonEnabled:hover::before, .embeddedServiceHelpButton .helpButton .helpButtonEnabled:focus::before {
-        content: " ";
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: 23px;
-        background-color: #da291c;;
-        opacity: 0.2;
-        pointer-events: none;
-    }
-
-    .embeddedServiceHelpButton .embeddedServiceIcon::before {
-        font-size: 2.25em;
-    }
-
-    .embeddedServiceHelpButton .embeddedServiceIcon {
-        margin-right: 30px;
-        margin-left: 5px;
-    }
-
-    @media only screen and (min-width: 768px) {
-        .embeddedServiceHelpButton .helpButton {
-            transform: translateX(0%);
-        }
-
-        .embeddedServiceHelpButton .helpButton {
-            bottom: 12px;
-            right: 12px;
-        }
-
-        .embeddedServiceHelpButton .embeddedServiceIcon::before {
-            font-size: 1.25em;
-        }
-
-        .embeddedServiceHelpButton .embeddedServiceIcon {
-            margin-right: 10px;
-            margin-left: 0px;
-        }
-
-        .embeddedServiceHelpButton .helpButton .uiButton {
-            height: 46px;
-        }
-
-        .embeddedServiceHelpButton .uiButton .helpButtonLabel {
-            justify-content: center;
-        }
-    }
- </style>
 
 
 <script type='text/javascript' src='https://service.force.com/embeddedservice/5.0/esw.min.js'></script>
