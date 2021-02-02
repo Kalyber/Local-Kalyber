@@ -8,13 +8,17 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  width:32.8%;
+  width:100%;
   background-color: $primary-blue;
   margin:0 0 12px 0;
   transition: all .25s linear;
 
   &:hover .blog-item__read-more {
     opacity:1;
+  }
+
+  @include respond(small) {
+    width:32.8%;
   }
 }
 
@@ -48,7 +52,11 @@
   color:white;
   bottom:0;
   right:0;
-  opacity: 0;
+  opacity: 1;
   line-height:1;
   transition: all .25s ease-in;
+
+  @include respond(small) {
+    opacity:0;
+  }
 }
