@@ -2,10 +2,11 @@
      width:100%;
      padding:30px 0;
      background-color:#0D2B3A;
-     background-image: url(../../images/home__header-new.jpg);
+     background-color:white;
+     background-image: url(../../images/home__header-top2.jpg);
      background-repeat: no-repeat;
-     background-position: right bottom;
-     background-size: 100%;
+     background-position: right 50%;
+     background-size: 150%;
 
      @include respond(medium) {
           padding:80px 0;
@@ -13,7 +14,7 @@
 }
 
 .hero-interior__inner {
-     color:white;
+     //color:white;
      font-size:40px;
 
      @include respond(medium) {

@@ -4,9 +4,12 @@
      $featured_url = $featured_url_array[0];
 ?>
 
-<a href="<?php the_permalink();?>" class="item" style="background-image: url('<?= $featured_url ?>');">
-     <div class="item__details">
-          <h2><?php the_field('title'); ?></h2>
-          <span class="read">Read More</span>
+<a href="<?php the_permalink();?>" class="blog-item">
+     <div class="blog-item__photo">
+          <img src="<?= $featured_url ?>" alt="">
      </div>
+     <div class="blog-item__details">
+          <h2><?php the_field('title'); ?></h2>
+     </div>
+     <span class="blog-item__read-more">Read More</span>
 </a>
