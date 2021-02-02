@@ -1,12 +1,12 @@
 === Complianz - GDPR/CCPA Cookie Consent ===
-Contributors: RogierLankhorst, aahulsebos, leonwimmenhoeve, paapst, markwolters, mujuonly, xantek, pierrotevrard
+Contributors: RogierLankhorst, aahulsebos, leonwimmenhoeve, paapst, markwolters, mujuonly, xantek, pierrotevrard, samu-d
 Donate link: https://paypal.me/complianz
 Tags: GDPR, Cookie, Cookie Notice, DSGVO, CCPA, Consent, RGPD, LGPD, Privacy, PIPEDA, Cookie Policy, Opt-in
 Requires at least: 4.9
 License: GPL2
 Requires PHP: 5.6
 Tested up to: 5.6
-Stable tag: 4.9.4
+Stable tag: 4.9.5
 
 Configure your Cookie Notice, Cookie Consent and Cookie Policy with our Wizard and Cookie Scan. Supports GDPR, DSGVO, CCPA and PIPEDA.
 
@@ -114,6 +114,11 @@ Canada’s Anti-Spam Legislation (CASL) and Personal Information Protection and 
 With some custom CSS this is possible, but we do not consider a cookie wall to be GDPR compliant, so it's not actively supported. We do, however, have the option to create a Soft Cookie Wall. Which blocks interaction with the website, but dismissing remains a possibility.
 
 == Change log ==
+= 4.9.5 =
+* JetPack integration
+* Fix: disabling of integrations not working properly after theme support was added.
+* Fix: short code for custom consent area not activating due to changes in the jquery events props samu-d.
+
 = 4.9.4 =
 * Fix: when configured with accept/deny, accept on blocked content container not working
 
