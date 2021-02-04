@@ -1,6 +1,4 @@
 <?php
-     $position_title = "Position Title";
-     $position_description = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident et blanditiis reprehenderit facilis quisquam temporibus mollitia quo distinctio at asperiores. Eos quisquam maiores ad, commodi dignissimos fuga dolorum perspiciatis autem fugiat nihil at magnam sequi asperiores quia iusto quae soluta excepturi expedita eius quis adipisci, voluptate consequuntur a laboriosam. Veniam ut laboriosam velit veritatis aperiam? Temporibus sequi voluptatum cum voluptatem sapiente blanditiis voluptatibus tenetur a perferendis dolore eius quidem consectetur minima numquam tempora, rerum similique veniam enim maiores possimus vitae repudiandae repellat adipisci quibusdam. Eos rerum sit est doloribus! Blanditiis assumenda molestias, eos dolore error voluptatibus recusandae eum! Alias, maiores.";
      $no_positions = get_field('no_positions_message');
 ?>
 
@@ -11,7 +9,10 @@
           <h3>Available Positions</h3>
 
           <?php
-               if (1 == 2):
+               if (have_rows('positions')):
+                    while( have_rows('positions') ) : the_row();
+                         $position_title = get_sub_field('position_title');
+                         $position_description = get_sub_field('position_description');
           ?>
                <div class="careers__position">
                     <h4 class="position-title position-title--off"><?= $position_title ?></h4>
@@ -19,13 +20,7 @@
                          <?= $position_description ?>
                     </div>
                </div>
-
-               <div class="careers__position">
-                    <h4 class="position-title position-title--off"><?= $position_title ?></h4>
-                    <div class="careers__position-description">
-                         <?= $position_description ?>
-                    </div>
-               </div>
+               <?php endwhile; ?>
           <?php else: ?>
                <p><?= $no_positions ?></p>
           <?php endif; ?>
