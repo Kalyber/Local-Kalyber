@@ -1,0 +1,54 @@
+.careers__wrap {
+     display:flex;
+     justify-content: space-between;
+     flex-direction: row;
+     margin-bottom:70px;
+}
+
+.careers__position {
+     border-bottom:1px solid $primary-blue;
+     padding:20px 0 14px;
+     margin:0 0 20px 0;
+}
+
+.position-title {
+     position: relative;
+     width:100%;
+     display:block;
+     width:100%;
+     font-weight: 600;
+     cursor: pointer;
+}
+
+.position-title--off {
+     &:after {
+          position: absolute;
+          height: 28px;
+          right:0;
+          top:-12px;
+          content:"+";
+          font-size:34px;
+          color:$primary-blue;
+     }
+}
+
+.position-title--on {
+     &:after {
+          position: absolute;
+          height: 28px;
+          right:0;
+          top:-12px;
+          content:"–";
+          font-size:34px;
+          color:$primary-blue;
+     }
+}
+
+.careers__position-description {
+     padding-top:20px;
+     display:none;
+}
+
+.description-on {
+     display:block;
+}

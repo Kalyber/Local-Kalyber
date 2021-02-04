@@ -6,6 +6,9 @@
 
 <a href="<?php the_permalink();?>" class="blog-item">
      <div class="blog-item__photo">
+          <div class="blog-item__description">
+               <?php the_excerpt(); ?>
+          </div>
           <img src="<?= $featured_url ?>" alt="">
      </div>
      <div class="blog-item__details">
