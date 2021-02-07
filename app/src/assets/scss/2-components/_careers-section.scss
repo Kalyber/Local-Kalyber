@@ -17,6 +17,7 @@
      display:block;
      width:100%;
      font-weight: 600;
+     text-transform: uppercase;
      cursor: pointer;
 }
 
@@ -45,8 +46,14 @@
 }
 
 .careers__position-description {
+     font-size:15px;
      padding-top:20px;
      display:none;
+
+     strong {
+          font-weight:500;
+          color:$primary-blue;
+     }
 }
 
 .description-on {
