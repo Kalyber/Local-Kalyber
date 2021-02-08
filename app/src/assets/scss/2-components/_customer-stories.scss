@@ -1,0 +1,133 @@
+.stories__item {
+     display: flex;
+     flex-direction: column;
+     width:100%;
+     margin:0 0 20px 0;
+     color:white;
+
+     @include respond(small) {
+          margin:0;
+     }
+}
+
+.stories__item__header {
+     width:100%;
+     font-size:40px;
+     margin-right:50px;
+     line-height: 1.2;
+
+     @include respond(medium) {
+          font-size:54px;
+     }
+}
+
+.stories__item__content {
+     display: flex;
+     flex-direction: column;
+
+     @include respond(small) {
+          flex-direction: row;
+     }
+}
+
+.stories__copy {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     text-align: center;
+     width:100%;
+     order:3;
+
+     @include respond(small) {
+          width:33%;
+          order:1;
+     }
+
+     .stories__copy__inner {
+          width:90%;
+          max-width: 800px;
+          margin:0 auto;
+          padding:50px 0;
+
+          @include respond(small) {
+               width: 66%;
+               max-width: auto;
+               padding:50px 0;
+          }
+     }
+}
+
+.stories__quote {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     width:100%;
+     order:2;
+
+     @include respond(small) {
+          width:33%;
+          order:2;
+     }
+
+     .stories__quote__inner {
+          width:90%;
+          max-width: 800px;
+          margin:0 auto;
+          padding:50px 0; 
+          border-left-width: 0;
+          border-left-style:solid;
+          border-bottom-width: 2px;
+          border-bottom-style:solid;
+
+          @include respond(small) {
+               width:100%;
+               max-width: 800px;
+               margin:0 auto;
+               padding:50px 15%;
+               border-left-width:2px;
+               border-bottom-width:0pc          
+          }
+
+          p {
+               font-size: 1.0rem;
+               font-weight:500;
+
+               @include respond(small) {
+                    font-size: 1.0rem;
+               }
+
+               @include respond(medium) {
+                    font-size: 1.0rem;
+               }
+
+               @include respond(large) {
+                    font-size: 1.0rem;
+               }
+
+               @include respond(x-large) {
+                    font-size: 1.3rem;
+               }
+          }
+
+          span {
+               display: block;
+               width: 100%;
+               text-align: right;
+          }
+     }
+}
+
+.stories__media {
+     width:100%;
+     order:1;
+
+     @include respond(small) {
+          width:34%;
+          order:3;
+     }
+
+     img {
+          width: 100%;
+          display: block;
+     }
+}

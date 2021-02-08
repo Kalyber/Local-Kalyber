@@ -5,11 +5,6 @@
                     $headline        = get_sub_field('alternating_content_headline');
                     $copy            = get_sub_field('alternating_content_copy');
                     $image           = get_sub_field('alternating_content_image');
-                    //$image_no_ext    = explode('.', $image);
-                    //$image_desk      = $image_no_ext[0].'.jpg';
-
-                    //echo '<pre>', var_dump($image), '</pre>';
-                    //die();
      ?>
 
           <div class="alternating-content__wrap">
@@ -24,6 +19,14 @@
                               <source srcset="<?= esc_url($image['sizes']['large']) ?>" media="(max-width: 1024px)">
                               <img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>">
                          </picture>
+
+                         <?php
+                              if(1 == 2):
+                         ?>
+                              <a href=""></a>
+                         <?php
+                              endif;
+                         ?>
                     </div>
                </div>
           </div>
