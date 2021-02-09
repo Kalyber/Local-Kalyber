@@ -1,8 +1,13 @@
 .careers__wrap {
      display:flex;
      justify-content: space-between;
-     flex-direction: row;
-     margin-bottom:70px;
+     flex-direction: column;
+     margin-bottom:0;
+
+     @include respond(small) {
+          flex-direction: row;
+          margin-bottom: 70px;
+     }
 }
 
 .careers__position {
