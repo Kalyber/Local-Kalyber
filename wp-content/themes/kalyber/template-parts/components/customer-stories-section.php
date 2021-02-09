@@ -8,7 +8,8 @@
                $link              = get_sub_field('link');
                $quote             = get_sub_field('quote');
                $attribution       = get_sub_field('quote_attribution');
-               $image             = get_sub_field('photo');  
+               $image_desk        = get_sub_field('photo_desktop');
+               $image_mob         = get_sub_field('photo_mobile'); 
 
                if( $link ): 
                     $link_url = $link['url'];
@@ -39,7 +40,17 @@
                     </div>
                </div>
                <div class="stories__media">
-                    <img src="<?= esc_url($image['url']) ?>" alt="<?= esc_attr($image['alt']) ?>">
+                    <?php
+                         if(1 == 1):
+                    ?>
+                         <picture>
+                              <source srcset="<?= esc_url($image_mob['url']) ?>" media="(max-width: 640px)">
+                              <source srcset="<?= esc_url($image_desk['url']) ?>" media="(max-width: 1024px)">
+                              <img src="<?= esc_url($image_desk['url']) ?>" alt="<?= esc_attr($image_desk['alt']) ?>">
+                         </picture>
+                    <?php
+                         endif;
+                    ?>
                </div>
           </div>
      </section>
