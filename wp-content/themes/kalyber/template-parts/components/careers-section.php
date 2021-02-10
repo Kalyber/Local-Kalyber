@@ -1,5 +1,7 @@
 <?php
      $no_positions = get_field('no_positions_message');
+     $shortcode_id = get_field('form_id');
+     $shortcode    = '[contact-form-7 id="'.$shortcode_id.'" title="Contact form"]';
 ?>
 
 <div class="container__full-mobile careers__wrap">
@@ -28,7 +30,8 @@
      <div class="careers__form">
           <h3 class="color__white">Apply Yourself</h3>
           <p>If you think you have what it takes to work at Kalyber, let us know. Make sure to include a cover letter to let us know what position your interested in, and why your mom thinks you’re special.</p>
-          <?php echo do_shortcode('[contact-form-7 id="570" title="Contact form 1"]'); ?>
+
+          <?php echo do_shortcode($shortcode); ?>
      </div>
 </div>
 
