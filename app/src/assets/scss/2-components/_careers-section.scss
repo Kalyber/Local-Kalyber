@@ -64,3 +64,85 @@
 .description-on {
      display:block;
 }
+
+.careers__form {
+     display:flex;
+     flex-direction:column;
+     width:100%;
+     padding:50px 30px 50px 30px;
+     background-color: $primary-blue;
+
+     @include respond(small) {
+          width:40%;
+          padding:20px 20px 20px 20px;
+     }
+
+     @include respond(medium) {
+          width:35%;
+          padding:30px 30px 30px 30px;
+     }
+
+     @include respond(large) {
+          padding:50px 50px 50px 50px;
+     }
+
+     h3 {
+          line-height: 1.2;
+     }
+
+     p {
+          color:white;
+          margin:0 0 0 0;
+     }
+
+     form {
+          margin-top:30px;
+     }
+
+     label {
+          display:block;
+          width: 100%;
+          margin:0 0 0 0;
+          color:white;
+     }
+
+     input, textarea {
+          width:100%;
+          border:none;
+          margin:8px 0 24px 0;
+          padding:13px 14px 11px 14px;
+          font-size: 16px;
+          background-color:rgba(255,255,255,1);
+          transition: all .25s ease-in;
+
+          &:focus {
+               outline:0;
+               background-color: rgba(255,255,255,0.5);
+          }
+     }
+
+     input[type="file"] {
+          background-color: rgba(255,255,255,0.5);
+          color:#444;
+     }
+
+     textarea {
+          height:100px;
+     }
+
+     input[type="submit"] {
+          display: block;
+          width:auto;
+          margin:0 auto;
+          padding-left:20px;
+          padding-right:20px;
+          background-color:transparent;
+          border:2px solid white;
+          color:white;
+          font-size: 18px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: .5px;
+          transition: .5s all;
+     }
+}
