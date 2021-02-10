@@ -133,7 +133,7 @@
      input[type="submit"] {
           display: block;
           width:auto;
-          margin:0 auto;
+          margin:24px auto 0;
           padding-left:20px;
           padding-right:20px;
           background-color:transparent;
@@ -144,6 +144,12 @@
           text-transform: uppercase;
           letter-spacing: .5px;
           transition: .5s all;
+          cursor:pointer;
+
+          &:hover {
+               background-color: white;
+               color:$primary-blue;
+          }
      }
 
      .wpcf7-not-valid-tip {
