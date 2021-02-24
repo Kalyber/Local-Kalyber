@@ -75,16 +75,6 @@ abstract class RuleSet implements \Google\Web_Stories_Dependencies\Sabberworm\CS
             $iSiblingPos = \array_search($oSibling, $this->aRules[$sRule], \true);
             if ($iSiblingPos !== \false) {
                 $iPosition = $iSiblingPos;
-                $oRule->setPosition($oSibling->getLineNo(), $oSibling->getColNo() - 1);
-            }
-        }
-        if ($oRule->getLineNo() === 0 && $oRule->getColNo() === 0) {
-            //this node is added manually, give it the next best line
-            $rules = $this->getRules();
-            $pos = \count($rules);
-            if ($pos > 0) {
-                $last = $rules[$pos - 1];
-                $oRule->setPosition($last->getLineNo() + 1, 0);
             }
         }
         \array_splice($this->aRules[$sRule], $iPosition, 0, array($oRule));
@@ -108,12 +98,6 @@ abstract class RuleSet implements \Google\Web_Stories_Dependencies\Sabberworm\CS
                 $aResult = \array_merge($aResult, $aRules);
             }
         }
-        \usort($aResult, function (\Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule $first, \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule $second) {
-            if ($first->getLineNo() === $second->getLineNo()) {
-                return $first->getColNo() - $second->getColNo();
-            }
-            return $first->getLineNo() - $second->getLineNo();
-        });
         return $aResult;
     }
     /**

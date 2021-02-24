@@ -1,12 +1,8 @@
 .hero-interior--secondary__wrap {
      width:100%;
      padding:30px 0;
-     background-position: right center;
-     background-size: cover;
-     background-repeat: no-repeat;
 
      @include respond(medium) {
-          background-size: 90%;
           padding:60px 0;
      }
 }

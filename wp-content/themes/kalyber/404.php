@@ -10,51 +10,31 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
+<?php get_template_part('template-parts/components/hero-interior'); ?>
 
-		<section class="error-404 not-found">
-			<header class="page-header">
-				<h1 class="page-title"><?php esc_html_e( 'Oops! That page can&rsquo;t be found.', 'kalybernew' ); ?></h1>
-			</header><!-- .page-header -->
+<div class="generic-bar--blue">
+	<div class="container">
+		<h2>Page Not Found</h2>
+	</div>
+</div>
 
-			<div class="page-content">
-				<p><?php esc_html_e( 'It looks like nothing was found at this location. Maybe try one of the links below or a search?', 'kalybernew' ); ?></p>
+<div class="container">
+	<p>What you're looking for isn't a thing that exists. Like bigfoot. Or sharknados. Or flying cars, which really makes us angry. Weren't we promised flying cars?</p>
 
-					<?php
-					get_search_form();
+	<p>But you might be interested in things that do exist. Like these fine blog posts:</p>
 
-					the_widget( 'WP_Widget_Recent_Posts' );
-					?>
+	<div style="height:50px;"></div>
 
-					<div class="widget widget_categories">
-						<h2 class="widget-title"><?php esc_html_e( 'Most Used Categories', 'kalybernew' ); ?></h2>
-						<ul>
-							<?php
-							wp_list_categories(
-								array(
-									'orderby'    => 'count',
-									'order'      => 'DESC',
-									'show_count' => 1,
-									'title_li'   => '',
-									'number'     => 10,
-								)
-							);
-							?>
-						</ul>
-					</div><!-- .widget -->
+	<div class="generic-ul-list">
+		<ul>
+			<li><a href="/marketing/seo-audit-what-marketers-need-to-know/">SEO Audit - What Marketers Need to Know</a></li>
+			<li><a href="/content-management/wordpress-for-the-enterprise-a-guide-for-marketers/">WordPress for the Enterprise — A Guide for Marketers</a></li>
+			<li><a href="/marketing/top-wordpress-plugins-for-marketers/">Top WordPress Plugins For Marketers</a></li>
+		</ul>
+	</div>
 
-					<?php
-					/* translators: %1$s: smiley */
-					$kalybernew_archive_content = '<p>' . sprintf( esc_html__( 'Try looking in the monthly archives. %1$s', 'kalybernew' ), convert_smilies( ':)' ) ) . '</p>';
-					the_widget( 'WP_Widget_Archives', 'dropdown=1', "after_title=</h2>$kalybernew_archive_content" );
-
-					the_widget( 'WP_Widget_Tag_Cloud' );
-					?>
-
-			</div><!-- .page-content -->
-		</section><!-- .error-404 -->
-
-	</main><!-- #main -->
+	<div style="height:380px;"></div>
+</div>
 
 <?php
 get_footer();

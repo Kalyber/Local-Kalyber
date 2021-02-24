@@ -4,10 +4,9 @@
 
 namespace Google_Web_Stories_Composer\Autoload;
 
-class ComposerStaticInitf55a00f094a5a57503c8504389c49cdc
+class ComposerStaticInit320e640b046e85cd2fae29cb9d5ae407
 {
     public static $classMap = array (
-        'ComposerAutoloaderInitf55a00f094a5a57503c8504389c49cdc' => __DIR__ . '/..' . '/composer/autoload_real.php',
         'Google\\Web_Stories\\AMP\\Canonical_Sanitizer' => __DIR__ . '/../..' . '/AMP/Canonical_Sanitizer.php',
         'Google\\Web_Stories\\AMP\\Integration\\AMP_Story_Sanitizer' => __DIR__ . '/../..' . '/AMP/Integration/AMP_Story_Sanitizer.php',
         'Google\\Web_Stories\\AMP\\Meta_Sanitizer' => __DIR__ . '/../..' . '/AMP/Meta_Sanitizer.php',
@@ -61,15 +60,14 @@ class ComposerStaticInitf55a00f094a5a57503c8504389c49cdc
         'Google\\Web_Stories\\Traits\\Document_Parser' => __DIR__ . '/../..' . '/Traits/Document_Parser.php',
         'Google\\Web_Stories\\Traits\\Publisher' => __DIR__ . '/../..' . '/Traits/Publisher.php',
         'Google\\Web_Stories\\Traits\\Types' => __DIR__ . '/../..' . '/Traits/Types.php',
-        'Google_Web_Stories_Composer\\Autoload\\ClassLoader' => __DIR__ . '/..' . '/composer/ClassLoader.php',
-        'Google_Web_Stories_Composer\\Autoload\\ComposerStaticInitf55a00f094a5a57503c8504389c49cdc' => __DIR__ . '/..' . '/composer/autoload_static.php',
+        'Google\\Web_Stories\\User_Preferences' => __DIR__ . '/../..' . '/User_Preferences.php',
         'Web_Stories_Compatibility' => __DIR__ . '/../..' . '/compat/Web_Stories_Compatibility.php',
     );
 
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInitf55a00f094a5a57503c8504389c49cdc::$classMap;
+            $loader->classMap = ComposerStaticInit320e640b046e85cd2fae29cb9d5ae407::$classMap;
 
         }, null, ClassLoader::class);
     }

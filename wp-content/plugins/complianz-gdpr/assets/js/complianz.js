@@ -90,13 +90,31 @@ jQuery(document).ready(function ($) {
 	 * */
 
 	function setBlockedContentContainer() {
-		//force = typeof force !== 'undefined' ? force : false;
-		//to prevent this function to run when cookies are accepted, we check for accepted status here
-		//this is not the same as getHighestAcceptance
-		// if (!ccAllEnabled) return;
+		//to prevent this function to twice on an element, we add an attribute to each element that has been processed.
+		//then skip elements with that element.
+
+		$('.cmplz-image').each(function (i, obj) {
+			if ( $(this).hasClass('cmplz-processed') ) return;
+			$(this).addClass('cmplz-processed' );
+			var blockedImageContainer = $(this).parent();
+			blockedImageContainer.addClass('cmplz-blocked-content-container');
+			//handle browser native lazy load feature
+			if ($(this).attr('loading') === 'lazy' ) {
+				$(this).removeAttr('loading');
+				$(this).data('deferlazy', 1);
+			}
+			//insert placeholder text
+			if (cmplzGetHighestAcceptance() !== 'marketing' && !blockedImageContainer.find(".cmplz-blocked-content-notice").length) {
+				var placeholderText = complianz.placeholdertext;
+				if (typeof placeholderText !== 'undefined') blockedImageContainer.append('<button tabindex=0 class="cmplz-blocked-content-notice cmplz-accept-marketing">' + placeholderText + '</button>');
+			}
+		});
 
 		$('.cmplz-placeholder-element').each(function () {
-			//we set this element as container with placeholder image
+			if ( $(this).hasClass('cmplz-processed') ) return;
+			$(this).addClass('cmplz-processed' );
+
+ 			//we set this element as container with placeholder image
 			var blockedContentContainer;
 			if ($(this).hasClass('cmplz-iframe')) {
 
@@ -137,6 +155,7 @@ jQuery(document).ready(function ($) {
 		/**
 		 * In some cases, like ajax loaded content, the placeholders are initialized again. In that case, the scripts may need to be fired again as well.
 		 * We're assuming that statistics scripts won't be loaded with ajax, so we only load marketing level scripts
+		 *
 		 */
 		if ( cmplzGetHighestAcceptance() === 'marketing') {
 			cmplzEnableMarketing();
@@ -186,17 +205,17 @@ jQuery(document).ready(function ($) {
 	var resizeTimer;
 	$(window).on( "resize", function() {
 		clearTimeout(resizeTimer);
-		resizeTimer = setTimeout( setBlockedContentContainer, 100);
+		//resizeTimer = setTimeout( setBlockedContentContainer, 100);
 	});
 
 	/**
 	 * 	we run this function also on an interval, because with ajax loaded content, the placeholders would otherwise not be handled.
 	 */
-	if ( complianz.block_ajax_content == 1 ) {
+	//if ( complianz.block_ajax_content == 1 ) {
 		setInterval(function () {
 			setBlockedContentContainer();
 		}, 2000);
-	}
+	//}
 
 	/**
 	 * Enable scripts that were blocked
@@ -213,27 +232,42 @@ jQuery(document).ready(function ($) {
 			cmplzEnableStats();
 		}
 
-		//make sure it doesn't run twice
-		if (!ccAllEnabled) {
-			//enable integrations
-			cmplzIntegrationsConsent();
+		//enable cookies for integrations
+		cmplzIntegrationsConsent();
 
-			//styles
-			$('.cmplz-style-element').each(function (i, obj) {
-				var src = $(this).data('href');
-				$('head').append('<link rel="stylesheet" type="text/css" href="' + src + '">');
-			});
+		//styles
+		$('.cmplz-style-element').each(function (i, obj) {
+			if ( $(this).hasClass('cmplz-activated') ) return;
+			$(this).addClass('cmplz-activated' );
+			var src = $(this).data('href');
+			$('head').append('<link rel="stylesheet" type="text/css" href="' + src + '">');
+		});
 
-			//remove accept cookie notice overlay
-			$('.cmplz-blocked-content-notice').each(function () {
-				$(this).remove();
-			});
-		}
+		//remove accept cookie notice overlay
+		$('.cmplz-blocked-content-notice').each(function () {
+			$(this).remove();
+		});
+
+		//blocked images
+		var images = $('.cmplz-image');
+		images.each(function (i, obj) {
+			if ( $(this).hasClass('cmplz-activated') ) return;
+			$(this).addClass('cmplz-activated' );
+
+			var src = $(this).data('src-cmplz');
+			$(this).attr('src', src);
+			//handle browser native lazy load feature
+			if ($(this).data('deferlazy')) {
+				$(this).attr('loading', 'lazy');
+			}
+		});
 
 		//iframes and video's
 		$('.cmplz-iframe').each(function (i, obj) {
-			var src = $(this).data('src-cmplz');
+			if ( $(this).hasClass('cmplz-activated') ) return;
+			$(this).addClass('cmplz-activated' );
 
+			var src = $(this).data('src-cmplz');
 			//check if there's an autoplay value we need to pass on
 			var autoplay = cmplzGetUrlParameter($(this).attr('src'), 'autoplay');
 			if (autoplay === '1') src = src + '&autoplay=1';
@@ -268,6 +302,9 @@ jQuery(document).ready(function ($) {
 
 		//other services, no iframe, with placeholders
 		$('.cmplz-noframe').each(function (i, obj) {
+			if ( $(this).hasClass('cmplz-activated') ) return;
+			$(this).addClass('cmplz-activated' );
+
 			var blockedContentContainer = $(this);
 			//remove the added classes
 			var cssIndex = blockedContentContainer.data('placeholderClassIndex');
@@ -276,94 +313,95 @@ jQuery(document).ready(function ($) {
 			blockedContentContainer.removeClass('cmplz-placeholder-' + cssIndex);
 		});
 
-		if (!ccAllEnabled) {
+		//first, create list of waiting scripts
+		var scriptElements = $('.cmplz-script');
+		scriptElements.each(function (i, obj) {
+			var waitfor = $(this).data('waitfor');
+			var src = $(this).attr('src');
 
-			//first, create list of waiting scripts
-			var scriptElements = $('.cmplz-script');
-			scriptElements.each(function (i, obj) {
-				var waitfor = $(this).data('waitfor');
-				var src = $(this).attr('src');
-
-				if (src && src.length) {
-					if (typeof (waitfor) !== "undefined") {
-						waitingScripts[waitfor] = src;
-					}
-				} else if ($(this).text().length) {
-					if (typeof (waitfor) !== "undefined") {
-						waitingInlineScripts[waitfor] = $(this);
-					}
+			if (src && src.length) {
+				if (typeof (waitfor) !== "undefined") {
+					waitingScripts[waitfor] = src;
 				}
-			});
-
-			//scripts: set "cmplz-script classes to type="text/javascript"
-			scriptElements.each(function (i, obj) {
-				//do not run stats scripts yet. We leave that to the dedicated stats function cmplzEnableStats()
-				if ($(this).hasClass('cmplz-stats')) return true;
-
-				var src = $(this).attr('src');
-				if (src && src.length) {
-					$(this).attr('type', 'text/javascript');
-
-					//check if this src or txt is in a waiting script. If so, skip.
-					if (cmplzIsWaitingScript(waitingScripts, src)) {
-						return;
-					}
-
-					if (typeof $(this).data('post_scribe_id') !== 'undefined') {
-						var psID = '#' + $(this).data('post_scribe_id');
-						if ($(psID).length) {
-							$(psID).html('');
-							$(function () {
-								postscribe(psID, '<script src=' + src + '></script>');
-							});
-						}
-					} else {
-						$.getScript(src)
-							.done(function (s, Status) {
-								//check if we have waiting scripts
-								var waitingScript = cmplzGetWaitingScript(waitingScripts, src);
-								if (waitingScript) {
-									$.getScript(waitingScript).done(function (script, textStatus) {
-										cmplzRunAfterAllScripts();
-									}).fail(function (jqxhr, settings, exception) {
-										console.warn("Something went wrong " + exception);
-									});
-								}
-
-								var waitingInlineScript = cmplzGetWaitingScript(waitingInlineScripts, src);
-								if (waitingInlineScript) {
-									cmplzRunInlineScript(waitingInlineScript);
-								}
-
-								//maybe all scripts are already done
-								cmplzRunAfterAllScripts();
-							})
-							.fail(function (jqxhr, settings, exception) {
-								console.warn("Something went wrong " + exception);
-							});
-					}
-
-				} else if ($(this).text().length) {
-					//check if this src or txt is in a waiting script. If so, skip.
-					if (cmplzIsWaitingScript(waitingInlineScripts, $(this).text())) {
-						return;
-					}
-					cmplzRunInlineScript($(this));
-					//get scripts that are waiting for this inline script
-					var waitingScript = cmplzGetWaitingScript(waitingScripts, $(this).text());
-					if (waitingScript !== false) {
-						$.getScript(waitingScript)
-							.done(function (s, Status) {
-								//maybe all scripts are already done
-								cmplzRunAfterAllScripts();
-							})
-							.fail(function (jqxhr, settings, exception) {
-								console.warn("Something went wrong " + exception);
-							});
-					}
+			} else if ($(this).text().length) {
+				if (typeof (waitfor) !== "undefined") {
+					waitingInlineScripts[waitfor] = $(this);
 				}
-			});
-		}
+			}
+		});
+
+		//scripts: set "cmplz-script classes to type="text/javascript"
+		scriptElements.each(function (i, obj) {
+			if ( $(this).hasClass('cmplz-activated') ) return;
+			$(this).addClass('cmplz-activated' );
+
+			//do not run stats scripts yet. We leave that to the dedicated stats function cmplzEnableStats()
+			if ($(this).hasClass('cmplz-stats')) return true;
+
+			var src = $(this).attr('src');
+			if (src && src.length) {
+				$(this).attr('type', 'text/javascript');
+
+				//check if this src or txt is in a waiting script. If so, skip.
+				if (cmplzIsWaitingScript(waitingScripts, src)) {
+					return;
+				}
+
+				if (typeof $(this).data('post_scribe_id') !== 'undefined') {
+					var psID = '#' + $(this).data('post_scribe_id');
+					if ($(psID).length) {
+						$(psID).html('');
+						$(function () {
+							postscribe(psID, '<script src=' + src + '></script>');
+						});
+					}
+				} else {
+					$.getScript(src)
+						.done(function (s, Status) {
+							//check if we have waiting scripts
+							var waitingScript = cmplzGetWaitingScript(waitingScripts, src);
+							if (waitingScript) {
+								$.getScript(waitingScript).done(function (script, textStatus) {
+									cmplzRunAfterAllScripts();
+								}).fail(function (jqxhr, settings, exception) {
+									console.warn("Something went wrong " + exception);
+								});
+							}
+
+							var waitingInlineScript = cmplzGetWaitingScript(waitingInlineScripts, src);
+							if (waitingInlineScript) {
+								cmplzRunInlineScript(waitingInlineScript);
+							}
+
+							//maybe all scripts are already done
+							cmplzRunAfterAllScripts();
+						})
+						.fail(function (jqxhr, settings, exception) {
+							console.warn("Something went wrong " + exception);
+						});
+				}
+
+			} else if ($(this).text().length) {
+				//check if this src or txt is in a waiting script. If so, skip.
+				if (cmplzIsWaitingScript(waitingInlineScripts, $(this).text())) {
+					return;
+				}
+				cmplzRunInlineScript($(this));
+				//get scripts that are waiting for this inline script
+				var waitingScript = cmplzGetWaitingScript(waitingScripts, $(this).text());
+				if (waitingScript !== false) {
+					$.getScript(waitingScript)
+						.done(function (s, Status) {
+							//maybe all scripts are already done
+							cmplzRunAfterAllScripts();
+						})
+						.fail(function (jqxhr, settings, exception) {
+							console.warn("Something went wrong " + exception);
+						});
+				}
+			}
+		});
+
 
 		if (!ccAllEnabled) {
 			//fire an event so custom scripts can hook into this.
@@ -820,7 +858,6 @@ jQuery(document).ready(function ($) {
 						cmplzFireCategories(false, true);
 					}
 				}
-
 				if (status === 'deny' && complianz.consenttype === 'optout') {
 					cmplzRevoke();
 				}
@@ -831,7 +868,7 @@ jQuery(document).ready(function ($) {
 				}
 
 				//when the revoke button is clicked, the status is still 'allow'
-				if (complianz.use_categories === 'no' && ccStatus === 'allow') {
+				if (complianz.use_categories === 'no') {
 					cmplzRevoke();
 					$('.cc-revoke').fadeOut();
 					ccName.open();
@@ -1171,12 +1208,17 @@ jQuery(document).ready(function ($) {
 			}
 		}
 
-		//if it's already denied, show the accept option again.
-		//if not denied, do a full revoke
 		if ( cmplzGetCookie('complianz_consent_status') === 'deny' ) {
+			//when denied, just get the popup again.
 			$('.cc-revoke').click();
 			$('.cc-revoke').fadeOut();
+		} else if ( complianz.use_categories === 'no' ) {
+			//when accept/deny, set to deny, and revoke.
+			//if we set to deny in the revoke function, it will prevent the banner from showing up in other cases.
+			cmplzSetCookie('complianz_consent_status', 'deny', complianz.cookie_expiry);
+			cmplzRevoke();
 		} else {
+			//category banners, do a full revoke
 			cmplzRevoke();
 		}
 	});
@@ -1575,7 +1617,6 @@ jQuery(document).ready(function ($) {
 		return output;
 	}
 
-
 	/**
 	 * If current cookie policy has changed, reset cookie consent
 	 *
@@ -1583,9 +1624,55 @@ jQuery(document).ready(function ($) {
 
 	function cmplzCheckCookiePolicyID() {
 		var user_policy_id = cmplzGetCookie('complianz_policy_id');
-		if (user_policy_id && (complianz.current_policy_id !== user_policy_id)) {
-			cmplzSetCookie("complianz_consent_status", "", 0);
+		if (user_policy_id && (complianz.current_policy_id !== user_policy_id) ) {
+			cmplzClearAllComplianzCookies();
 		}
+	}
+
+	/**
+	 * Clear all our own cookies, to make sure path issues are resolved.
+	 *
+	 *
+	 */
+	function cmplzClearAllComplianzCookies(){
+		var secure = ";secure";
+		var date = new Date();
+		date.setTime(date.getTime() - (24 * 60 * 60 * 1000));
+		var expires = ";expires=" + date.toGMTString();
+		if (window.location.protocol !== "https:") secure = '';
+		(function () {
+			var cookies = document.cookie.split("; ");
+			for (var c = 0; c < cookies.length; c++) {
+				var d = window.location.hostname.split(".");
+				//if we have more than one result in the array, we can skip the last one, as it will be the .com/.org extension
+				var skip_last = d.length > 1;
+				while (d.length > 0) {
+					var cookieName = cookies[c].split(";")[0].split("=")[0];
+					var p = location.pathname;
+					p = p.replace(/^\/|\/$/g, '').split('/');
+					if ( cookieName.indexOf('cmplz') !==-1 || cookieName.indexOf('complianz') !==-1) {
+						var cookieBase = encodeURIComponent(cookieName) + '=;SameSite=Lax' + secure + expires +';domain=.' + d.join('.') + ';path=';
+						var cookieBaseDomain = encodeURIComponent(cookieName) + '=;SameSite=Lax' + secure + expires +';domain=;path=';
+						document.cookie = cookieBaseDomain + '/';
+						document.cookie = cookieBase+ '/';
+						while (p.length > 0) {
+							var path = p.join('/');
+							if ( path.length>0 ) {
+								document.cookie = cookieBase + '/' + path;
+								document.cookie = cookieBaseDomain + '/' + path;
+							}
+							p.pop();
+						};
+					}
+					d.shift();
+					//prevents setting cookies on .com/.org
+					if (skip_last && d.length==1) d.shift();
+				}
+			}
+		})();
+
+		//to prevent a double reload, we preserve the cookie policy id.
+		cmplzSetAcceptedCookiePolicyID();
 	}
 
 	/**
@@ -1672,7 +1759,6 @@ jQuery(document).ready(function ($) {
 			cmplzSetCookie('cmplz_stats', 'deny', complianz.cookie_expiry);
 			cmplz_wp_set_consent('statistics', 'deny');
 			if (complianz.consenttype === 'optinstats') cmplz_wp_set_consent('statistics-anonymous', 'deny');
-
 		}
 
 		//preferences acceptance

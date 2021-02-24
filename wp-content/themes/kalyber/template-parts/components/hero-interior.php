@@ -2,7 +2,7 @@
      $headline = get_field('hero-interior-headline');
 
      if ( is_404() ) {
-          $headline = "Page Not Found";
+          $headline = "Oh No...";
      }
 ?>
 

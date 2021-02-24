@@ -6,7 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'ComposerAutoloaderInitf55a00f094a5a57503c8504389c49cdc' => $vendorDir . '/composer/autoload_real.php',
     'Google\\Web_Stories\\AMP\\Canonical_Sanitizer' => $baseDir . '/AMP/Canonical_Sanitizer.php',
     'Google\\Web_Stories\\AMP\\Integration\\AMP_Story_Sanitizer' => $baseDir . '/AMP/Integration/AMP_Story_Sanitizer.php',
     'Google\\Web_Stories\\AMP\\Meta_Sanitizer' => $baseDir . '/AMP/Meta_Sanitizer.php',
@@ -60,7 +59,6 @@ return array(
     'Google\\Web_Stories\\Traits\\Document_Parser' => $baseDir . '/Traits/Document_Parser.php',
     'Google\\Web_Stories\\Traits\\Publisher' => $baseDir . '/Traits/Publisher.php',
     'Google\\Web_Stories\\Traits\\Types' => $baseDir . '/Traits/Types.php',
-    'Google_Web_Stories_Composer\\Autoload\\ClassLoader' => $vendorDir . '/composer/ClassLoader.php',
-    'Google_Web_Stories_Composer\\Autoload\\ComposerStaticInitf55a00f094a5a57503c8504389c49cdc' => $vendorDir . '/composer/autoload_static.php',
+    'Google\\Web_Stories\\User_Preferences' => $baseDir . '/User_Preferences.php',
     'Web_Stories_Compatibility' => $baseDir . '/compat/Web_Stories_Compatibility.php',
 );

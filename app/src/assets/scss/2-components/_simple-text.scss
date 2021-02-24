@@ -1,4 +1,51 @@
 .simple-text-copy {
-     column-count: 2;
-     column-gap: 40px;
+     display: flex;
+     flex-direction: column;
+     justify-content: space-between;
+     margin-bottom:40px;
+
+     @include respond(small) {
+          flex-direction: row;
+     }
+
+     div {
+          width:100%;
+
+          @include respond(small) {
+               width:47%;
+          }
+     }
+
+     p {
+          line-height:1.6;
+
+          span {
+               font-weight:600;
+               color:$primary-blue;
+          }
+     }
+
+     h4 {
+          margin:0 0 14px 0;
+          font-weight:600;
+     }
+
+     ul {
+          margin:0 0 24px 0;
+          list-style: none;
+
+          li {
+               margin:0 0 0 20px;
+
+               &:before {
+                    content: "\2022";
+                    color: $primary-blue;
+                    font-weight: bold;
+                    display: inline-block;
+                    width: 1em;
+                    margin-left: -1em;
+               }
+          }
+     } 
+
 }

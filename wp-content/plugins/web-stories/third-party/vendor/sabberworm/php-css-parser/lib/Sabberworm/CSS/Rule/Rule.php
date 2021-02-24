@@ -18,22 +18,20 @@ class Rule implements \Google\Web_Stories_Dependencies\Sabberworm\CSS\Renderable
     private $bIsImportant;
     private $aIeHack;
     protected $iLineNo;
-    protected $iColNo;
     protected $aComments;
-    public function __construct($sRule, $iLineNo = 0, $iColNo = 0)
+    public function __construct($sRule, $iLineNo = 0)
     {
         $this->sRule = $sRule;
         $this->mValue = null;
         $this->bIsImportant = \false;
         $this->aIeHack = array();
         $this->iLineNo = $iLineNo;
-        $this->iColNo = $iColNo;
         $this->aComments = array();
     }
     public static function parse(\Google\Web_Stories_Dependencies\Sabberworm\CSS\Parsing\ParserState $oParserState)
     {
         $aComments = $oParserState->consumeWhiteSpace();
-        $oRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($oParserState->parseIdentifier(!$oParserState->comes("--")), $oParserState->currentLine(), $oParserState->currentColumn());
+        $oRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($oParserState->parseIdentifier(!$oParserState->comes("--")), $oParserState->currentLine());
         $oRule->setComments($aComments);
         $oRule->addComments($oParserState->consumeWhiteSpace());
         $oParserState->consume(':');
@@ -73,18 +71,6 @@ class Rule implements \Google\Web_Stories_Dependencies\Sabberworm\CSS\Renderable
     public function getLineNo()
     {
         return $this->iLineNo;
-    }
-    /**
-     * @return int
-     */
-    public function getColNo()
-    {
-        return $this->iColNo;
-    }
-    public function setPosition($iLine, $iColumn)
-    {
-        $this->iColNo = $iColumn;
-        $this->iLineNo = $iLine;
     }
     public function setRule($sRule)
     {

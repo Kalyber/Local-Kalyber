@@ -4,7 +4,7 @@
 
 namespace Google_Web_Stories_Composer\Autoload;
 
-class ComposerStaticInit0d491072b27f8d86ee526a6b7f327018
+class ComposerStaticInitffa1349043f5b27f8fae8304222a9921
 {
     public static $classMap = array (
         'Google\\Web_Stories_Dependencies\\AMP_Allowed_Tags_Generated' => __DIR__ . '/..' . '/ampproject/amp-wp/includes/sanitizers/class-amp-allowed-tags-generated.php',
@@ -137,7 +137,7 @@ class ComposerStaticInit0d491072b27f8d86ee526a6b7f327018
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->classMap = ComposerStaticInit0d491072b27f8d86ee526a6b7f327018::$classMap;
+            $loader->classMap = ComposerStaticInitffa1349043f5b27f8fae8304222a9921::$classMap;
 
         }, null, ClassLoader::class);
     }

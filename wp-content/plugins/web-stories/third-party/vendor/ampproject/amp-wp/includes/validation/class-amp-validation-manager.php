@@ -1685,7 +1685,7 @@ class AMP_Validation_Manager
     {
         $encoded_messages = \base64_encode(\wp_json_encode(\array_unique($messages)));
         // phpcs:ignore WordPress.PHP.DiscouragedPHPFunctions.obfuscation_base64_encode
-        return \Google\Web_Stories_Dependencies\wp_hash($encoded_messages) . ':' . $encoded_messages;
+        return \Google\Web_Stories_Dependencies\wp_hash($encoded_messages . \Google\Web_Stories_Dependencies\wp_nonce_tick(), 'nonce') . ':' . $encoded_messages;
     }
     /**
      * Unserialize validation error messages.
@@ -1699,7 +1699,7 @@ class AMP_Validation_Manager
     public static function unserialize_validation_error_messages($serialized)
     {
         $parts = \explode(':', $serialized, 2);
-        if (\count($parts) !== 2 || \Google\Web_Stories_Dependencies\wp_hash($parts[1]) !== $parts[0]) {
+        if (\count($parts) !== 2 || !\hash_equals($parts[0], \Google\Web_Stories_Dependencies\wp_hash($parts[1] . \Google\Web_Stories_Dependencies\wp_nonce_tick(), 'nonce'))) {
             return null;
         }
         return \json_decode(\base64_decode($parts[1]), \true);

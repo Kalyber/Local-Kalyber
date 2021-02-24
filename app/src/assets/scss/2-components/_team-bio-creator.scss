@@ -1,0 +1,191 @@
+.bio-creator {
+     &__wrap {
+          margin-top:50px;
+          margin-bottom:0;
+
+          @include respond(small) {
+               margin-bottom: 100px;
+          }
+     }
+
+     &__inner {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+
+          @include respond(small) {
+               flex-direction: row;
+          }
+
+          .bio-creator__copy {
+               width:100%;
+               padding:0 5% 0 5%;
+
+               @include respond(small){
+                    width:47%;
+                    padding:0 0 0 0;
+               }
+
+               .founders-photos__wrap{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    margin:30px 0 0 0;
+
+                    @include respond(small) {
+                         flex-direction: row;
+                         margin:50px 0 0 0;
+                    }
+
+                    .founders-photos__joe, .founders-photos__jim {
+                         width:100%;
+                         margin:0 0 24px 0;
+                         text-align:center;
+
+                         @include respond(small) {
+                              width:47%;
+                              margin:0 0 0 0;
+                              text-align: left;
+                         }
+
+                         img {
+                              width:260px;
+                         }
+
+                         .founders-name {
+                              margin:0;
+                         }
+                         .founders-title {
+                              font-size: 14px;
+                              color:$primary-blue;
+                              margin:0;
+                         }
+                    }
+               }
+          }
+          .bio-creator__app {
+               position:relative;
+               width:100%;
+               background-color:$primary-blue;
+               color:white;
+
+               @include respond(small) {
+                    width:47%
+               }
+          }
+
+          .bio-creator__results {
+               position: absolute;
+               display: flex;
+               justify-content: center;
+               align-items: center;
+               top:0;
+               left:0;
+               right:0;
+               background-color:$primary-blue;
+               z-index: 10;
+          }
+
+          .bio-creator__results--show {
+               background-color:#006bb4;
+               bottom:0;
+               padding: 20px 5%;
+
+               @include respond(small) {
+                    padding: 50px;
+               }
+          }
+
+          .bio-creator__results__inner {
+               width:90%;
+               opacity:0;
+               transition: all .5s ease-in;
+          }
+
+          .bio-creator__results__inner--show {
+               opacity:1;
+          }
+
+          .bio-creator__questions {
+               h3 {
+                    width:100%;
+                    background-color: shade($primary-blue, 10%);
+                    padding:20px 20px;
+                    font-weight: 500;
+                    line-height:1.2;
+                    text-align:center;
+                    margin:0;
+               }
+
+               .questions__inner {
+                    padding:30px 5% 30px 5%;
+
+                    @include respond(small) {
+                         padding:30px 40px 30px 40px;
+                    }
+
+                    p {
+                         margin-bottom:12px;
+                    }
+
+
+
+                    .questions__wrap {
+                         display: flex;
+                         flex-direction: column;
+                         justify-content: space-between;
+                         margin-top:30px;
+
+                         @include respond(small) {
+                              flex-direction: row;
+                         }
+                    }
+
+                    .questions__wrap__right, .questions__wrap__left {
+                         width:100%;
+
+                         @include respond(small) {
+                              width: 46%;
+                         }
+
+                         p {
+                              margin-bottom: 20px;
+
+                              @include respond(small) {
+                                   margin-bottom: 30px;
+                              }
+                         }
+
+                         input {
+                              width: 100%;
+                              border:none;
+                              padding:10px 10px 10px 10px;
+                              margin:6px 0 0 0;
+                              font-size: 14px;
+
+                              &:focus {
+                                   outline:none;
+                              }
+                         }
+                    }
+               }
+
+               .fake-submit-button {
+                    display: block;
+                    width: 140px;
+                    margin: 12px auto;
+                    padding: 13px 20px 11px 20px;
+                    background-color: transparent;
+                    border: 2px solid #fff;
+                    color: #fff;
+                    font-size: 18px;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    letter-spacing: .5px;
+                    text-align:center;
+                    transition: .5s all;
+                    cursor: pointer;
+               }
+          }
+     }
+}

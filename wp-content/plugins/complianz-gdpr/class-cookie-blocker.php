@@ -194,11 +194,21 @@ if ( ! class_exists( 'cmplz_cookie_blocker' ) ) {
 			) {
 				foreach ( $matches[1] as $key => $image_url ) {
 					$total_match = $matches[0][ $key ];
-					if ( $this->strpos_arr( $image_url, $image_tags ) !== false ) {
+					$found = $this->strpos_arr( $image_url, $image_tags );
+					if ( $found !== false ) {
 						$placeholder = cmplz_placeholder( false, $image_url );
 						$new = $total_match;
+						$new = $this->add_data( $new, 'img', 'src-cmplz', $image_url );
+						//remove lazy loading for images, as it is breaking on activation
+						$new = str_replace('loading="lazy"', 'data-deferlazy="1"', $new );
+						$new = $this->add_class( $new, 'img', apply_filters( 'cmplz_image_class', 'cmplz-image', $total_match, $found ) );
 						$new = $this->replace_src( $new, apply_filters( 'cmplz_source_placeholder', $placeholder ) );
 						$new = apply_filters('cmplz_image_html', $new, $image_url);
+
+						if ( cmplz_use_placeholder( $image_url ) ) {
+							$new = $this->add_class( $new, 'img', " cmplz-placeholder-element " );
+							$new = '<div>' . $new . '</div>';
+						}
 						$output = str_replace( $total_match, $new, $output );
 					}
 				}
@@ -227,8 +237,9 @@ if ( ! class_exists( 'cmplz_cookie_blocker' ) ) {
 			 *
 			 *
 			 * */
-			$iframe_pattern = '/<(iframe)[^>].*?src=[\'"](http:\/\/|https:\/\/|\/\/)' . $url_pattern . '[\'"].*?>.*?<\/iframe>/is';
-
+			//the iframes URL pattern allows for a space, which may be included in a Google Maps embed.
+			$url_pattern_iframes = '([\w.,;@?^=%&:()\/~+#!\- *]*?)';
+			$iframe_pattern = '/<(iframe)[^>].*?src=[\'"](http:\/\/|https:\/\/|\/\/)' . $url_pattern_iframes . '[\'"].*?>.*?<\/iframe>/is';
 			if ( preg_match_all( $iframe_pattern, $output, $matches, PREG_PATTERN_ORDER ) ) {
 				foreach ( $matches[0] as $key => $total_match ) {
 					$iframe_src = $matches[2][ $key ] . $matches[3][ $key ];
@@ -251,8 +262,7 @@ if ( ! class_exists( 'cmplz_cookie_blocker' ) ) {
 						}
 
 						$new = $this->replace_src( $new, apply_filters( 'cmplz_source_placeholder', 'about:blank' ) );
-						$new = $this->add_class( $new, 'iframe',
-							"cmplz-iframe cmplz-iframe-styles $video_class " );
+						$new = $this->add_class( $new, 'iframe', "cmplz-iframe cmplz-iframe-styles $video_class " );
 
 						if ( cmplz_use_placeholder( $iframe_src ) ) {
 							$new = $this->add_class( $new, 'iframe', " cmplz-placeholder-element " );

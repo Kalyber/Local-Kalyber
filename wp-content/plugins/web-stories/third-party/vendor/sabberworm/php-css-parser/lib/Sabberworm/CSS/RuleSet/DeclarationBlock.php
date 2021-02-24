@@ -241,7 +241,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
                         }
                     }
                 }
-                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sNewRuleName, $oRule->getLineNo(), $oRule->getColNo());
+                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sNewRuleName, $this->iLineNo);
                 $oNewRule->setIsImportant($oRule->getIsImportant());
                 $oNewRule->addValue(array($mNewValue));
                 $this->addRule($oNewRule);
@@ -292,7 +292,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
                     break;
             }
             foreach (array('top', 'right', 'bottom', 'left') as $sPosition) {
-                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule(\sprintf($sExpanded, $sPosition), $oRule->getLineNo(), $oRule->getColNo());
+                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule(\sprintf($sExpanded, $sPosition), $this->iLineNo);
                 $oNewRule->setIsImportant($oRule->getIsImportant());
                 $oNewRule->addValue(${$sPosition});
                 $this->addRule($oNewRule);
@@ -358,7 +358,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
             }
         }
         foreach ($aFontProperties as $sProperty => $mValue) {
-            $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $oRule->getLineNo(), $oRule->getColNo());
+            $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $this->iLineNo);
             $oNewRule->addValue($mValue);
             $oNewRule->setIsImportant($oRule->getIsImportant());
             $this->addRule($oNewRule);
@@ -388,7 +388,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
         }
         if (\count($aValues) == 1 && $aValues[0] == 'inherit') {
             foreach ($aBgProperties as $sProperty => $mValue) {
-                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $oRule->getLineNo(), $oRule->getColNo());
+                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $this->iLineNo);
                 $oNewRule->addValue('inherit');
                 $oNewRule->setIsImportant($oRule->getIsImportant());
                 $this->addRule($oNewRule);
@@ -428,7 +428,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
             }
         }
         foreach ($aBgProperties as $sProperty => $mValue) {
-            $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $oRule->getLineNo(), $oRule->getColNo());
+            $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $this->iLineNo);
             $oNewRule->setIsImportant($oRule->getIsImportant());
             $oNewRule->addValue($mValue);
             $this->addRule($oNewRule);
@@ -454,7 +454,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
         }
         if (\count($aValues) == 1 && $aValues[0] == 'inherit') {
             foreach ($aListProperties as $sProperty => $mValue) {
-                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $oRule->getLineNo(), $oRule->getColNo());
+                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $this->iLineNo);
                 $oNewRule->addValue('inherit');
                 $oNewRule->setIsImportant($oRule->getIsImportant());
                 $this->addRule($oNewRule);
@@ -479,7 +479,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
             }
         }
         foreach ($aListProperties as $sProperty => $mValue) {
-            $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $oRule->getLineNo(), $oRule->getColNo());
+            $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $this->iLineNo);
             $oNewRule->setIsImportant($oRule->getIsImportant());
             $oNewRule->addValue($mValue);
             $this->addRule($oNewRule);
@@ -510,7 +510,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
             }
         }
         if (\count($aNewValues)) {
-            $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sShorthand, $oRule->getLineNo(), $oRule->getColNo());
+            $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sShorthand, $this->iLineNo);
             foreach ($aNewValues as $mValue) {
                 $oNewRule->addValue($mValue);
             }
@@ -569,7 +569,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
                     }
                     $aValues[$sPosition] = $aRuleValues;
                 }
-                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $oRule->getLineNo(), $oRule->getColNo());
+                $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule($sProperty, $this->iLineNo);
                 if ((string) $aValues['left'][0] == (string) $aValues['right'][0]) {
                     if ((string) $aValues['top'][0] == (string) $aValues['bottom'][0]) {
                         if ((string) $aValues['top'][0] == (string) $aValues['left'][0]) {
@@ -612,9 +612,7 @@ class DeclarationBlock extends \Google\Web_Stories_Dependencies\Sabberworm\CSS\R
         if (!isset($aRules['font-size']) || !isset($aRules['font-family'])) {
             return;
         }
-        $oOldRule = isset($aRules['font-size']) ? $aRules['font-size'] : $aRules['font-family'];
-        $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule('font', $oOldRule->getLineNo(), $oOldRule->getColNo());
-        unset($oOldRule);
+        $oNewRule = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\Rule\Rule('font', $this->iLineNo);
         foreach (array('font-style', 'font-variant', 'font-weight') as $sProperty) {
             if (isset($aRules[$sProperty])) {
                 $oRule = $aRules[$sProperty];

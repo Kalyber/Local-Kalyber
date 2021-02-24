@@ -74,3 +74,25 @@ hr {
         display:none;
     }
 }
+
+.generic-bar--blue {
+    background-color: $primary-blue;
+    color:white;
+    width:100%;
+    padding:40px 0 20px;
+    margin:0 0 50px 0;
+}
+
+.generic-ul-list {
+    ul {
+        margin:0 0 0 20px;
+    }
+
+    li {
+        margin:0 0 18px 0;
+    }
+
+    a:link, a:focus, a:visited {
+        color:$primary-blue !important;
+    }
+}
