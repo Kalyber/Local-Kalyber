@@ -8,6 +8,7 @@ namespace Google\Web_Stories_Dependencies;
  * @package AMP
  */
 use Google\Web_Stories_Dependencies\AmpProject\Dom\Document;
+use Google\Web_Stories_Dependencies\AmpProject\Attribute;
 /**
  * Trait AMP_Noscript_Fallback
  *
@@ -47,6 +48,8 @@ trait AMP_Noscript_Fallback
                 }
             }
         }
+        // Remove attributes which are likely to cause styling conflicts, as the noscript fallback should get treated like it has fill layout.
+        unset($this->noscript_fallback_allowed_attributes[\Google\Web_Stories_Dependencies\AmpProject\Attribute::ID], $this->noscript_fallback_allowed_attributes[\Google\Web_Stories_Dependencies\AmpProject\Attribute::CLASS_], $this->noscript_fallback_allowed_attributes[\Google\Web_Stories_Dependencies\AmpProject\Attribute::STYLE]);
     }
     /**
      * Checks whether the given node is within an AMP-specific <noscript> element.
@@ -75,13 +78,12 @@ trait AMP_Noscript_Fallback
         $noscript = $dom->createElement('noscript');
         $noscript->appendChild($old_element);
         $new_element->appendChild($noscript);
-        // Remove all non-allowed attributes preemptively to prevent doubled validation errors.
+        // Remove all non-allowed attributes preemptively to prevent doubled validation errors, only leaving the attributes required.
         for ($i = $old_element->attributes->length - 1; $i >= 0; $i--) {
             $attribute = $old_element->attributes->item($i);
-            if (isset($this->noscript_fallback_allowed_attributes[$attribute->nodeName])) {
-                continue;
+            if (!isset($this->noscript_fallback_allowed_attributes[$attribute->nodeName])) {
+                $old_element->removeAttribute($attribute->nodeName);
             }
-            $old_element->removeAttribute($attribute->nodeName);
         }
     }
 }

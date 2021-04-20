@@ -141,9 +141,9 @@ class Sanitization {
 				Attribute::ASYNC => '',
 			];
 			if ( Extension::MUSTACHE === $missing_script_handle ) {
-				$attrs[ Attribute::CUSTOM_TEMPLATE ] = $missing_script_handle;
+				$attrs[ Attribute::CUSTOM_TEMPLATE ] = (string) $missing_script_handle;
 			} else {
-				$attrs[ Attribute::CUSTOM_ELEMENT ] = $missing_script_handle;
+				$attrs[ Attribute::CUSTOM_ELEMENT ] = (string) $missing_script_handle;
 			}
 
 			$amp_scripts[ $missing_script_handle ] = AMP_DOM_Utils::create_node( $document, Tag::SCRIPT, $attrs );
@@ -251,9 +251,11 @@ class Sanitization {
 			unset( $amp_scripts[ Amp::RUNTIME ] );
 		} else {
 			$script = $document->createElement( Tag::SCRIPT );
-			$script->setAttribute( Attribute::ASYNC, '' );
-			$script->setAttribute( Attribute::SRC, $runtime_src );
-			$ordered_scripts[ Amp::RUNTIME ] = $script;
+			if ( $script ) {
+				$script->setAttribute( Attribute::ASYNC, '' );
+				$script->setAttribute( Attribute::SRC, $runtime_src );
+				$ordered_scripts[ Amp::RUNTIME ] = $script;
+			}
 		}
 
 		/*

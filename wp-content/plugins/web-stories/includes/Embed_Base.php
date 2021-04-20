@@ -34,7 +34,7 @@ use Google\Web_Stories\Traits\Assets;
 /**
  * Embed block class.
  */
-class Embed_Base {
+class Embed_Base extends Service_Base {
 	use Assets;
 
 	/**
@@ -58,21 +58,22 @@ class Embed_Base {
 	 *
 	 * @return void
 	 */
-	public function init() {
+	public function register() {
 		wp_register_script( self::STORY_PLAYER_HANDLE, 'https://cdn.ampproject.org/amp-story-player-v0.js', [], 'v0', false );
 		wp_register_style( self::STORY_PLAYER_HANDLE, 'https://cdn.ampproject.org/amp-story-player-v0.css', [], 'v0' );
 
-		// Registering a style without a `src` allows us to just use the inline style below
+		$this->register_style( self::SCRIPT_HANDLE );
+		// Set a style without a `src` allows us to just use the inline style below
 		// without needing an external stylesheet.
-		wp_register_style(
-			self::SCRIPT_HANDLE,
-			'',
-			[],
-			WEBSTORIES_VERSION
-		);
+		wp_styles()->registered[ self::SCRIPT_HANDLE ]->src = false;
 
-		if ( is_readable( WEBSTORIES_PLUGIN_DIR_PATH . 'includes/assets/embed.css' ) ) {
-			$css = file_get_contents( WEBSTORIES_PLUGIN_DIR_PATH . 'includes/assets/embed.css' );
+		$path = WEBSTORIES_PLUGIN_DIR_PATH . 'assets/css/' . self::SCRIPT_HANDLE . '.css';
+		if ( is_rtl() ) {
+			$path = WEBSTORIES_PLUGIN_DIR_PATH . 'assets/css/' . self::SCRIPT_HANDLE . '-rtl.css';
+		}
+
+		if ( is_readable( $path ) ) {
+			$css = file_get_contents( $path ); // phpcs:ignore WordPressVIPMinimum.Performance.FetchingRemoteData.FileGetContentsUnknown
 
 			if ( $css ) {
 				wp_add_inline_style( self::SCRIPT_HANDLE, $css );
@@ -80,6 +81,17 @@ class Embed_Base {
 		}
 
 		add_filter( 'wp_kses_allowed_html', [ $this, 'filter_kses_allowed_html' ], 10, 2 );
+	}
+
+	/**
+	 * Get the action priority to use for registering the service.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @return int Registration action priority to use.
+	 */
+	public static function get_registration_action_priority() {
+		return 9;
 	}
 
 	/**

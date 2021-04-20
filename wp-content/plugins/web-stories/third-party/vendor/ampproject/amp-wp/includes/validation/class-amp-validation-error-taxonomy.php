@@ -7,9 +7,7 @@ namespace Google\Web_Stories_Dependencies;
  *
  * @package AMP
  */
-use Google\Web_Stories_Dependencies\AmpProject\AmpWP\DevTools\UserAccess;
 use Google\Web_Stories_Dependencies\AmpProject\AmpWP\Icon;
-use Google\Web_Stories_Dependencies\AmpProject\AmpWP\PluginRegistry;
 use Google\Web_Stories_Dependencies\AmpProject\AmpWP\Services;
 /**
  * Class AMP_Validation_Error_Taxonomy
@@ -193,6 +191,12 @@ class AMP_Validation_Error_Taxonomy
      */
     const TRANSIENT_KEY_ERROR_INDEX_COUNTS = 'amp_error_index_counts';
     /**
+     * Current row index for the validated URL's validation error being displayed.
+     *
+     * @var int
+     */
+    protected static $current_validation_error_row_index = 0;
+    /**
      * Whether the terms_clauses filter should apply to a term query for validation errors to limit to a given status.
      *
      * This is set to false when calling wp_count_terms() for the admin menu and for the views.
@@ -294,6 +298,7 @@ class AMP_Validation_Error_Taxonomy
     public static function delete_empty_terms()
     {
         global $wpdb;
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $empty_term_ids = $wpdb->get_col($wpdb->prepare("SELECT term_id FROM {$wpdb->term_taxonomy} WHERE taxonomy = %s AND count = 0", self::TAXONOMY_SLUG));
         if (empty($empty_term_ids)) {
             return 0;
@@ -841,8 +846,8 @@ class AMP_Validation_Error_Taxonomy
         $groups = [];
         if (isset($_POST[self::VALIDATION_ERROR_STATUS_QUERY_VAR])) {
             // phpcs:ignore WordPress.Security.NonceVerification.Missing
+            // phpcs:ignore WordPress.Security.NonceVerification.Missing, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $groups = self::sanitize_term_status(\Google\Web_Stories_Dependencies\wp_unslash($_POST[self::VALIDATION_ERROR_STATUS_QUERY_VAR]), ['multiple' => \true]);
-            // phpcs:ignore WordPress.Security.NonceVerification.Missing
         }
         if (!empty($groups)) {
             $url = \add_query_arg([self::VALIDATION_ERROR_STATUS_QUERY_VAR => $groups], $url);
@@ -861,8 +866,8 @@ class AMP_Validation_Error_Taxonomy
             return;
         }
         self::$should_filter_terms_clauses_for_error_validation_status = \true;
+        // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
         $groups = self::sanitize_term_status(\Google\Web_Stories_Dependencies\wp_unslash($_GET[self::VALIDATION_ERROR_STATUS_QUERY_VAR]), ['multiple' => \true]);
-        // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         if (empty($groups)) {
             return;
         }
@@ -1041,8 +1046,8 @@ class AMP_Validation_Error_Taxonomy
         $selected_groups = [];
         if (isset($_GET[self::VALIDATION_ERROR_STATUS_QUERY_VAR])) {
             // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended, WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
             $selected_groups = self::sanitize_term_status($_GET[self::VALIDATION_ERROR_STATUS_QUERY_VAR], ['multiple' => \true]);
-            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
         }
         if (!empty($selected_groups)) {
             \sort($selected_groups);
@@ -1224,6 +1229,7 @@ class AMP_Validation_Error_Taxonomy
     public static function render_clear_empty_button()
     {
         global $wpdb;
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery, WordPress.DB.DirectDatabaseQuery.NoCaching
         $count = $wpdb->get_var($wpdb->prepare("SELECT COUNT(*) FROM {$wpdb->term_taxonomy} WHERE taxonomy = %s AND count = 0", self::TAXONOMY_SLUG));
         if ($count > 0) {
             \Google\Web_Stories_Dependencies\wp_nonce_field(self::VALIDATION_ERROR_CLEAR_EMPTY_ACTION, self::VALIDATION_ERROR_CLEAR_EMPTY_ACTION . '_nonce', \false);
@@ -1287,6 +1293,65 @@ class AMP_Validation_Error_Taxonomy
         }
     }
     /**
+     * Get the validation data and source info from the validated URL if available (as it should be).
+     *
+     * @param WP_Term $term Term.
+     * @return array|null Validation data if successfully retrieved from the validated URL post, or else null.
+     */
+    private static function get_current_validation_error_data_from_post(\Google\Web_Stories_Dependencies\WP_Term $term)
+    {
+        $post = \get_post();
+        if (!$post instanceof \Google\Web_Stories_Dependencies\WP_Post || \Google\Web_Stories_Dependencies\AMP_Validated_URL_Post_Type::POST_TYPE_SLUG !== $post->post_type) {
+            return null;
+        }
+        $validation_errors = \Google\Web_Stories_Dependencies\AMP_Validated_URL_Post_Type::get_invalid_url_validation_errors($post);
+        if (!isset($validation_errors[self::$current_validation_error_row_index])) {
+            return null;
+        }
+        $validation_error = $validation_errors[self::$current_validation_error_row_index];
+        if ($term->term_id !== $validation_error['term']->term_id) {
+            return null;
+        }
+        return $validation_error['data'];
+    }
+    /**
+     * Returns JSON-formatted error details for an error term.
+     *
+     * @param WP_Term $term Term.
+     * @return string Encoded JSON.
+     */
+    public static function get_error_details_json(\Google\Web_Stories_Dependencies\WP_Term $term)
+    {
+        $validation_data = self::get_current_validation_error_data_from_post($term);
+        // Fall back to obtaining the validation data from the term itself (without sources).
+        if (null === $validation_data) {
+            $validation_data = \json_decode($term->description, \true);
+        }
+        // Total failure to obtain the validation data.
+        if (!\is_array($validation_data)) {
+            return \wp_json_encode([]);
+        }
+        // Convert the numeric constant value of the node_type to its constant name.
+        $xml_reader_reflection_class = new \ReflectionClass('XMLReader');
+        $constants = $xml_reader_reflection_class->getConstants();
+        foreach ($constants as $key => $value) {
+            if ($validation_data['node_type'] === $value) {
+                $validation_data['node_type'] = $key;
+                break;
+            }
+        }
+        $validation_data['removed'] = (bool) ((int) $term->term_group & self::ACCEPTED_VALIDATION_ERROR_BIT_MASK);
+        $validation_data['reviewed'] = (bool) ((int) $term->term_group & self::ACKNOWLEDGED_VALIDATION_ERROR_BIT_MASK);
+        return \wp_json_encode($validation_data);
+    }
+    /**
+     * Reset the index for the current validation error being displayed.
+     */
+    public static function reset_validation_error_row_index()
+    {
+        self::$current_validation_error_row_index = 0;
+    }
+    /**
      * Add row actions.
      *
      * @param array   $actions Actions.
@@ -1309,13 +1374,15 @@ class AMP_Validation_Error_Taxonomy
         unset($actions['delete']);
         if ('post.php' === $pagenow) {
             $actions['details'] = \sprintf('<button type="button" aria-label="%s" class="single-url-detail-toggle button-link">%s</button>', \esc_attr__('Toggle error details', 'amp'), \esc_html__('Details', 'amp'));
+            $actions['copy'] = \sprintf('<button type="button" class="single-url-detail-copy button-link" data-error-json="%s">%s</button>', \esc_attr(self::get_error_details_json($term)), \esc_html__('Copy to clipboard', 'amp'));
         } elseif ('edit-tags.php' === $pagenow) {
             $actions['details'] = \sprintf('<a href="%s">%s</a>', \Google\Web_Stories_Dependencies\admin_url(\add_query_arg([self::TAXONOMY_SLUG => $term->name, 'post_type' => \Google\Web_Stories_Dependencies\AMP_Validated_URL_Post_Type::POST_TYPE_SLUG], 'edit.php')), \esc_html__('Details', 'amp'));
             if (0 === $term->count) {
                 $actions['delete'] = \sprintf('<a href="%s">%s</a>', \Google\Web_Stories_Dependencies\wp_nonce_url(\add_query_arg(\array_merge(['action' => 'delete'], \compact('term_id'))), 'delete'), \esc_html__('Delete', 'amp'));
             }
         }
-        $actions = \wp_array_slice_assoc($actions, ['details', 'delete']);
+        $actions = \wp_array_slice_assoc($actions, ['details', 'delete', 'copy']);
+        self::$current_validation_error_row_index++;
         return $actions;
     }
     /**
@@ -1324,10 +1391,8 @@ class AMP_Validation_Error_Taxonomy
     public static function add_admin_menu_validation_error_item()
     {
         $menu_item_label = \esc_html__('Error Index', 'amp');
-        $new_error_count = self::get_validation_error_count(['group' => [self::VALIDATION_ERROR_NEW_REJECTED_STATUS, self::VALIDATION_ERROR_NEW_ACCEPTED_STATUS]]);
-        if ($new_error_count) {
-            $menu_item_label .= ' <span class="awaiting-mod"><span class="pending-count">' . \esc_html(\Google\Web_Stories_Dependencies\number_format_i18n($new_error_count)) . '</span></span>';
-        }
+        // Append markup to display a loading spinner while the unreviewed count is being fetched.
+        $menu_item_label .= ' <span class="awaiting-mod"><span id="new-error-index-count" class="loading"></span></span>';
         $post_menu_slug = 'edit.php?post_type=' . \Google\Web_Stories_Dependencies\AMP_Validated_URL_Post_Type::POST_TYPE_SLUG;
         $term_menu_slug = 'edit-tags.php?taxonomy=' . self::TAXONOMY_SLUG . '&post_type=' . \Google\Web_Stories_Dependencies\AMP_Validated_URL_Post_Type::POST_TYPE_SLUG;
         global $submenu;
@@ -1929,7 +1994,6 @@ class AMP_Validation_Error_Taxonomy
         }
         ?>
 		</dl>
-
 		<?php 
         $output = \ob_get_clean();
         if ($with_summary) {

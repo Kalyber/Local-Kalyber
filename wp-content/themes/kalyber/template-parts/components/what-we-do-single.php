@@ -1,9 +1,6 @@
 <?php
-     $form_address = "";
-
-     if(get_field('pardot_form_address')) :
-          $form_address = get_field('pardot_form_address');
-     endif;
+     $shortcode_id = get_field('form_id');
+     $shortcode    = '[contact-form-7 id="'.$shortcode_id.'"]';
 ?>
 
 
@@ -16,6 +13,6 @@
           <h3 class="color__white">Supercharge Your Marketing</h3>
           <p class="color__white">For more information about how Kalyber can help your business, use the form below.</p>
 
-          <iframe src="<?= $form_address ?>" width="100%" height="1000" type="text/html" frameborder="0" allowTransparency="true" style="border: 0"></iframe>
+          <?php echo do_shortcode($shortcode); ?>
      </div>
 </article>

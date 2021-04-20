@@ -66,6 +66,31 @@ jQuery(document).ready(function ($) {
 	];
 
 	/**
+	 * Show manage consent area
+	 */
+	$('#cmplz-manage-consent-container-nojavascript').hide();
+	$('#cmplz-manage-consent-container').show();
+	/**
+	 * Toggle service
+	 */
+	$('.cmplz-service-header').each(function () {
+		var item = $(this).next();
+		$(this).removeClass('cmplz-service-open');
+		item.addClass('cmplz-service-hidden');
+	});
+	$(document).on('click', '.cmplz-service-header', function () {
+		var item = $(this).next();
+
+		if (item.hasClass('cmplz-service-hidden')) {
+			$(this).addClass('cmplz-service-open');
+			item.removeClass('cmplz-service-hidden');
+		} else {
+			$(this).removeClass('cmplz-service-open');
+			item.addClass('cmplz-service-hidden');
+		}
+	});
+
+	/**
 	 * prevent scroll to top behaviour because of missing href tag
 	 */
 
@@ -83,6 +108,15 @@ jQuery(document).ready(function ($) {
 		ccBody.addClass('cmplz-status-' + status);
 		curClass = 'cmplz-status-' + status;
 	}
+
+	/**
+	 * This creates an API which devs can use to trigger actions in complianz.
+	 */
+	document.addEventListener('cmplz_consent_action', function (e) {
+		cmplzFireCategories( e.detail.category , true);
+		cmplzSyncCategoryCheckboxes();
+		cmplzSaveCategoriesSelection();
+	});
 
 	/**
 	 * Set placeholder image as background on the parent div, set notice, and handle height.
@@ -249,8 +283,7 @@ jQuery(document).ready(function ($) {
 		});
 
 		//blocked images
-		var images = $('.cmplz-image');
-		images.each(function (i, obj) {
+		$('.cmplz-image').each(function (i, obj) {
 			if ( $(this).hasClass('cmplz-activated') ) return;
 			$(this).addClass('cmplz-activated' );
 
@@ -262,7 +295,6 @@ jQuery(document).ready(function ($) {
 			}
 		});
 
-		//iframes and video's
 		$('.cmplz-iframe').each(function (i, obj) {
 			if ( $(this).hasClass('cmplz-activated') ) return;
 			$(this).addClass('cmplz-activated' );
@@ -358,9 +390,11 @@ jQuery(document).ready(function ($) {
 				} else {
 					$.getScript(src)
 						.done(function (s, Status) {
+							var allScriptsExecuted = true;
 							//check if we have waiting scripts
 							var waitingScript = cmplzGetWaitingScript(waitingScripts, src);
 							if (waitingScript) {
+								allScriptsExecuted = false;
 								$.getScript(waitingScript).done(function (script, textStatus) {
 									cmplzRunAfterAllScripts();
 								}).fail(function (jqxhr, settings, exception) {
@@ -370,11 +404,12 @@ jQuery(document).ready(function ($) {
 
 							var waitingInlineScript = cmplzGetWaitingScript(waitingInlineScripts, src);
 							if (waitingInlineScript) {
+								allScriptsExecuted = false;
 								cmplzRunInlineScript(waitingInlineScript);
 							}
 
 							//maybe all scripts are already done
-							cmplzRunAfterAllScripts();
+							if (allScriptsExecuted) cmplzRunAfterAllScripts();
 						})
 						.fail(function (jqxhr, settings, exception) {
 							console.warn("Something went wrong " + exception);
@@ -387,18 +422,6 @@ jQuery(document).ready(function ($) {
 					return;
 				}
 				cmplzRunInlineScript($(this));
-				//get scripts that are waiting for this inline script
-				var waitingScript = cmplzGetWaitingScript(waitingScripts, $(this).text());
-				if (waitingScript !== false) {
-					$.getScript(waitingScript)
-						.done(function (s, Status) {
-							//maybe all scripts are already done
-							cmplzRunAfterAllScripts();
-						})
-						.fail(function (jqxhr, settings, exception) {
-							console.warn("Something went wrong " + exception);
-						});
-				}
 			}
 		});
 
@@ -430,15 +453,14 @@ jQuery(document).ready(function ($) {
 	function cmplzGetWaitingScript(waitingScripts, src) {
 		for (var waitfor in waitingScripts) {
 			var waitingScript;//recaptcha/api.js, waitfor="gregaptcha"
-
 			if (waitingScripts.hasOwnProperty(waitfor)) {
 				waitingScript = waitingScripts[waitfor];
-				if (typeof waitingScript !== 'string') waitingScript = waitingScript.text();
+				if (typeof waitingScript !== 'string') {
+					waitingScript = waitingScript.text();
+				}
 				if (src.indexOf(waitfor) !== -1) {
-
 					var output = waitingScripts[waitfor];
 					delete waitingScripts[waitfor];
-
 					return output;
 				}
 			}
@@ -487,10 +509,8 @@ jQuery(document).ready(function ($) {
 
 	function cmplzRunAfterAllScripts() {
 		if (!cmplzAllScriptsHookFired && cmplzArrayIsEmpty(waitingInlineScripts) && cmplzArrayIsEmpty(waitingScripts) ) {
-			//hook
 			var event = new CustomEvent( 'cmplzRunAfterAllScripts' );
 			document.dispatchEvent(event);
-
 			cmplzAllScriptsHookFired = true;
 		}
 	}
@@ -503,8 +523,23 @@ jQuery(document).ready(function ($) {
 	function cmplzRunInlineScript(script) {
 		$('<script>')
 			.attr('type', 'text/javascript')
-			.text(script.text())
-			.appendTo(script.parent());
+			.text(script.text()).appendTo(script.parent());
+
+		//get scripts that are waiting for this inline script
+		var waitingScript = cmplzGetWaitingScript(waitingScripts, script.text());
+		if (waitingScript !== false) {
+			$.getScript(waitingScript)
+				.done(function (s, Status) {
+					//maybe all scripts are already done
+					cmplzRunAfterAllScripts();
+				})
+				.fail(function (jqxhr, settings, exception) {
+					console.warn("Something went wrong " + exception);
+				});
+		} else {
+			cmplzRunAfterAllScripts();
+		}
+
 		script.remove();
 	}
 
@@ -1203,7 +1238,6 @@ jQuery(document).ready(function ($) {
 					$('.'+cat).each(function(){
 						$(this).prop('checked', false);
 					});
-
 				}
 			}
 		}
@@ -1874,22 +1908,6 @@ jQuery(document).ready(function ($) {
 			};
 		}
 	}
-
-	/**
-	 * Toggle service
-	 */
-
-	$(document).on('click', '.cmplz-service-header', function () {
-		var item = $(this).next();
-
-		if (item.hasClass('cmplz-service-hidden')) {
-			$(this).addClass('cmplz-service-open');
-			item.removeClass('cmplz-service-hidden');
-		} else {
-			$(this).removeClass('cmplz-service-open');
-			item.addClass('cmplz-service-hidden');
-		}
-	});
 
 	function getHoverColour(hex){
 		if (hex[0] == '#') {

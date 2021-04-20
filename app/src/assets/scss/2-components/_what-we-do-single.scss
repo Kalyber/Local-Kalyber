@@ -38,6 +38,15 @@
           list-style-type: none;
      }
 
+     a:link, a:focus, a:visited {
+          color:$primary-blue;
+          transition: all .25s ease-in;
+
+          &:hover {
+               color:black;
+          }
+     }
+
      li::before {
           content: "•";
           color:$primary-red;
@@ -133,5 +142,24 @@
           text-transform: uppercase;
           letter-spacing: .5px;
           transition: .5s all;
+          cursor:pointer;
+
+          &:hover {
+               background-color:white;
+               color:$primary-blue;
+          }
+     }
+
+     textarea:focus, input:focus{
+          outline: none;
+     }
+
+     .wpcf7-response-output {
+          color:white;
+          background-color: $primary-blue;
+          margin: 2em 0 1em !important;
+          padding: 18px !important;
+          line-height:1.2 !important;
+          border: 2px solid white !important;
      }
 }

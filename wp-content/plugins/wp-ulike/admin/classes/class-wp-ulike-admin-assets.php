@@ -20,15 +20,20 @@ if ( ! class_exists( 'wp_ulike_admin_assets' ) ) {
 
 		private $hook;
 
-		/**
-		 * __construct
-		 */
-		function __construct( $hook ) {
+	  	/**
+	   	 * __construct
+	   	 */
+	  	function __construct() {
+			// general assets
+        	add_action( 'admin_enqueue_scripts', array( $this, 'enqueue' ) );
+	  	}
+
+		public function enqueue( $hook ){
 			$this->hook = $hook;
 			// general assets
 			$this->load_styles();
 			$this->load_scripts();
-		 }
+		}
 
 
 		/**
@@ -72,13 +77,15 @@ if ( ! class_exists( 'wp_ulike_admin_assets' ) ) {
 			// remove_all_actions( 'admin_notices' );
 
 			// Enqueue vueJS
-			wp_enqueue_script(
-				'wp_ulike_vuejs',
-				WP_ULIKE_ADMIN_URL . '/assets/js/solo/vue/vue.min.js',
-				array(),
-				null,
-				false
-			);
+			if ( preg_match("/(logs|statistics)/i", $this->hook ) ) {
+				wp_enqueue_script(
+					'wp_ulike_vuejs',
+					WP_ULIKE_ADMIN_URL . '/assets/js/solo/vue/vue.min.js',
+					array(),
+					null,
+					false
+				);
+			}
 
 			// Enqueue admin plugins
 			wp_enqueue_script(

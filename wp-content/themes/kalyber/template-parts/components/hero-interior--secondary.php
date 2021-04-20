@@ -5,7 +5,7 @@
      $subhead          = get_field('subhead');
 ?>
 
-<div class="hero-interior--secondary__wrap">
+<div class="hero-interior--secondary__wrap" style="background-color:<?= $background_dark ?>;">
      <div class="container hero-interior--secondary__inner">
           <h1><?= $headline ?></h1>
      </div>

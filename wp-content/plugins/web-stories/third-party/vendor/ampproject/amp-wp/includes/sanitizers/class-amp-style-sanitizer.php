@@ -1243,7 +1243,7 @@ class AMP_Style_Sanitizer extends \Google\Web_Stories_Dependencies\AMP_Base_Sani
         $parsed = null;
         $cache_key = null;
         $cached = \true;
-        $cache_group = 'amp-parsed-stylesheet-v34';
+        $cache_group = 'amp-parsed-stylesheet-v36';
         // This should be bumped whenever the PHP-CSS-Parser is updated or parsed format is updated.
         $use_transients = $this->should_use_transient_caching();
         $cache_impacting_options = \array_merge(\wp_array_slice_assoc($options, ['property_allowlist', 'property_denylist', 'stylesheet_url', 'allowed_at_rules']), \wp_array_slice_assoc($this->args, ['should_locate_sources', 'parsed_cache_variant', 'dynamic_element_selectors']), ['language' => \get_bloginfo('language')]);
@@ -1539,6 +1539,9 @@ class AMP_Style_Sanitizer extends \Google\Web_Stories_Dependencies\AMP_Base_Sani
                 }, $this->args['dynamic_element_selectors']));
             }
             $split_stylesheet = \preg_split($pattern, $stylesheet_string, -1, \PREG_SPLIT_DELIM_CAPTURE);
+            // Ensure all instances of </style> are escaped as <\/style> (such as can occur in SVG data: URLs) to prevent
+            // the inline style from prematurely closing style[amp-custom].
+            $split_stylesheet = \str_replace('</style>', '<\\/style>', $split_stylesheet, $count);
             $length = \count($split_stylesheet);
             for ($i = 0; $i < $length; $i++) {
                 // Skip empty tokens.
@@ -1690,19 +1693,7 @@ class AMP_Style_Sanitizer extends \Google\Web_Stories_Dependencies\AMP_Base_Sani
             if ($css_item instanceof \Google\Web_Stories_Dependencies\Sabberworm\CSS\RuleSet\DeclarationBlock && empty($options['validate_keyframes'])) {
                 $validation_results = \array_merge($validation_results, $this->process_css_declaration_block($css_item, $css_list, $options));
             } elseif ($css_item instanceof \Google\Web_Stories_Dependencies\Sabberworm\CSS\CSSList\AtRuleBlockList) {
-                if ('-moz-document' === $css_item->atRuleName() && 'url-prefix()' === $css_item->atRuleArgs() && \in_array('supports', $options['allowed_at_rules'], \true)) {
-                    // Replace `@-moz-document url-prefix()` with `@supports (-moz-appearance:meterbar)` as an alternative
-                    // way to provide Firefox-specific style rules. This is a workaround since @-moz-document is not
-                    // yet allowed in AMP, and this use of @supports is another recognized Firefox-specific CSS hack,
-                    // per <http://browserhacks.com/#hack-8e9b5504d9fda44ec75169381b3c3157>.
-                    // For adding @-moz-document to AMP, see <https://github.com/ampproject/amphtml/issues/26406>.
-                    $new_css_item = new \Google\Web_Stories_Dependencies\Sabberworm\CSS\CSSList\AtRuleBlockList('supports', '(-moz-appearance:meterbar)');
-                    $new_css_item->setContents($css_item->getContents());
-                    $this->replace_inside_css_list($css_list, $css_item, [$new_css_item]);
-                    $css_item = $new_css_item;
-                    // To process_css_list below.
-                    $sanitized = \false;
-                } elseif (!\in_array($css_item->atRuleName(), $options['allowed_at_rules'], \true)) {
+                if (!\in_array($css_item->atRuleName(), $options['allowed_at_rules'], \true)) {
                     $error = ['code' => self::CSS_SYNTAX_INVALID_AT_RULE, 'at_rule' => $css_item->atRuleName(), 'type' => \Google\Web_Stories_Dependencies\AMP_Validation_Error_Taxonomy::CSS_ERROR_TYPE, 'spec_name' => $options['spec_name']];
                     $sanitized = $this->should_sanitize_validation_error($error);
                     $validation_results[] = \compact('error', 'sanitized');

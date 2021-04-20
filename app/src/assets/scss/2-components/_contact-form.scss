@@ -1,8 +1,8 @@
 .contact-form__wrap {
-     padding:50px 0 30px;
+     padding:0px 0 0px;
 
      @include respond(medium) {
-          padding: 100px 0 60px;
+          padding: 50px 0 60px;
      }
 }
 
@@ -59,15 +59,97 @@
 
      form {
           display:flex;
-          flex-direction: column;
+          flex-flow: column wrap;
           justify-content: space-between;
           width:100% !important;
 
           @include respond(small) {
-               flex-direction: row;
+               flex-flow: row wrap;
           }
      }
+
+     .input-data {
+          position: relative;
+          width: 100%;
+          margin-bottom: 30px;
+
+          @include respond(small) {
+               width: 46%;
+          }
+     }
+
+     .input-data--100 {
+          width: 100%;
+          margin-bottom: 18px;
+     }
+
+     .input-data p {
+          display:block;
+          position:absolute;
+          top:0;
+          left:0;
+          padding:12px 14px 16px 14px;
+          margin:0;
+          z-index: -1;
+     }
+
+     input, textarea {
+          border: 2px solid $primary-blue;
+          outline: none;
+          background: rgba(153, 187, 224, 0);
+          padding:14px;
+          margin-top: 6px;
+          z-index:10;
+          transition: all .25s ease-in;
+          width: 100%;
+
+          &:focus {
+               outline: 0;
+               box-shadow: 0;
+               background: rgba(153, 187, 224, .95);
+               transition: all .25s ease-in;
+          }
+          &::placeholder {
+               color: transparent;
+          }
+     }
+
+     input[type=submit] {
+          border: 2px solid $primary-blue;
+          outline: none;
+          background: $primary-blue;
+          font-size: 18px;
+          font-weight: 700;
+          text-transform: uppercase;
+          letter-spacing: .5px;
+          color:white;
+          padding:14px;
+          margin-top: 6px;
+          z-index:10;
+          transition: all .25s ease-in;
+          width: 100%;
+          cursor: pointer;
+          transition: all .25s ease-in;
+
+          &:hover {
+               background: white;
+               color: $primary-blue;
+               
+          }
+          &::placeholder {
+               color: transparent;
+          }
+     }
+
+     .wpcf7-response-output {
+          width:100%;
+          margin: 2em 0 1em;
+          padding: 1em;
+          border: 2px solid #00a0d2 !important;
+     }
 }
+
+
 
 .contact-form__form-left, .contact-form__form-right {
      width:100%;
@@ -80,84 +162,5 @@
           position: relative;
           overflow: hidden;
           margin:0 0 14px 0;
-     }
-}
-
-
-form.something {
-     input, textarea {
-          width: 100%;
-          border: 1px solid gray; 
-          background: none;
-          position: relative;
-          top: 0;
-          left: 0;
-          z-index: 1;
-          padding: 16px 12px 16px 12px;
-          outline: 0;
-          font-size:14px;
-
-          &:valid {
-          // Hides the label
-          background: white; 
-          }
-
-          &:focus {
-          border-color: #0077c8;
-          }
-
-          &:focus + label {
-          background:#0077c8;
-          color: white;
-          font-size: 70%;
-          padding: 1px 6px;
-          z-index: 2;
-          text-transform: uppercase;
-
-          right: 0;
-          margin-right: 0;
-          width: 30%;
-          padding-top: 5px;
-          }
-     }
-     label {
-          font-size: 16px;
-
-          transition: // not padding
-          background 0.2s,
-          color 0.2s,
-          top 0.2s,
-          bottom 0.2s,
-          right 0.2s,
-          left 0.2s;
-          position: absolute;
-          color: #999;
-          padding: 7px 6px 7px 12px;
-
-          top: 1px;
-          right: 100%;
-          width: 100%;
-          margin-right: -100%;
-          bottom: 1px;
-     }
-
-     textarea {
-          display: block;
-          resize: vertical;
-          min-height: 184px;
-     }
-
-     input[type=button], input[type=submit], input[type=reset] {
-          background-color: $primary-red;
-          border: none;
-          color: white;
-          padding: 12px 32px;
-          text-decoration: none;
-          text-transform: uppercase;
-          font-size:18px;
-          width:auto;
-          font-weight: 700;
-          letter-spacing: 1px;
-          cursor: pointer;
      }
 }

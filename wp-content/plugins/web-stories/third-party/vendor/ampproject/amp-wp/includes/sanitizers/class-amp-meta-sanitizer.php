@@ -26,6 +26,15 @@ use Google\Web_Stories_Dependencies\AmpProject\Tag;
 class AMP_Meta_Sanitizer extends \Google\Web_Stories_Dependencies\AMP_Base_Sanitizer
 {
     /**
+     * Default args.
+     *
+     * @var array
+     */
+    protected $DEFAULT_ARGS = [
+        // phpcs:ignore WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase
+        'remove_initial_scale_viewport_property' => \true,
+    ];
+    /**
      * Tag.
      *
      * @var string HTML <meta> tag to identify and replace with AMP version.
@@ -160,6 +169,10 @@ class AMP_Meta_Sanitizer extends \Google\Web_Stories_Dependencies\AMP_Base_Sanit
                     }
                 }
             }
+            // Remove initial-scale=1 to leave just width=device-width in order to avoid a tap delay hurts FID.
+            if (!empty($this->args['remove_initial_scale_viewport_property']) && isset($parsed_rules['initial-scale']) && \abs((float) $parsed_rules['initial-scale'] - 1.0) < 0.0001) {
+                unset($parsed_rules['initial-scale']);
+            }
             $viewport_value = \implode(',', \array_map(static function ($rule_name) use($parsed_rules) {
                 return $rule_name . '=' . $parsed_rules[$rule_name];
             }, \array_keys($parsed_rules)));
@@ -226,7 +239,7 @@ class AMP_Meta_Sanitizer extends \Google\Web_Stories_Dependencies\AMP_Base_Sanit
      */
     protected function create_charset_element()
     {
-        return \Google\Web_Stories_Dependencies\AMP_DOM_Utils::create_node($this->dom, \Google\Web_Stories_Dependencies\AmpProject\Tag::META, [\Google\Web_Stories_Dependencies\AmpProject\Attribute::CHARSET => \Google\Web_Stories_Dependencies\AmpProject\Dom\Document::AMP_ENCODING]);
+        return \Google\Web_Stories_Dependencies\AMP_DOM_Utils::create_node($this->dom, \Google\Web_Stories_Dependencies\AmpProject\Tag::META, [\Google\Web_Stories_Dependencies\AmpProject\Attribute::CHARSET => \Google\Web_Stories_Dependencies\AmpProject\Dom\Document\Encoding::AMP]);
     }
     /**
      * Create a new meta tag for the viewport setting.

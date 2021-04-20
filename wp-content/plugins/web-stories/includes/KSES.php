@@ -33,7 +33,7 @@ use WP_Post_Type;
  *
  * Provides KSES utility methods to override the ones from core.
  */
-class KSES {
+class KSES extends Service_Base {
 	/**
 	 * Initializes KSES filters for all post types if user can edit stories.
 	 *
@@ -41,7 +41,7 @@ class KSES {
 	 *
 	 * @return void
 	 */
-	public function init() {
+	public function register() {
 
 		$edit_posts       = false;
 		$post_type_object = get_post_type_object( Story_Post_Type::POST_TYPE_SLUG );
@@ -64,6 +64,17 @@ class KSES {
 			add_filter( 'content_save_pre', [ $this, 'filter_content_save_pre_after_kses' ], 20 );
 			remove_filter( 'content_filtered_save_pre', 'wp_filter_post_kses' );
 		}
+	}
+
+	/**
+	 * Get the action priority to use for registering the service.
+	 *
+	 * @since 1.6.0
+	 *
+	 * @return int Registration action priority to use.
+	 */
+	public static function get_registration_action_priority() {
+		return 11;
 	}
 
 	/**
@@ -548,6 +559,7 @@ class KSES {
 				'src'           => true,
 				'srcset'        => true,
 				'srcwidth'      => true,
+				'width'         => true,
 			],
 			'svg'                       => [
 				'width'  => true,
@@ -564,11 +576,47 @@ class KSES {
 			],
 		];
 
-		$allowed_tags = array_merge( $allowed_tags, $story_components );
+		$allowed_tags = $this->array_merge_recursive_distinct( $allowed_tags, $story_components );
 
 		$allowed_tags = array_map( [ $this, 'add_global_attributes' ], $allowed_tags );
 
 		return $allowed_tags;
+	}
+
+	/**
+	 * Recursively merge multiple arrays and ensure values are distinct.
+	 *
+	 * Based on information found in http://www.php.net/manual/en/function.array-merge-recursive.php
+	 *
+	 * @since 1.5.0
+	 *
+	 * @param array ...$arrays [optional] Variable list of arrays to recursively merge.
+	 *
+	 * @return array An array of values resulted from merging the arguments together.
+	 */
+	protected function array_merge_recursive_distinct( array ...$arrays ) {
+		if ( count( $arrays ) < 2 ) {
+			if ( [] === $arrays ) {
+				return $arrays;
+			} else {
+				return array_shift( $arrays );
+			}
+		}
+
+		$merged = array_shift( $arrays );
+
+		foreach ( $arrays as $array ) {
+			foreach ( $array as $key => $value ) {
+				if ( is_array( $value ) && ( isset( $merged[ $key ] ) && is_array( $merged[ $key ] ) ) ) {
+					$merged[ $key ] = $this->array_merge_recursive_distinct( $merged[ $key ], $value );
+				} else {
+					$merged[ $key ] = $value;
+				}
+			}
+			unset( $key, $value );
+		}
+
+		return $merged;
 	}
 
 	/**

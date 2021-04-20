@@ -7,14 +7,16 @@ namespace Google\Web_Stories_Dependencies;
  *
  * @package AMP
  */
+use Google\Web_Stories_Dependencies\AmpProject\AmpWP\Dom\Options;
 use Google\Web_Stories_Dependencies\AmpProject\Dom\Document;
+use Google\Web_Stories_Dependencies\AmpProject\Dom\Element;
 use Google\Web_Stories_Dependencies\AmpProject\Tag;
 /**
  * Class AMP_DOM_Utils
  *
  * Functionality to simplify working with Dom\Documents and DOMElements.
  *
- * @internal
+ * @since 0.2
  */
 class AMP_DOM_Utils
 {
@@ -63,7 +65,11 @@ class AMP_DOM_Utils
     public static function get_dom($document, $encoding = null)
     {
         \Google\Web_Stories_Dependencies\_deprecated_function(__METHOD__, '1.5.0', 'AmpProject\\Dom\\Document::fromHtml()');
-        return \Google\Web_Stories_Dependencies\AmpProject\Dom\Document::fromHtml($document, $encoding);
+        $options = \Google\Web_Stories_Dependencies\AmpProject\AmpWP\Dom\Options::DEFAULTS;
+        if (null !== $encoding) {
+            $options[\Google\Web_Stories_Dependencies\AmpProject\Dom\Document\Option::ENCODING] = $encoding;
+        }
+        return \Google\Web_Stories_Dependencies\AmpProject\Dom\Document::fromHtml($document, $options);
     }
     /**
      * Determine whether a node can be in the head.
@@ -168,7 +174,9 @@ class AMP_DOM_Utils
          * We can later use this to extract our nodes.
          */
         $document = "<html><head></head><body>{$content}</body></html>";
-        return \Google\Web_Stories_Dependencies\AmpProject\Dom\Document::fromHtml($document, $encoding);
+        $options = \Google\Web_Stories_Dependencies\AmpProject\AmpWP\Dom\Options::DEFAULTS;
+        $options[\Google\Web_Stories_Dependencies\AmpProject\Dom\Document\Option::ENCODING] = $encoding;
+        return \Google\Web_Stories_Dependencies\AmpProject\Dom\Document::fromHtml($document, $options);
     }
     /**
      * Return valid HTML *body* content extracted from the Dom\Document passed as a parameter.
@@ -354,8 +362,8 @@ class AMP_DOM_Utils
      *
      * @deprecated Use AmpProject\Dom\Document::getElementId() instead.
      *
-     * @param DOMElement $element Element to get the ID for.
-     * @param string     $prefix  Optional. Defaults to 'amp-wp-id'.
+     * @param DOMElement|Element $element Element to get the ID for.
+     * @param string             $prefix  Optional. Defaults to 'amp-wp-id'.
      * @return string ID to use.
      */
     public static function get_element_id($element, $prefix = 'amp-wp-id')

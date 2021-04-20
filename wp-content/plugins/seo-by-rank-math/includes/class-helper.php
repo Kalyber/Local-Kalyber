@@ -18,6 +18,7 @@ use RankMath\Helpers\Post_Type;
 use RankMath\Helpers\Options;
 use RankMath\Helpers\Taxonomy;
 use RankMath\Helpers\WordPress;
+use RankMath\Helpers\Schema;
 use RankMath\Replace_Variables\Replacer;
 
 defined( 'ABSPATH' ) || exit;
@@ -27,7 +28,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Helper {
 
-	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress;
+	use Api, Attachment, Conditional, Choices, Post_Type, Options, Taxonomy, WordPress, Schema;
 
 	/**
 	 * Replace `%variables%` with context-dependent value.
@@ -189,6 +190,28 @@ class Helper {
 		}
 
 		update_option( 'rank_math_modules', array_unique( $stored ) );
+	}
+
+	/**
+	 * Get list of currently active modules.
+	 *
+	 * @return array
+	 */
+	public static function get_active_modules() {
+		$registered_modules = rank_math()->manager->modules;
+		$stored             = array_values( get_option( 'rank_math_modules', [] ) );
+		foreach ( $stored as $key => $value ) {
+			if (
+				! isset( $registered_modules[ $value ] )
+				|| ! is_object( $registered_modules[ $value ] )
+				|| ! method_exists( $registered_modules[ $value ], 'is_disabled' )
+				|| $registered_modules[ $value ]->is_disabled()
+			) {
+				unset( $stored[ $key ] );
+			}
+		}
+
+		return $stored;
 	}
 
 	/**

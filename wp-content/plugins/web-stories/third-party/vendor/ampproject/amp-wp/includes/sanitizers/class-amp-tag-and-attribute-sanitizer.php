@@ -735,6 +735,8 @@ class AMP_Tag_And_Attribute_Sanitizer extends \Google\Web_Stories_Dependencies\A
             if (!\preg_match($delimiter . $cdata_spec['cdata_regex'] . $delimiter . 'u', $element->textContent)) {
                 return ['code' => self::MANDATORY_CDATA_MISSING_OR_INCORRECT];
             }
+        } elseif (isset($cdata_spec['mandatory_cdata']) && $cdata_spec['mandatory_cdata'] !== $element->textContent) {
+            return ['code' => self::MANDATORY_CDATA_MISSING_OR_INCORRECT];
         }
         // When the CDATA is expected to be JSON, ensure it's valid JSON.
         if ('script' === $element->nodeName && 'application/json' === $element->getAttribute('type')) {

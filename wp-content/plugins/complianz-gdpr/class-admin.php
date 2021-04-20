@@ -505,6 +505,12 @@ if ( ! class_exists( "cmplz_admin" ) ) {
 				COMPLIANZ::$cookie_admin->upgrade_active_policy_id();
 			}
 
+			if (  $prev_version
+				  && version_compare( $prev_version, '4.9.7', '<' )
+			) {
+				update_option('cmplz_show_terms_conditions_notice', time());
+			}
+
 			do_action( 'cmplz_upgrade', $prev_version );
 
 			update_option( 'cmplz-current-version', cmplz_version );
@@ -714,11 +720,8 @@ if ( ! class_exists( "cmplz_admin" ) ) {
 				if ( COMPLIANZ::$cookie_admin->site_needs_cookie_warning() && get_option('cmplz_detected_missing_jquery') ) {
 					$warnings[] = 'no-jquery';
 				}
-
 				$warnings = apply_filters( 'cmplz_warnings', $warnings );
-
-				set_transient( 'complianz_warnings', $warnings,
-					HOUR_IN_SECONDS );
+				set_transient( 'complianz_warnings', $warnings, HOUR_IN_SECONDS );
 			}
 
 			$warnings = array_diff( $warnings, $ignore_warnings );
